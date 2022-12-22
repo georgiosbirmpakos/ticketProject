@@ -5,8 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { GlobalState } from './modules/core/global-state';
 
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 function main() {
   GlobalState.initializeDefault();
+  console.log(GlobalState.instance)
 
   const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
