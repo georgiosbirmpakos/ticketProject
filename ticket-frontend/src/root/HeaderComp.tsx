@@ -18,6 +18,10 @@ export default function HeaderComp() {
     {
       name: 'Events',
       to: '/events'
+    },
+    {
+      name: 'Admin',
+      to: '/admin'
     }
   ];
   const settings: string[] = ['settings'];
@@ -44,7 +48,7 @@ export default function HeaderComp() {
   return (
     <header className="App-header">
       <AppBar position="static">
-        <Container >
+        <Container maxWidth={false}>
           <Toolbar disableGutters>
             <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
             <Typography

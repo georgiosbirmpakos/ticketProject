@@ -8,6 +8,8 @@ export function createRouter() {
     const EventsPageLazy = React.lazy(() => import('./root/events/EventsPage'));
     const EventListPageLazy = React.lazy(() => import('./root/events/list/EventListPage'));
     const EventDetailsPageLazy = React.lazy(() => import('./root/events/details/EventDetailsPage'));
+    const AdminPageLazy = React.lazy(() => import('./root/admin/AdminPage'));
+
     const router = createBrowserRouter([
         {
             path: "/",
@@ -45,7 +47,11 @@ export function createRouter() {
                             element: <EventDetailsPageLazy />
                         },
                     ]
-                }
+                },
+                {
+                    path: "admin",
+                    element: <AdminPageLazy />
+                },
             ],
         },
     ]);
