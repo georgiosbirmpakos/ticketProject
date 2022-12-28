@@ -22,13 +22,12 @@ public class UserRoleLink {
     @Column(name = "USER_ROLE_LINK_ID")
     private Long userRoleLinkId;
 
+    // ASSOCIATIONS
 
     @ManyToOne
     @JoinColumn(name = "USER_ID_FK", nullable = false, updatable = false)
     private User user;
-
     @ManyToOne
     @JoinColumn(name = "ROLE_ID_FK", nullable = false, updatable = false)
     private Role role;
-
 }

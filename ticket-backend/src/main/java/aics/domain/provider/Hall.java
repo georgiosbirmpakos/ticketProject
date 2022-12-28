@@ -1,4 +1,4 @@
-package aics.domain.user;
+package aics.domain.provider;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,17 +6,22 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
-@Entity(name = "ROLES")
+@Entity(name = "HALLS")
 @Getter
 @Setter
 @Accessors(chain = true)
-public class Role {
+public class Hall {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ROLE_ID")
-    private Long roleId;
-    @Column(name = "NAME", nullable = false, length = 255, unique = true)
+    @Column(name = "HALL_ID")
+    private Long hallId;
+    @Column(name = "NAME", nullable = false, length = 255)
     private String name;
     @Column(name = "DESCRIPTION", nullable = true, length = 255)
     private String description;
+
+    // ASSOCIATIONS
+    @ManyToOne
+    @JoinColumn(name = "PROVIDER_ID_FK", nullable = false, updatable = false)
+    private Provider provider;
 }

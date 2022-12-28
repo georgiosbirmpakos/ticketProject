@@ -1,4 +1,4 @@
-package aics.domain.user;
+package aics.domain.movie;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,17 +6,19 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
-@Entity(name = "ROLES")
+@Entity(name = "MOVIES")
 @Getter
 @Setter
 @Accessors(chain = true)
-public class Role {
+public class Movie {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ROLE_ID")
-    private Long roleId;
-    @Column(name = "NAME", nullable = false, length = 255, unique = true)
+    @Column(name = "MOVIE_ID")
+    private Long movieId;
+    @Column(name = "NAME", nullable = false, length = 255)
     private String name;
     @Column(name = "DESCRIPTION", nullable = true, length = 255)
     private String description;
+    @Column(name = "IMAGE", nullable = false, length = 255)
+    private byte[] image;
 }
