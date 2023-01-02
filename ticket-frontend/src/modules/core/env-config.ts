@@ -1,6 +1,6 @@
 export class EnvConfig {
-    readonly backendUrl: string;
-    readonly envProfile: string;
+    private readonly backendUrl: string;
+    private readonly envProfile: string;
 
     constructor(requiredProps: {
         backendUrl: string,

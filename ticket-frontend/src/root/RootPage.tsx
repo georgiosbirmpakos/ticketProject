@@ -1,13 +1,13 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import MuiNavbar from './components/MuiNavbar';
 import HeaderComp from './HeaderComp';
 
 function RootPage() {
   return (
     <React.Fragment>
-      <HeaderComp />
+      <MuiNavbar/>
       <main>
-        <div>Root</div>
         <Outlet />
       </main >
     </React.Fragment >

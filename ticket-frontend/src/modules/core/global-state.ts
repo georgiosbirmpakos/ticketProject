@@ -1,19 +1,14 @@
-import { AxiosInstance } from 'axios';
-import { createApiConsumer } from '../net/api-consumer';
 import { EnvConfig } from './env-config';
 
 export class GlobalState {
     private static _instance: GlobalState | null = null;
 
-    readonly envConfig: EnvConfig;
-    readonly apiConsumer: AxiosInstance;
+    private readonly envConfig: EnvConfig;
 
     constructor(requiredProps: {
-        envConfig: EnvConfig,
-        apiConsumer: AxiosInstance;
+        envConfig: EnvConfig
     }) {
         this.envConfig = requiredProps.envConfig;
-        this.apiConsumer = requiredProps.apiConsumer;
     }
 
     static get instance(): GlobalState {
@@ -27,12 +22,8 @@ export class GlobalState {
         if (this._instance != null) {
             throw new Error('GlobalState has already been initialized');
         }
-        const envConfig = EnvConfig.fromEnv();
-        const apiConsumer = createApiConsumer(envConfig);
-
         GlobalState._instance = new GlobalState({
-            envConfig: envConfig,
-            apiConsumer: apiConsumer
+            envConfig: EnvConfig.fromEnv()
         });
     }
 }
