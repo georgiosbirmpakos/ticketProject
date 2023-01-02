@@ -5,6 +5,7 @@ import { Typography, Divider, Button } from '@mui/material';
 import GridLayout from './GridLayout';
 import MovieIcon from '@mui/icons-material/Movie';
 import Footer from '../components/Footer';
+import { Stack } from '@mui/system';
 
 const HomePage = () => {
 
@@ -31,14 +32,14 @@ const HomePage = () => {
     <React.Fragment> 
       <CarouselComponent/>
 
-      <div className='container'>
-      <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    flexWrap: 'wrap'}}>
+      <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent:'space-between'}}>
+      <Stack direction={'row'} alignContent='center' alignItems={'center'}>
       <MovieIcon sx={{ marginLeft:4}} fontSize='large'/>
       <Typography sx={{color:'black', fontSize:'xx-large', marginLeft:2, fontWeight:'bolder'}}>ΠΑΙΖΟΝΤΑΙ ΤΩΡΑ</Typography>
-      </div>
+
+      </Stack>
+      
+
       <Button component={Link}
                   to={'/events'}
                   key={'Events'}
