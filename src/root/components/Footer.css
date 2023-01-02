@@ -1,0 +1,25 @@
+.facebookIcon{
+    padding-top:2px;
+    color: white;
+    font-size: 35px;
+} 
+.facebookIcon:hover{
+    color:#920b17;
+}
+.instaTwitterIcon{
+    padding-top:2px;
+    color: white;
+    margin-left: 20px;
+    font-size: 35px;
+
+} 
+.instaTwitterIcon:hover{
+    color:#920b17;
+}
+.actionButtons{
+    color: white;
+    padding: 0;
+}
+.actionButtons:hover{
+    color:#920b17;
+}
