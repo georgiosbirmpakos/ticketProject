@@ -1,0 +1,29 @@
+.carousel{
+    width: 100 wv;
+    margin: auto;
+}
+.carouselImg{
+  object-fit:cover;
+  width: 100vw;
+  height:80vh;
+}
+
+.imageBtn{
+    position: relative !important;
+    bottom: 100px;
+    width: fit-content !important;
+    height: auto !important;
+    left: -40%;
+    border-radius: 20px !important;
+    font-size: medium !important;
+    background-color: #E63946 !important;
+}
+.imageBtn:hover{
+    background-color: #920b17 !important;
+}
+.control-dots {
+    bottom: 40px !important;
+  }
+.control-arrow{
+    height: 80vh;
+}
