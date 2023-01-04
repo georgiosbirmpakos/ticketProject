@@ -19,6 +19,7 @@ public class Movie {
     private String name;
     @Column(name = "DESCRIPTION", nullable = true, length = 255)
     private String description;
-    @Column(name = "IMAGE", nullable = false, length = 255)
+    @Column(name = "IMAGE", nullable = false)
+    @Lob
     private byte[] image;
 }

@@ -19,8 +19,6 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TICKET_ID")
     private Long ticketId;
-    @Column(name = "PAID_PRICE", nullable = false, precision = 10, scale = 2)
-    private Double paidPrice;
     @Column(name = "DATE_OF_BOOKING", nullable = true)
     private LocalDateTime dateOfBooking;
     @Column(name = "DESCRIPTION", nullable = true, length = 255)
@@ -34,6 +32,6 @@ public class Ticket {
     @JoinColumn(name = "SEAT_ID_FK", nullable = false, updatable = false)
     private Seat seat;
     @ManyToOne
-    @JoinColumn(name = "USER_ID_FK", nullable = false, updatable = false)
+    @JoinColumn(name = "USER_ID_FK", nullable = true, updatable = false)
     private User user;
 }
