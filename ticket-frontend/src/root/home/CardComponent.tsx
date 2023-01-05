@@ -32,7 +32,7 @@ const CardComponent = ({imageTitle, title, description}: {imageTitle:string, tit
       </CardContent>
       <CardActions>
         <Button onClick={() => onClick(title)} variant='contained' sx={{":hover":{backgroundColor: '#920b17'}, borderRadius:20, backgroundColor: '#E63946'}} size="small">ΕΙΣΙΤΗΡΙΑ</Button>
-        <Button onClick={() => onClick(title)} variant='outlined' sx={{":hover":{borderColor: '#920b17', color: '#920b17'},  color: '#E63946', backgroundColor: 'white', borderColor: '#E63946' ,borderRadius:20}}  size="small">ΠΛΗΡΟΦΟΡΙΕΣ</Button>
+        <Button component={Link} to={'/events/details/:'+ title} key={'Events'} variant='outlined' sx={{":hover":{borderColor: '#920b17', color: '#920b17'},  color: '#E63946', backgroundColor: 'white', borderColor: '#E63946' ,borderRadius:20, marginLeft:1}}  size="small">ΠΛΗΡΟΦΟΡΙΕΣ</Button>
       </CardActions>
     </Card>
   )

@@ -6,6 +6,8 @@ import GridLayout from './GridLayout';
 import MovieIcon from '@mui/icons-material/Movie';
 import Footer from '../components/Footer';
 import { Stack } from '@mui/system';
+import MuiNavbar from '../components/MuiNavbar';
+import '../components/Footer.css';
 
 const HomePage = () => {
 
@@ -30,8 +32,9 @@ const HomePage = () => {
 
   return (
     <React.Fragment> 
+      <MuiNavbar/>
       <CarouselComponent/>
-
+      
       <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent:'space-between'}}>
       <Stack direction={'row'} alignContent='center' alignItems={'center'}>
       <MovieIcon sx={{ marginLeft:4}} fontSize='large'/>
@@ -39,12 +42,9 @@ const HomePage = () => {
 
       </Stack>
       
-
-      <Button component={Link}
-                  to={'/events'}
-                  key={'Events'}
-                  onClick={handleCloseNavMenu} 
-                  sx={{color:'black', textDecoration:'underline', marginRight: 5 }}> ΟΛΕΣ ΟΙ ΤΑΙΝΙΕΣ </Button>
+      <Link to={'/events'}>
+      <Button sx={{color:'black', textDecoration:'underline', marginRight: 5 }}> ΟΛΕΣ ΟΙ ΤΑΙΝΙΕΣ </Button>
+                  </Link>
       </div>
 
       <Divider variant="middle" style={{marginBottom:10}} />

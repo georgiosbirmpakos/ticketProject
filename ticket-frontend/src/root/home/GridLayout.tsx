@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Grid, Box } from '@mui/material'
+import { Grid} from '@mui/material'
 import CardComponent from './CardComponent'
 
 const GridLayout = () => {

@@ -41,19 +41,6 @@ export default function CarouselComponent() {
      <React.Fragment>
        <Carousel className="carousel" autoPlay showThumbs={false} interval={3000}>
         {renderSlides}
-                {/* <div>
-                <img className="carouselImg" src={require('./avengers.jpeg')}/>
-                <Button onClick={() => onClick('batman')} className="imageBtn" variant="contained">ΕΙΣΙΤΗΡΙΑ</Button>
-                </div>
-
-                <div>
-                    <img className="carouselImg" src={require("./batman.jpeg")} />
-                    <Button onClick={() => onClick('batman')} className="imageBtn" variant="contained">ΕΙΣΙΤΗΡΙΑ</Button>
-                </div>
-                <div>
-                    <img className="carouselImg" src={require("./spiderman.jpg")} />
-                    <Button onClick={() => onClick('spiderman')} className="imageBtn" variant="contained">ΕΙΣΙΤΗΡΙΑ</Button>
-                </div> */}
             </Carousel>
         </React.Fragment>
     );

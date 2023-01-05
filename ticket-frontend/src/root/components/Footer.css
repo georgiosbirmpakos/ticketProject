@@ -1,9 +1,11 @@
-.facebookIcon{
+.firstIcon{
     padding-top:2px;
     color: white;
+    margin-left: 20px;
     font-size: 35px;
+
 } 
-.facebookIcon:hover{
+.firstIcon:hover{
     color:#920b17;
 }
 .instaTwitterIcon{
@@ -19,6 +21,7 @@
 .actionButtons{
     color: white;
     padding: 0;
+    text-transform: none;
 }
 .actionButtons:hover{
     color:#920b17;

@@ -4,10 +4,14 @@ import GridLayout from '../home/GridLayout';
 import { Divider, Typography } from '@mui/material';
 import MovieIcon from '@mui/icons-material/Movie';
 import Footer from '../components/Footer';
+import MuiNavbar from '../components/MuiNavbar';
+import ScrollToTopOnMount from '../components/ScrollToTopOnMount';
 
 export default function EventsPage() {
   return (
     <React.Fragment>
+    <ScrollToTopOnMount/>
+    <MuiNavbar/>
       <div style={{
     display: 'flex',
     alignItems: 'center',
@@ -18,9 +22,8 @@ export default function EventsPage() {
       <Divider variant="middle"  style={{marginBottom:10}} />
       <GridLayout/>
       <Footer/>
-        
       
-      <Outlet />
+      {/* <Outlet /> */}
     </React.Fragment>
   );
 }

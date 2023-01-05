@@ -1,7 +1,7 @@
 import { Box, Stack } from '@mui/system'
 import React from 'react'
 import { alpha, Button, Typography } from "@mui/material";
-import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
+import { FacebookRounded } from '@mui/icons-material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import './Footer.css';
@@ -26,7 +26,7 @@ const Footer = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  
   return (
     // Defining a container box for the footer
     <Box height={'contain'} sx={{backgroundColor: '#E63946', marginTop:'auto'}} alignItems='center' display='block' justifyContent='center'>
@@ -34,8 +34,8 @@ const Footer = () => {
       {/* Creating a stack for our social media buttons */}
 
       <Stack direction={'row'} justifyContent='center'>
-        <FacebookRoundedIcon className='facebookIcon'/>
-        <InstagramIcon className='instaTwitterIcon' />
+        <FacebookRounded className='firstIcon' />
+        <InstagramIcon className='instaTwitterIcon'/>
         <TwitterIcon className='instaTwitterIcon'/>
       </Stack>
 
@@ -45,21 +45,15 @@ const Footer = () => {
         {/* Creating the first row */}
 
         <Stack direction={'column'} justifyContent='center' alignItems={'center'} alignContent='center' display={'block'}>
-          <Typography color={'white'} fontWeight={'bold'} variant='h5'>Our Company</Typography>
-          <Button component={Link}
-                  to={'/about'}
-                  key={'About'}
-                  onClick={handleCloseNavMenu}  className='actionButtons'variant="text">About us</Button>
+          <Typography color={'white'} fontWeight={'bold'} variant='h5'>Εταιρεία</Typography>
+          <Button className='actionButtons' component={Link} to={'/about'} key={'About'} onClick={handleCloseNavMenu}variant="text">Σχετικά με εμάς</Button>
         </Stack>
 
         {/* Creating the second row */}
         <Stack direction={'column'} justifyContent='flex-start' alignItems={'flex-start'} alignContent='center'>
-          <Typography color={'white'}  fontWeight={'bold'} variant='h5' >Movies</Typography>
-          <Button component={Link}
-                  to={'/events'}
-                  key={'Events'}
-                  onClick={handleCloseNavMenu}  className='actionButtons'variant="text">Now playing</Button>
-          <Button className='actionButtons' variant="text">Coming soon</Button>
+          <Typography color={'white'}  fontWeight={'bold'} variant='h5' >Ταινίες</Typography>
+          <Button  className='actionButtons' component={Link} to={'/events'} key={'Events'} onClick={handleCloseNavMenu} variant="text" >Παίζονται τώρα</Button>
+          <Button className='actionButtons' variant="text">Προσεχώς</Button>
         </Stack>
           
       </Stack>
