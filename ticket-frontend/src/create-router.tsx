@@ -8,6 +8,10 @@ export function createRouter() {
     const EventsPageLazy = React.lazy(() => import('./root/events/EventsPage'));
     const EventListPageLazy = React.lazy(() => import('./root/events/list/EventListPage'));
     const EventDetailsPageLazy = React.lazy(() => import('./root/events/details/EventDetailsPage'));
+    const AdminPageLazy = React.lazy(() => import('./root/admin/AdminPage'));
+    const AdminEventsPageLazy = React.lazy(() => import('./root/admin/events/AdminEventsPage'));
+    const AdminProvidersPageLazy = React.lazy(() => import('./root/admin/providers/AdminProvidersPage'));
+    const AdminMoviesPageLazy = React.lazy(() => import('./root/admin/movies/AdminMoviesPage'));
     const router = createBrowserRouter([
         {
             path: "/",
@@ -41,11 +45,33 @@ export function createRouter() {
                             element: <EventListPageLazy />
                         },
                         {
-                            path: "details",
+                            path: "details/:id",
                             element: <EventDetailsPageLazy />
                         },
                     ]
-                }
+                },
+                {
+                    path: "admin",
+                    element: <AdminPageLazy />,
+                    children: [
+                        {
+                            path: "",
+                            element: <Navigate to="providers" />
+                        },
+                        {
+                            path: "providers",
+                            element: <AdminProvidersPageLazy />
+                        },
+                        {
+                            path: "movies",
+                            element: <AdminMoviesPageLazy />
+                        },
+                        {
+                            path: "events",
+                            element: <AdminEventsPageLazy />
+                        },
+                    ]
+                },
             ],
         },
     ]);

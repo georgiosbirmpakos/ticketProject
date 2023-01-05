@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom'
 import { Typography, Divider, Button } from '@mui/material';
 import GridLayout from './GridLayout';
 import MovieIcon from '@mui/icons-material/Movie';
-import Footer from '../components/Footer';
 import { Stack } from '@mui/system';
-import MuiNavbar from '../components/MuiNavbar';
-import '../components/Footer.css';
+import '../shared/components/Footer.css';
 
 const HomePage = () => {
 
@@ -31,26 +29,24 @@ const HomePage = () => {
   };
 
   return (
-    <React.Fragment> 
-      <MuiNavbar/>
-      <CarouselComponent/>
-      
-      <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent:'space-between'}}>
-      <Stack direction={'row'} alignContent='center' alignItems={'center'}>
-      <MovieIcon sx={{ marginLeft:4}} fontSize='large'/>
-      <Typography sx={{color:'black', fontSize:'xx-large', marginLeft:2, fontWeight:'bolder'}}>ΠΑΙΖΟΝΤΑΙ ΤΩΡΑ</Typography>
+    <React.Fragment>
+      <CarouselComponent />
 
-      </Stack>
-      
-      <Link to={'/events'}>
-      <Button sx={{color:'black', textDecoration:'underline', marginRight: 5 }}> ΟΛΕΣ ΟΙ ΤΑΙΝΙΕΣ </Button>
-                  </Link>
+      <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+        <Stack direction={'row'} alignContent='center' alignItems={'center'}>
+          <MovieIcon sx={{ marginLeft: 4 }} fontSize='large' />
+          <Typography sx={{ color: 'black', fontSize: 'xx-large', marginLeft: 2, fontWeight: 'bolder' }}>ΠΑΙΖΟΝΤΑΙ ΤΩΡΑ</Typography>
+
+        </Stack>
+
+        <Link to={'/events'}>
+          <Button sx={{ color: 'black', textDecoration: 'underline', marginRight: 5 }}> ΟΛΕΣ ΟΙ ΤΑΙΝΙΕΣ </Button>
+        </Link>
       </div>
 
-      <Divider variant="middle" style={{marginBottom:10}} />
-      <GridLayout/>
-      <Footer/>
-      </React.Fragment>
+      <Divider variant="middle" style={{ marginBottom: 10 }} />
+      <GridLayout />
+    </React.Fragment>
   )
 }
 
