@@ -1,0 +1,28 @@
+.firstIcon{
+    padding-top:2px;
+    color: white;
+    margin-left: 20px;
+    font-size: 35px;
+
+} 
+.firstIcon:hover{
+    color:#920b17;
+}
+.instaTwitterIcon{
+    padding-top:2px;
+    color: white;
+    margin-left: 20px;
+    font-size: 35px;
+
+} 
+.instaTwitterIcon:hover{
+    color:#920b17;
+}
+.actionButtons{
+    color: white;
+    padding: 0;
+    text-transform: none;
+}
+.actionButtons:hover{
+    color:#920b17;
+}
