@@ -1,25 +1,57 @@
+import { Box, Drawer, Tab, Tabs } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { AdminService } from './admin-shared/admin-service';
+import TabPanel from './TabPanelComponent';
 
 export default function AdminPage() {
-    const [data, setData] = useState<any>(null);
+    const [value, setValue] = React.useState(0);
 
-    useEffect(() => {
-        loadData();
-    }, [])
+    const tabs = [
+        {
+            name: 'Ταινίες',
+            to: '/admin/movies'
+        },
+        {
+            name: 'Καταστήματα',
+            to: '/admin/providers'
+        },
+        {
+            name: 'Προβολές',
+            to: '/admin/events'
+        },
+        {
+            name: 'Χρήστες',
+            to: '/admin/users'
+        }
+    ];
 
-
-    async function loadData() {
-        const data = await AdminService.fetchMoviesList();
-        console.log('data', data)
-        setData(data);
-    }
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
 
     return (
-        <React.Fragment>
-            Admin page
+        <Box style={{ width: '100%', height: '100%' }}>
+            <Box sx={{ width: '100%' }}>
+                <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
+                    {tabs.map((tab, index) =>
+                        <Tab key={index}
+                            component={Link}
+                            to={tab.to}
+                            label={tab.name}
+                        />
+                    )}
+
+                </Tabs>
+            </Box>
             <Outlet />
-        </React.Fragment>
+        </Box>
     );
+}
+
+function a11yProps(index: number) {
+    return {
+        id: `vertical-tab-${index}`,
+        'aria-controls': `vertical-tabpanel-${index}`,
+    };
 }

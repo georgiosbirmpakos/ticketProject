@@ -4,7 +4,7 @@ export class CreateMovieRequestDto {
     movieId: number = 0;
     name: string = '';
     description: string | null = null;
-    image: string = '';
+    image: File | null = null;
 
     static fromObj(obj: any): CreateMovieRequestDto | null  {
         if (!obj) {

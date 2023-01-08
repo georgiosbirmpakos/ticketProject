@@ -11,6 +11,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -36,10 +38,17 @@ public class MoviesActions {
     public CreateMovieResponseDto doCreateMovie(CreateMovieRequestDto createMovieRequestDto) throws TicketException {
         Log.info("Start MoviesActions.doCreateMovie");
         CreateMovieResponseDto createMovieResponseDto = new CreateMovieResponseDto();
+        byte[] image;
+        try {
+            image = Files.readAllBytes(createMovieRequestDto.getImage().uploadedFile());
+        } catch (IOException e) {
+            throw new TicketException(e);
+        }
+
         MovieModel movieModel = new MovieModel()
             .setName(createMovieRequestDto.getName())
             .setDescription(createMovieRequestDto.getDescription())
-            .setImage(Base64.getEncoder().encodeToString(createMovieRequestDto.getImage()));
+            .setImage(Base64.getEncoder().encodeToString(image));
 
         String error = this.movieService.createMovie(movieModel);
         if (error != null) {

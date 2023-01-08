@@ -20,5 +20,5 @@ public class CreateMovieRequestDto implements Serializable {
     private String description;
     @RestForm("image")
     @PartType(MediaType.APPLICATION_OCTET_STREAM)
-    private byte[] image;
+    private FileUpload image;
 }
