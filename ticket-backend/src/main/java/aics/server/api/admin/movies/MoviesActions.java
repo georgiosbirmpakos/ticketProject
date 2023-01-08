@@ -3,19 +3,23 @@ package aics.server.api.admin.movies;
 import aics.domain.movie.Movie;
 import aics.domain.movie.MovieService;
 import aics.domain.movie.models.MovieModel;
+import aics.infrastructure.errors.TicketErrorStatus;
 import aics.infrastructure.errors.TicketException;
 import aics.server.api.admin.movies.dtos.*;
 import io.quarkus.logging.Log;
 import org.apache.commons.collections4.CollectionUtils;
+import org.jboss.resteasy.reactive.RestResponse;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import org.jboss.resteasy.reactive.RestResponse;
 
 @ApplicationScoped
 public class MoviesActions {
@@ -52,7 +56,7 @@ public class MoviesActions {
 
         String error = this.movieService.createMovie(movieModel);
         if (error != null) {
-            throw new TicketException(new Exception(error), error);
+            throw new TicketException(new Exception(error), error, TicketErrorStatus.UNPROCESSABLE_ENTITY_422);
         }
 
         Log.info("End MoviesActions.doCreateMovie");

@@ -5,6 +5,8 @@ import { AdminService } from '../admin-shared/admin-service';
 import MovieCardComponent from './components/MovieCardComponent';
 import MovieDialogCreate from './components/MovieDialogCreate';
 import MovieDialogDelete from './components/MovieDialogDelete';
+import MoviesTable from './components/MoviesTable';
+import { Add } from '@mui/icons-material';
 
 export default function AdminMoviesPage() {
     const [movies, setMovies] = useState<MovieModel[]>([]);
@@ -55,7 +57,7 @@ export default function AdminMoviesPage() {
                     <Grid item>
                     </Grid>
                     <Grid item>
-                        <Button onClick={createMovieClicked}>
+                        <Button onClick={createMovieClicked} variant="contained" startIcon={<Add />}>
                             Δημιουργία Ταινίας
                         </Button>
                     </Grid>
@@ -69,6 +71,11 @@ export default function AdminMoviesPage() {
                     ))}
                 </Grid>
 
+                <MoviesTable movies={movies}
+                    onViewAction={(movie) => deleteMovieClicked(movie)}
+                    onEditAction={(movie) => deleteMovieClicked(movie)}
+                    onDeleteAction={(movie) => deleteMovieClicked(movie)} />
+
             </Box>
             {isDialogCreateOpen && (
                 <MovieDialogCreate open={isDialogCreateOpen}
@@ -77,7 +84,7 @@ export default function AdminMoviesPage() {
             )}
             {isDialogDeleteOpen && selectedMovie && (
                 <MovieDialogDelete open={isDialogDeleteOpen}
-                    onCancel={() => setIsDialogCreateOpen(false)}
+                    onCancel={() => setIsDialogDeleteOpen(false)}
                     afterDelete={afterDelete} movie={selectedMovie} />
             )}
         </Fragment>

@@ -13,6 +13,7 @@ export function createRouter() {
     const AdminProvidersPageLazy = React.lazy(() => import('./root/admin/providers/AdminProvidersPage'));
     const AdminMoviesPageLazy = React.lazy(() => import('./root/admin/movies/AdminMoviesPage'));
     const AdminUsersPageLazy = React.lazy(() => import('./root/admin/users/AdminUsersPage'));
+    
     const router = createBrowserRouter([
         {
             path: "/",
