@@ -18,6 +18,7 @@ export class AdminService {
     static async createMovie(createMovieRequestDto: CreateMovieRequestDto): Promise<CreateMovieResponseDto | null> {
         const apiConsumer = GlobalState.instance.apiConsumer;
         const fetchMoviesListUrl = '/admin/movies/new'
+        console.log('createMovieRequestDto', createMovieRequestDto)
 
 
         const formData = new FormData();
@@ -26,6 +27,11 @@ export class AdminService {
         if (createMovieRequestDto.image) {
             formData.append('image', createMovieRequestDto.image);
         }
+        formData.append('directors', createMovieRequestDto.directors);
+        formData.append('script', createMovieRequestDto.script);
+        formData.append('actors', createMovieRequestDto.actors);
+        formData.append('appropriateness', createMovieRequestDto.appropriateness);
+        formData.append('duration', '' + createMovieRequestDto.duration);
 
         const response = await apiConsumer.post(fetchMoviesListUrl, formData, {
             headers: {

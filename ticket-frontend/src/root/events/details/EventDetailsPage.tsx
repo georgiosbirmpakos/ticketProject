@@ -70,8 +70,8 @@ export default function EventDetailsPage() {
               color: 'black', fontSize: 'small', marginLeft: 2,
               float: 'left', display: 'block'
             }}>
-              Καταλληλότητα ταινίας:	ΚΑΤΑΛΛΗΛΗ ΑΝΩ ΤΩΝ 12 ΕΤΩΝ</Typography>
-
+              :	ΚΑΤΑΛΛΗΛΗ ΑΝΩ ΤΩΝ 12 ΕΤΩΝ</Typography>
+Καταλληλότητα ταινίας
           </Stack>
           <Typography sx={{
             color: 'black', fontSize: 'x-large', marginLeft: 2, fontWeight: 'bolder', clear: 'both',

@@ -1,6 +1,6 @@
 import { Box, Drawer, Tab, Tabs } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { AdminService } from './admin-shared/admin-service';
 import TabPanel from './TabPanelComponent';
 
@@ -25,6 +25,30 @@ export default function AdminPage() {
             to: '/admin/users'
         }
     ];
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        handleLocationChange();
+
+        function handleLocationChange() {
+            if (location.pathname.startsWith('/admin/movies')) {
+                setValue(0);
+            } else if (location.pathname.startsWith('/admin/providers')) {
+                setValue(1);
+            } else if (location.pathname.startsWith('/admin/events')) {
+                setValue(2);
+            } else if (location.pathname.startsWith('/admin/users')) {
+                setValue(3);
+            } else {
+                console.error('unknown location: ' + location.pathname);
+                navigate('/admin/movies');
+            }
+        };
+    }, [location, navigate]);
+
+
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);

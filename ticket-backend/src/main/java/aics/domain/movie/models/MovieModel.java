@@ -14,6 +14,11 @@ public class MovieModel implements Serializable {
     private String name;
     private String description;
     private String image;
+    private String directors;
+    private String script;
+    private String actors;
+    private String appropriateness;
+    private int duration;
 
     public static MovieModel fromMovie(Movie movie) {
         if (movie == null) {
@@ -23,6 +28,11 @@ public class MovieModel implements Serializable {
             .setMovieId(movie.getMovieId())
             .setName(movie.getName())
             .setDescription(movie.getDescription())
-            .setImage(Base64.getEncoder().encodeToString(movie.getImage()));
+            .setImage(Base64.getEncoder().encodeToString(movie.getImage()))
+            .setDirectors(movie.getDirectors())
+            .setScript(movie.getScript())
+            .setActors(movie.getActors())
+            .setAppropriateness(movie.getAppropriateness())
+            .setDuration(movie.getDuration());
     }
 }

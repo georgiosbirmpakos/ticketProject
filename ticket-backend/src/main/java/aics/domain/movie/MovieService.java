@@ -33,11 +33,31 @@ public class MovieService {
         if (movieModel.getImage() == null || movieModel.getImage().isEmpty()) {
             return "movieModel.getImage() was empty";
         }
+        if (StringUtils.isEmpty(movieModel.getDirectors())) {
+            return "movieModel.getDirectors() was empty";
+        }
+        if (StringUtils.isEmpty(movieModel.getScript())) {
+            return "movieModel.getScript() was empty";
+        }
+        if (StringUtils.isEmpty(movieModel.getActors())) {
+            return "movieModel.getActors() was empty";
+        }
+        if (StringUtils.isEmpty(movieModel.getAppropriateness())) {
+            return "movieModel.getAppropriateness() was empty";
+        }
+        if (movieModel.getDuration() <= 0) {
+            return "movieModel.getDuration() was not positive";
+        }
 
         Movie newMovie = new Movie()
             .setDescription(movieModel.getDescription())
             .setImage(Base64.getDecoder().decode(movieModel.getImage()))
-            .setName(movieModel.getName());
+            .setName(movieModel.getName())
+            .setDirectors(movieModel.getDirectors())
+            .setScript(movieModel.getScript())
+            .setActors(movieModel.getActors())
+            .setAppropriateness(movieModel.getAppropriateness())
+            .setDuration(movieModel.getDuration());
 
         this.movieRepository.persist(newMovie);
 
@@ -57,6 +77,21 @@ public class MovieService {
         if (movieModel.getImage() == null || movieModel.getImage().isEmpty()) {
             return "movieModel.getImage() was empty";
         }
+        if (StringUtils.isEmpty(movieModel.getDirectors())) {
+            return "movieModel.getDirectors() was empty";
+        }
+        if (StringUtils.isEmpty(movieModel.getScript())) {
+            return "movieModel.getScript() was empty";
+        }
+        if (StringUtils.isEmpty(movieModel.getActors())) {
+            return "movieModel.getActors() was empty";
+        }
+        if (StringUtils.isEmpty(movieModel.getAppropriateness())) {
+            return "movieModel.getAppropriateness() was empty";
+        }
+        if (movieModel.getDuration() <= 0) {
+            return "movieModel.getDuration() was not positive";
+        }
         Movie movie = this.movieRepository.findById(movieModel.getMovieId());
         if (movie == null) {
             return "couldn't find movie";
@@ -64,7 +99,12 @@ public class MovieService {
 
         movie.setDescription(movieModel.getDescription())
             .setImage(Base64.getDecoder().decode(movieModel.getImage()))
-            .setName(movieModel.getName());
+            .setName(movieModel.getName())
+            .setDirectors(movieModel.getDirectors())
+            .setScript(movieModel.getScript())
+            .setActors(movieModel.getActors())
+            .setAppropriateness(movieModel.getAppropriateness())
+            .setDuration(movieModel.getDuration());
 
         this.movieRepository.persist(movie);
 

@@ -22,4 +22,14 @@ public class Movie {
     @Column(name = "IMAGE", nullable = false)
     @Lob
     private byte[] image;
+    @Column(name = "DIRECTORS", nullable = false, length = 255)
+    private String directors;
+    @Column(name = "SCRIPT", nullable = false, length = 255)
+    private String script;
+    @Column(name = "ACTORS", nullable = false, length = 255)
+    private String actors;
+    @Column(name = "APPROPRIATENESS", nullable = false, length = 255)
+    private String appropriateness;
+    @Column(name = "DURATION", nullable = false, length = 255)
+    private int duration;
 }

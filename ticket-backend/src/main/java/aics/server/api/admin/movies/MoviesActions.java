@@ -52,7 +52,12 @@ public class MoviesActions {
         MovieModel movieModel = new MovieModel()
             .setName(createMovieRequestDto.getName())
             .setDescription(createMovieRequestDto.getDescription())
-            .setImage(Base64.getEncoder().encodeToString(image));
+            .setImage(Base64.getEncoder().encodeToString(image))
+            .setDirectors(createMovieRequestDto.getDirectors())
+            .setScript(createMovieRequestDto.getScript())
+            .setActors(createMovieRequestDto.getActors())
+            .setAppropriateness(createMovieRequestDto.getAppropriateness())
+            .setDuration(createMovieRequestDto.getDuration() != null ? Integer.parseInt(createMovieRequestDto.getDuration()): 0);
 
         String error = this.movieService.createMovie(movieModel);
         if (error != null) {
@@ -71,7 +76,12 @@ public class MoviesActions {
             .setMovieId(movieId)
             .setName(updateMovieRequestDto.getName())
             .setDescription(updateMovieRequestDto.getDescription())
-            .setImage(Base64.getEncoder().encodeToString(updateMovieRequestDto.getImage()));
+            .setImage(Base64.getEncoder().encodeToString(updateMovieRequestDto.getImage()))
+            .setDirectors(updateMovieRequestDto.getDirectors())
+            .setScript(updateMovieRequestDto.getScript())
+            .setActors(updateMovieRequestDto.getActors())
+            .setAppropriateness(updateMovieRequestDto.getAppropriateness())
+            .setDuration(updateMovieRequestDto.getDuration() != null ? Integer.parseInt(updateMovieRequestDto.getDuration()): 0);
         String error = this.movieService.updateMovie(movieModel);
         if (error != null) {
             throw new TicketException(new Exception(error), error);

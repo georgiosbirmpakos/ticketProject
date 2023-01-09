@@ -5,6 +5,11 @@ export class CreateMovieRequestDto {
     name: string = '';
     description: string | null = null;
     image: File | null = null;
+    directors: string = '';
+    script: string = '';
+    actors: string = '';
+    appropriateness: string = '';
+    duration: number = 0;
 
     static fromObj(obj: any): CreateMovieRequestDto | null  {
         if (!obj) {
@@ -15,6 +20,11 @@ export class CreateMovieRequestDto {
         createMovieRequestDto.name = obj.name;
         createMovieRequestDto.description = obj.description;
         createMovieRequestDto.image = obj.image;
+        createMovieRequestDto.directors = obj.directors;
+        createMovieRequestDto.script = obj.script;
+        createMovieRequestDto.actors = obj.actors;
+        createMovieRequestDto.appropriateness = obj.appropriateness;
+        createMovieRequestDto.duration = obj.duration;
         return createMovieRequestDto;
     }
 

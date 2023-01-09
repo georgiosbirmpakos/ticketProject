@@ -50,8 +50,7 @@ export default function AdminMoviesPage() {
     return (
         <Fragment>
             <Box style={{ width: '100%', height: '100%' }}>
-                Admin Movies page
-                <Grid container direction="row"
+                <Grid container direction="row" padding={2}
                     justifyContent="space-between"
                     alignItems="center">
                     <Grid item>
