@@ -75,7 +75,7 @@ const MuiNavbar = () => {
         <div>
           {/* Using a stack to have the other options */}
           <Stack direction={'row'}>
-            <Button className="stackBtn">Είσοδος/Σύνδεση</Button>
+            <Button className="stackBtn" component={Link} to={'/login'}>Είσοδος/Σύνδεση</Button>
             <Tooltip title='Change Language'>
               <IconButton size="large" edge='end'>
                 <LanguageIcon htmlColor="black" />

@@ -13,6 +13,7 @@ export function createRouter() {
     const AdminProvidersPageLazy = React.lazy(() => import('./root/admin/providers/AdminProvidersPage'));
     const AdminMoviesPageLazy = React.lazy(() => import('./root/admin/movies/AdminMoviesPage'));
     const AdminUsersPageLazy = React.lazy(() => import('./root/admin/users/AdminUsersPage'));
+    const LoginPageLazy = React.lazy(() => import('./root/shared/LoginPage'));
 
     const router = createBrowserRouter([
         {
@@ -34,6 +35,11 @@ export function createRouter() {
                     path: "about",
                     element: <AboutPageLazy />
                 },
+                {
+                    path: "login",
+                    element: <LoginPageLazy />
+                },
+
                 {
                     path: "events",
                     element: <EventsPageLazy />,
