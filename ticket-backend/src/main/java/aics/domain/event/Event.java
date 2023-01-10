@@ -1,7 +1,7 @@
 package aics.domain.event;
 
 import aics.domain.movie.Movie;
-import aics.domain.provider.Hall;
+import aics.domain.provider.entities.Hall;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

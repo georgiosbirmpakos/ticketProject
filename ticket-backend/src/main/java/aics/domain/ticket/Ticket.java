@@ -1,7 +1,7 @@
 package aics.domain.ticket;
 
 import aics.domain.event.Event;
-import aics.domain.provider.Seat;
+import aics.domain.provider.entities.Seat;
 import aics.domain.user.User;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { MovieModel } from '../../shared/models/movie-model';
-import { AdminService } from '../admin-shared/admin-service';
+import { AdminMoviesService } from '../movies/admin-movies-service';
 
 export default function AdminUsersPage() {
     const [movies, setMovies] = useState<MovieModel[]>([]);
@@ -13,7 +13,7 @@ export default function AdminUsersPage() {
 
     async function loadData() {
         setMovies([]);
-        const movies = await AdminService.fetchMoviesList();
+        const movies = await AdminMoviesService.fetchMoviesList();
         console.log('movies', movies)
         setMovies(movies);
     }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AdminService } from '../admin-shared/admin-service';
+import { AdminMoviesService } from '../movies/admin-movies-service';
 
 export default function AdminEventsPage() {
     const [data, setData] = useState<any>(null);
@@ -10,7 +10,7 @@ export default function AdminEventsPage() {
 
 
     async function loadData() {
-        const data = await AdminService.fetchMoviesList();
+        const data = await AdminMoviesService.fetchMoviesList();
         console.log('data', data)
         setData(data);
     }

@@ -1,7 +1,7 @@
 import { Box, Drawer, Tab, Tabs } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { AdminService } from './admin-shared/admin-service';
+import { AdminMoviesService } from './movies/admin-movies-service';
 import TabPanel from './TabPanelComponent';
 
 export default function AdminPage() {

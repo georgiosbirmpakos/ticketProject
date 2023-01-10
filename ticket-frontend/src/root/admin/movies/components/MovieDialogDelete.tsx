@@ -10,7 +10,7 @@ import { Modal, Box, Dialog, DialogActions, DialogContent, DialogContentText, Di
 import { Input } from '@mui/icons-material';
 import { useState } from 'react';
 import { CreateMovieRequestDto } from '../../admin-shared/dtos/create-movie-dto';
-import { AdminService } from '../../admin-shared/admin-service';
+import { AdminMoviesService } from '../admin-movies-service';
 
 export interface MovieDialogDeleteProps {
   movie: MovieModel;
@@ -23,7 +23,7 @@ export default function MovieDialogDelete(props: MovieDialogDeleteProps) {
 
 
   async function deleteClicked(e: any) {
-    const response = await AdminService.deleteMovie(props.movie.movieId);
+    const response = await AdminMoviesService.deleteMovie(props.movie.movieId);
     props.afterDelete(e);
   }
 

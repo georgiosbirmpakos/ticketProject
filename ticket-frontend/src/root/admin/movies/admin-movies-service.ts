@@ -1,9 +1,9 @@
 import { GlobalState } from '../../../modules/core/global-state';
 import { MovieModel } from '../../shared/models/movie-model';
-import { CreateMovieRequestDto, CreateMovieResponseDto } from './dtos/create-movie-dto';
-import { DeleteMovieResponseDto } from './dtos/delete-movie-dto';
+import { CreateMovieRequestDto, CreateMovieResponseDto } from '../admin-shared/dtos/create-movie-dto';
+import { DeleteMovieResponseDto } from '../admin-shared/dtos/delete-movie-dto';
 
-export class AdminService {
+export class AdminMoviesService {
 
     static async fetchMoviesList(): Promise<MovieModel[]> {
         const apiConsumer = GlobalState.instance.apiConsumer;

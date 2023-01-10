@@ -1,4 +1,4 @@
-package aics.domain.provider;
+package aics.domain.provider.entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +19,11 @@ public class Provider {
     private Long providerId;
     @Column(name = "NAME", nullable = false, length = 255, unique = true)
     private String name;
-    @Column(name = "DESCRIPTION", nullable = true, length = 255)
+    @Column(name = "ADDRESS", nullable = false, length = 255)
+    private String address;
+    @Column(name = "PHONE", nullable = false, length = 255)
+    private String phone;
+    @Column(name = "DESCRIPTION", nullable = false, length = 255)
     private String description;
 
     // ASSOCIATIONS

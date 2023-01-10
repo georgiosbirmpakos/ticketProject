@@ -1,4 +1,4 @@
-package aics.domain.provider;
+package aics.domain.provider.entities;
 
 import lombok.Getter;
 import lombok.Setter;

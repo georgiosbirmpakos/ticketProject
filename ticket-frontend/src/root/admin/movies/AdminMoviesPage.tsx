@@ -1,7 +1,7 @@
 import { Box, Button, Grid } from '@mui/material';
 import { Fragment, useEffect, useState } from 'react';
 import { MovieModel } from '../../shared/models/movie-model';
-import { AdminService } from '../admin-shared/admin-service';
+import { AdminMoviesService } from './admin-movies-service';
 import MovieCardComponent from './components/MovieCardComponent';
 import MovieDialogCreate from './components/MovieDialogCreate';
 import MovieDialogDelete from './components/MovieDialogDelete';
@@ -21,7 +21,7 @@ export default function AdminMoviesPage() {
 
     async function loadData() {
         setMovies([]);
-        const movies = await AdminService.fetchMoviesList();
+        const movies = await AdminMoviesService.fetchMoviesList();
         console.log('movies', movies)
         setMovies(movies);
     }

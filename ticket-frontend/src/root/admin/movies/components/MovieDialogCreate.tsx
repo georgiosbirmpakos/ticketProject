@@ -10,7 +10,7 @@ import { Modal, Box, Dialog, DialogActions, DialogContent, DialogContentText, Di
 import { Input } from '@mui/icons-material';
 import { useState } from 'react';
 import { CreateMovieRequestDto } from '../../admin-shared/dtos/create-movie-dto';
-import { AdminService } from '../../admin-shared/admin-service';
+import { AdminMoviesService } from '../admin-movies-service';
 
 export interface MovieDialogCreateProps {
   open: boolean;
@@ -46,7 +46,7 @@ export default function MovieDialogCreate(props: MovieDialogCreateProps) {
     createMovieRequestDto.actors = actors;
     createMovieRequestDto.appropriateness = appropriateness;
     createMovieRequestDto.duration = duration;
-    const response = await AdminService.createMovie(createMovieRequestDto);
+    const response = await AdminMoviesService.createMovie(createMovieRequestDto);
     props.afterAdd(e);
   }
 
