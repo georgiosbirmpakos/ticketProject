@@ -1,12 +1,12 @@
 import { Box, Button, Grid } from '@mui/material';
 import { Fragment, useEffect, useState } from 'react';
-import ProvidersTable from './components/ProvidersTable';
+import ProvidersTableComponent from './components/ProvidersTableComponent';
 import { Add } from '@mui/icons-material';
 import { AdminProvidersService } from './admin-providers-service';
 import { ProviderListItemDto } from '../../../modules/provider/provider-list-item-dto';
-import ProviderDialogCreate from './components/ProviderDialogCreate';
-import ProviderDialogUpdate from './components/ProviderDialogUpdate';
-import ProviderDialogDelete from './components/ProviderDialogDelete';
+import ProviderDialogCreate from './components/ProviderDialogCreateComponent';
+import ProviderDialogUpdate from './components/ProviderDialogUpdateComponent';
+import ProviderDialogDeleteComponent from './components/ProviderDialogDeleteComponent';
 
 export default function AdminProvidersPage() {
     const [providers, setProviders] = useState<ProviderListItemDto[]>([]);
@@ -74,7 +74,7 @@ export default function AdminProvidersPage() {
                     </Grid>
                 </Grid>
 
-                <ProvidersTable providers={providers}
+                <ProvidersTableComponent providers={providers}
                     onViewAction={(provider) => deleteProviderClicked(provider)}
                     onEditAction={(provider) => updateProviderClicked(provider)}
                     onDeleteAction={(provider) => deleteProviderClicked(provider)} />
@@ -92,7 +92,7 @@ export default function AdminProvidersPage() {
                     afterUpdate={afterUpdate} />
             )}
             {isDialogDeleteOpen && selectedProvider && (
-                <ProviderDialogDelete open={isDialogDeleteOpen}
+                <ProviderDialogDeleteComponent open={isDialogDeleteOpen}
                     onCancel={() => setIsDialogDeleteOpen(false)}
                     afterDelete={afterDelete} provider={selectedProvider} />
             )}

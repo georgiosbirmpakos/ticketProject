@@ -4,11 +4,11 @@ import aics.domain.movie.dtos.MovieDto;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Accessors(chain = true)
-public class CreateMovieRequestDto implements Serializable {
+public class FetchMovieDetailsResponseDto implements Serializable {
     private MovieDto movie;
 }

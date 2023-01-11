@@ -1,4 +1,4 @@
-package aics.domain.movie;
+package aics.domain.movie.entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +22,10 @@ public class Movie {
     @Column(name = "IMAGE", nullable = false)
     @Lob
     private byte[] image;
+    @Column(name = "IMAGE_NAME", nullable = false)
+    private String imageName;
+    @Column(name = "IMAGE_MIME_PREFIX", nullable = false)
+    private String imageMimePrefix;
     @Column(name = "DIRECTORS", nullable = false, length = 255)
     private String directors;
     @Column(name = "SCRIPT", nullable = false, length = 255)
@@ -30,6 +34,8 @@ public class Movie {
     private String actors;
     @Column(name = "APPROPRIATENESS", nullable = false, length = 255)
     private String appropriateness;
+    @Column(name = "TRAILER_SRC_URL", nullable = false, length = 255)
+    private String trailerSrcUrl;
     @Column(name = "DURATION", nullable = false, length = 255)
     private int duration;
 }

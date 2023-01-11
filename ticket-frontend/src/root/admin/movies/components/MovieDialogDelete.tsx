@@ -5,15 +5,15 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom'
-import { MovieModel } from '../../../shared/models/movie-model';
+import { MovieDto } from '../../../../modules/movie/movie-dto';
 import { Modal, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, FormControl, FormLabel } from '@mui/material';
 import { Input } from '@mui/icons-material';
 import { useState } from 'react';
-import { CreateMovieRequestDto } from '../../admin-shared/dtos/create-movie-dto';
+import { CreateMovieRequestDto } from '../dtos/create-movie-dto';
 import { AdminMoviesService } from '../admin-movies-service';
 
 export interface MovieDialogDeleteProps {
-  movie: MovieModel;
+  movie: MovieDto;
   open: boolean;
   onCancel?: ((event: any) => void) | undefined;
   afterDelete: (event: any) => void;

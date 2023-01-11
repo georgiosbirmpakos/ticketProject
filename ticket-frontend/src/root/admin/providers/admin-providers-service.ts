@@ -1,8 +1,8 @@
 import { GlobalState } from '../../../modules/core/global-state';
 import { ProviderDto } from '../../../modules/provider/provider-dto';
-import { MovieModel } from '../../shared/models/movie-model';
-import { CreateMovieRequestDto, CreateMovieResponseDto } from '../admin-shared/dtos/create-movie-dto';
-import { DeleteMovieResponseDto } from '../admin-shared/dtos/delete-movie-dto';
+import { MovieDto } from '../../../modules/movie/movie-dto';
+import { CreateMovieRequestDto, CreateMovieResponseDto } from '../movies/dtos/create-movie-dto';
+import { DeleteMovieResponseDto } from '../movies/dtos/delete-movie-dto';
 import { CreateProviderRequestDto, CreateProviderResponseDto } from './dtos/create-provider-dto';
 import { DeleteProviderResponseDto } from './dtos/delete-provider-dto';
 import { FetchProviderDetailsResponseDto } from './dtos/fetch-providers-details-dto';

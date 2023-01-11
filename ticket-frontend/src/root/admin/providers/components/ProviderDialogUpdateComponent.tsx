@@ -5,20 +5,20 @@ import { Link } from 'react-router-dom'
 import { Modal, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, FormControl, FormLabel, Grid } from '@mui/material';
 import { Input } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
-import { CreateMovieRequestDto } from '../../admin-shared/dtos/create-movie-dto';
+import { CreateMovieRequestDto } from '../../movies/dtos/create-movie-dto';
 import { ProviderDto } from '../../../../modules/provider/provider-dto';
 import { AdminProvidersService } from '../admin-providers-service';
 import { CreateProviderRequestDto } from '../dtos/create-provider-dto';
 import { UpdateProviderRequestDto } from '../dtos/update-provider-dto';
 
-export interface MovieDialogCreateProps {
+export interface MovieDialogCreateComponentProps {
   providerId: number;
   open: boolean;
   onCancel?: ((event: any) => void) | undefined;
   afterUpdate: (event: any) => void;
 }
 
-export default function MovieDialogCreate(props: MovieDialogCreateProps) {
+export default function MovieDialogCreateComponent(props: MovieDialogCreateComponentProps) {
   const [provider, setProvider] = useState<ProviderDto | null>(null);
 
   useEffect(() => {

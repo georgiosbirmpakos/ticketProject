@@ -5,7 +5,7 @@ import { Box, IconButton, Stack, Tooltip } from '@mui/material';
 import { Delete, Visibility, Edit } from '@mui/icons-material';
 import { ProviderListItemDto } from '../../../../modules/provider/provider-list-item-dto';
 
-export interface ProvidersTableProps {
+export interface ProvidersTableComponentProps {
   providers: ProviderListItemDto[];
   onViewAction: (provider: ProviderListItemDto) => void;
   onEditAction: (provider: ProviderListItemDto) => void;
@@ -14,7 +14,7 @@ export interface ProvidersTableProps {
 
 
 
-export default function ProvidersTable(props: ProvidersTableProps) {
+export default function ProvidersTableComponent(props: ProvidersTableComponentProps) {
   const columns: GridColDef[] = [
     {
       field: 'name',

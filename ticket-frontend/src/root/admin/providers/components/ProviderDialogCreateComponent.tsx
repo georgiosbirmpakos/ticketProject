@@ -5,22 +5,22 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom'
-import { MovieModel } from '../../../shared/models/movie-model';
+import { MovieDto } from '../../../../modules/movie/movie-dto';
 import { Modal, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, FormControl, FormLabel, Grid } from '@mui/material';
 import { Input } from '@mui/icons-material';
 import { useState } from 'react';
-import { CreateMovieRequestDto } from '../../admin-shared/dtos/create-movie-dto';
+import { CreateMovieRequestDto } from '../../movies/dtos/create-movie-dto';
 import { ProviderDto } from '../../../../modules/provider/provider-dto';
 import { AdminProvidersService } from '../admin-providers-service';
 import { CreateProviderRequestDto } from '../dtos/create-provider-dto';
 
-export interface MovieDialogCreateProps {
+export interface MovieDialogCreateComponentProps {
   open: boolean;
   onCancel?: ((event: any) => void) | undefined;
   afterAdd: (event: any) => void;
 }
 
-export default function MovieDialogCreate(props: MovieDialogCreateProps) {
+export default function MovieDialogCreateComponent(props: MovieDialogCreateComponentProps) {
   const [provider, setProvider] = useState<ProviderDto>(new ProviderDto());
 
 

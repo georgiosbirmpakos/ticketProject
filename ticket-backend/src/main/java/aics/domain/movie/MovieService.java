@@ -1,11 +1,11 @@
 package aics.domain.movie;
 
-import aics.domain.movie.models.MovieModel;
+import aics.domain.movie.entities.Movie;
+import aics.domain.movie.dtos.MovieDto;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.util.Base64;
 import java.util.List;
 
@@ -13,98 +13,87 @@ import java.util.List;
 public class MovieService {
     @Inject
     MovieRepository movieRepository;
+    @Inject
+    MovieValidator movieValidator;
 
     public List<Movie> fetchAllMovies() {
         List<Movie> movies = this.movieRepository.findAll().list();
 
         return movies;
     }
+    public Movie fetchMovieById(Long movieId) {
+        Movie movie = this.movieRepository.findById(movieId);
 
-    public String createMovie(MovieModel movieModel) {
-        if (movieModel == null) {
-            return "movieModel was null";
-        }
-        if (movieModel.getMovieId() != null) {
-            return "movieModel.getMovieId() should be null";
-        }
-        if (StringUtils.isEmpty(movieModel.getName())) {
-            return "movieModel.getName() was empty";
-        }
-        if (movieModel.getImage() == null || movieModel.getImage().isEmpty()) {
-            return "movieModel.getImage() was empty";
-        }
-        if (StringUtils.isEmpty(movieModel.getDirectors())) {
-            return "movieModel.getDirectors() was empty";
-        }
-        if (StringUtils.isEmpty(movieModel.getScript())) {
-            return "movieModel.getScript() was empty";
-        }
-        if (StringUtils.isEmpty(movieModel.getActors())) {
-            return "movieModel.getActors() was empty";
-        }
-        if (StringUtils.isEmpty(movieModel.getAppropriateness())) {
-            return "movieModel.getAppropriateness() was empty";
-        }
-        if (movieModel.getDuration() <= 0) {
-            return "movieModel.getDuration() was not positive";
+        return movie;
+    }
+
+    public String createMovie(MovieDto movieDto) {
+        final String error = this.movieValidator.validateForCreateMovie(movieDto);
+        if (StringUtils.isNotEmpty(error)) {
+            return error;
         }
 
         Movie newMovie = new Movie()
-            .setDescription(movieModel.getDescription())
-            .setImage(Base64.getDecoder().decode(movieModel.getImage()))
-            .setName(movieModel.getName())
-            .setDirectors(movieModel.getDirectors())
-            .setScript(movieModel.getScript())
-            .setActors(movieModel.getActors())
-            .setAppropriateness(movieModel.getAppropriateness())
-            .setDuration(movieModel.getDuration());
+            .setDescription(movieDto.getDescription())
+            .setImage(Base64.getDecoder().decode(movieDto.getImage()))
+            .setImageName(movieDto.getImageName())
+            .setImageMimePrefix(movieDto.getImageMimePrefix())
+            .setName(movieDto.getName())
+            .setDirectors(movieDto.getDirectors())
+            .setScript(movieDto.getScript())
+            .setActors(movieDto.getActors())
+            .setAppropriateness(movieDto.getAppropriateness())
+            .setDuration(movieDto.getDuration())
+            .setTrailerSrcUrl(movieDto.getTrailerSrcUrl());
 
         this.movieRepository.persist(newMovie);
 
         return null;
     }
 
-    public String updateMovie(MovieModel movieModel) {
-        if (movieModel == null) {
-            return "movieModel was null";
+    public String updateMovie(MovieDto movieDto) {
+        if (movieDto == null) {
+            return "movieDto was null";
         }
-        if (movieModel.getMovieId() == null) {
-            return "movieModel.getMovieId() was null";
+        if (movieDto.getMovieId() == null) {
+            return "movieDto.getMovieId() was null";
         }
-        if (StringUtils.isEmpty(movieModel.getName())) {
-            return "movieModel.getName() was empty";
+        if (StringUtils.isEmpty(movieDto.getName())) {
+            return "movieDto.getName() was empty";
         }
-        if (movieModel.getImage() == null || movieModel.getImage().isEmpty()) {
-            return "movieModel.getImage() was empty";
+        if (movieDto.getImage() == null || movieDto.getImage().isEmpty()) {
+            return "movieDto.getImage() was empty";
         }
-        if (StringUtils.isEmpty(movieModel.getDirectors())) {
-            return "movieModel.getDirectors() was empty";
+        if (StringUtils.isEmpty(movieDto.getDirectors())) {
+            return "movieDto.getDirectors() was empty";
         }
-        if (StringUtils.isEmpty(movieModel.getScript())) {
-            return "movieModel.getScript() was empty";
+        if (StringUtils.isEmpty(movieDto.getScript())) {
+            return "movieDto.getScript() was empty";
         }
-        if (StringUtils.isEmpty(movieModel.getActors())) {
-            return "movieModel.getActors() was empty";
+        if (StringUtils.isEmpty(movieDto.getActors())) {
+            return "movieDto.getActors() was empty";
         }
-        if (StringUtils.isEmpty(movieModel.getAppropriateness())) {
-            return "movieModel.getAppropriateness() was empty";
+        if (StringUtils.isEmpty(movieDto.getAppropriateness())) {
+            return "movieDto.getAppropriateness() was empty";
         }
-        if (movieModel.getDuration() <= 0) {
-            return "movieModel.getDuration() was not positive";
+        if (movieDto.getDuration() <= 0) {
+            return "movieDto.getDuration() was not positive";
         }
-        Movie movie = this.movieRepository.findById(movieModel.getMovieId());
+        Movie movie = this.movieRepository.findById(movieDto.getMovieId());
         if (movie == null) {
             return "couldn't find movie";
         }
 
-        movie.setDescription(movieModel.getDescription())
-            .setImage(Base64.getDecoder().decode(movieModel.getImage()))
-            .setName(movieModel.getName())
-            .setDirectors(movieModel.getDirectors())
-            .setScript(movieModel.getScript())
-            .setActors(movieModel.getActors())
-            .setAppropriateness(movieModel.getAppropriateness())
-            .setDuration(movieModel.getDuration());
+        movie.setDescription(movieDto.getDescription())
+            .setImage(Base64.getDecoder().decode(movieDto.getImage()))
+            .setImageName(movieDto.getImageName())
+            .setImageMimePrefix(movieDto.getImageMimePrefix())
+            .setName(movieDto.getName())
+            .setDirectors(movieDto.getDirectors())
+            .setScript(movieDto.getScript())
+            .setActors(movieDto.getActors())
+            .setAppropriateness(movieDto.getAppropriateness())
+            .setDuration(movieDto.getDuration());
 
         this.movieRepository.persist(movie);
 

@@ -1,18 +1,19 @@
 import { Box, Button, Grid } from '@mui/material';
 import { Fragment, useEffect, useState } from 'react';
-import { MovieModel } from '../../shared/models/movie-model';
+import { MovieDto } from '../../../modules/movie/movie-dto';
 import { AdminMoviesService } from './admin-movies-service';
 import MovieCardComponent from './components/MovieCardComponent';
 import MovieDialogCreate from './components/MovieDialogCreate';
 import MovieDialogDelete from './components/MovieDialogDelete';
 import MoviesTable from './components/MoviesTable';
 import { Add } from '@mui/icons-material';
+import { MovieListItemDto } from '../../../modules/movie/movie-list-item-dto';
 
 export default function AdminMoviesPage() {
-    const [movies, setMovies] = useState<MovieModel[]>([]);
+    const [movies, setMovies] = useState<MovieListItemDto[]>([]);
     const [isDialogCreateOpen, setIsDialogCreateOpen] = useState<boolean>(false);
     const [isDialogDeleteOpen, setIsDialogDeleteOpen] = useState<boolean>(false);
-    const [selectedMovie, setSelectedMovie] = useState<MovieModel | null>(null);
+    const [selectedMovie, setSelectedMovie] = useState<MovieDto | null>(null);
 
     useEffect(() => {
         loadData();
@@ -21,9 +22,9 @@ export default function AdminMoviesPage() {
 
     async function loadData() {
         setMovies([]);
-        const movies = await AdminMoviesService.fetchMoviesList();
-        console.log('movies', movies)
-        setMovies(movies);
+        const fetchMoviesListResponseDto = await AdminMoviesService.fetchMoviesList();
+        console.log('movies', fetchMoviesListResponseDto)
+        setMovies(fetchMoviesListResponseDto.movies);
     }
 
 
@@ -32,7 +33,7 @@ export default function AdminMoviesPage() {
         setIsDialogCreateOpen(true);
     }
 
-    function deleteMovieClicked(movie: MovieModel) {
+    function deleteMovieClicked(movie: MovieDto) {
         setSelectedMovie(movie);
         setIsDialogDeleteOpen(true);
     }
@@ -60,14 +61,6 @@ export default function AdminMoviesPage() {
                             Δημιουργία Ταινίας
                         </Button>
                     </Grid>
-                </Grid>
-
-                <Grid marginBottom={5} container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                    {movies.map((movie, index) => (
-                        <Grid item xs={2} sm={4} md={4} key={index} display='flex' style={{ marginTop: 15, display: 'flex-start', justifyContent: 'center', alignItems: 'center' }}>
-                            <MovieCardComponent movie={movie} onDelete={(movie) => deleteMovieClicked(movie)} />
-                        </Grid>
-                    ))}
                 </Grid>
 
                 <MoviesTable movies={movies}

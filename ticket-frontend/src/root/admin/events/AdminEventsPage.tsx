@@ -10,9 +10,9 @@ export default function AdminEventsPage() {
 
 
     async function loadData() {
-        const data = await AdminMoviesService.fetchMoviesList();
-        console.log('data', data)
-        setData(data);
+        // const data = await AdminMoviesService.fetchMoviesList();
+        // console.log('data', data)
+        // setData(data);
     }
 
     return (

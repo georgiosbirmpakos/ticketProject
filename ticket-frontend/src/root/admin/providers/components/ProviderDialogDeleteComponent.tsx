@@ -4,14 +4,14 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } 
 import { AdminProvidersService } from '../admin-providers-service';
 import { ProviderListItemDto } from '../../../../modules/provider/provider-list-item-dto';
 
-export interface ProviderDialogDeleteProps {
+export interface ProviderDialogDeleteComponentProps {
   provider: ProviderListItemDto;
   open: boolean;
   onCancel?: ((event: any) => void) | undefined;
   afterDelete: (event: any) => void;
 }
 
-export default function ProviderDialogDelete(props: ProviderDialogDeleteProps) {
+export default function ProviderDialogDeleteComponent(props: ProviderDialogDeleteComponentProps) {
 
 
   async function deleteClicked(e: any) {

@@ -5,11 +5,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom'
-import { MovieModel } from '../../../shared/models/movie-model';
+import { MovieDto } from '../../../../modules/movie/movie-dto';
 
 export interface MovieCardComponentProps {
-  movie: MovieModel;
-  onDelete: (movie: MovieModel) => void;
+  movie: MovieDto;
+  onDelete: (movie: MovieDto) => void;
 }
 
 export default function MovieCardComponent(props: MovieCardComponentProps) {

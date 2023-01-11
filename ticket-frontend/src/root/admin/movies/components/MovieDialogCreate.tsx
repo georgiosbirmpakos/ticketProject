@@ -5,12 +5,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom'
-import { MovieModel } from '../../../shared/models/movie-model';
+import { MovieDto } from '../../../../modules/movie/movie-dto';
 import { Modal, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, FormControl, FormLabel, Grid } from '@mui/material';
 import { Input } from '@mui/icons-material';
 import { useState } from 'react';
-import { CreateMovieRequestDto } from '../../admin-shared/dtos/create-movie-dto';
+import { CreateMovieRequestDto } from '../dtos/create-movie-dto';
 import { AdminMoviesService } from '../admin-movies-service';
+import { FileUtils } from '../../../../modules/core/file-utils';
 
 export interface MovieDialogCreateProps {
   open: boolean;
@@ -19,36 +20,57 @@ export interface MovieDialogCreateProps {
 }
 
 export default function MovieDialogCreate(props: MovieDialogCreateProps) {
-  const [name, setName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [image, setImage] = useState<File | null>(null);
-  const [directors, setDirectors] = useState<string>('');
-  const [script, setScript] = useState<string>('');
-  const [actors, setActors] = useState<string>('');
-  const [appropriateness, setAppropriateness] = useState<string>('');
-  const [duration, setDuration] = useState<number>(0);
+  const [movie, setMovie] = useState<MovieDto>(new MovieDto());
+
 
   const onClick = (id: string) => {
     console.log({ id })
   }
 
-  function setSelectedFile(target: any) {
-    console.log('target', target)
+  async function fileChanged(e: any) {
+    const file = e.target.files[0] as File | null | undefined;
+    console.log('file', file)
+    if (file) {
+      try {
+        const fileToBase64Result = await FileUtils.fileToBase64(file);
+        console.log('fileToBase64Result', fileToBase64Result)
+        setMovie({
+          ...movie,
+          imageName: fileToBase64Result.fileName,
+          image: fileToBase64Result.file,
+          imageMimePrefix: fileToBase64Result.fileMimePrefix
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      setMovie({
+        ...movie,
+        imageName: '',
+        image: '',
+        imageMimePrefix: ''
+      });
+    }
+    setTimeout(() => console.log('movie', movie))
   }
+
 
   async function addClicked(e: any) {
     const createMovieRequestDto: CreateMovieRequestDto = new CreateMovieRequestDto();
-    createMovieRequestDto.name = name;
-    createMovieRequestDto.description = description;
-    createMovieRequestDto.image = image ? image : null;
-    createMovieRequestDto.directors = directors;
-    createMovieRequestDto.script = script;
-    createMovieRequestDto.actors = actors;
-    createMovieRequestDto.appropriateness = appropriateness;
-    createMovieRequestDto.duration = duration;
+    createMovieRequestDto.movie = movie;
     const response = await AdminMoviesService.createMovie(createMovieRequestDto);
     props.afterAdd(e);
   }
+
+  async function toBase64(file: File) {
+    file.text()
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    })
+  };
 
   return (
     <Dialog onClose={props.onCancel} open={props.open}>
@@ -56,37 +78,44 @@ export default function MovieDialogCreate(props: MovieDialogCreateProps) {
         Προσθήκη Ταινίας
       </DialogTitle>
       <DialogContent>
-        {/* <DialogContentText id="alert-dialog-description">
-        </DialogContentText> */}
         <form>
           <Grid container spacing={2}>
             <Grid item>
-              <TextField label="Όνομα" value={name} onChange={(e) => setName(e.target.value)} />
+              <TextField label="Όνομα" value={movie.name} onChange={(e) => setMovie({ ...movie, name: e.target.value })} />
             </Grid>
             <Grid item>
-              <TextField label="Περιγραφή" value={description} onChange={(e) => setDescription(e.target.value)} />
+              <TextField label="Περιγραφή" value={movie.description} onChange={(e) => setMovie({ ...movie, description: e.target.value })} />
             </Grid>
             <Grid item>
-              <TextField label="Σκηνοθεσία" value={directors} onChange={(e) => setDirectors(e.target.value)} />
+              <TextField label="Σκηνοθεσία" value={movie.directors} onChange={(e) => setMovie({ ...movie, directors: e.target.value })} />
             </Grid>
             <Grid item>
-              <TextField label="Σενάριο" value={script} onChange={(e) => setScript(e.target.value)} />
+              <TextField label="Σενάριο" value={movie.script} onChange={(e) => setMovie({ ...movie, script: e.target.value })} />
             </Grid>
             <Grid item>
-              <TextField label="Ηθοποιοί" value={actors} onChange={(e) => setActors(e.target.value)} />
+              <TextField label="Ηθοποιοί" value={movie.actors} onChange={(e) => setMovie({ ...movie, actors: e.target.value })} />
             </Grid>
             <Grid item>
-              <TextField label="Καταλληλότητα" value={appropriateness} onChange={(e) => setAppropriateness(e.target.value)} />
+              <TextField label="Καταλληλότητα" value={movie.appropriateness} onChange={(e) => setMovie({ ...movie, appropriateness: e.target.value })} />
             </Grid>
             <Grid item>
-              <TextField type='number' label="Διάρκεια" value={duration} onChange={(e) => setDuration(e.target.value ? parseInt(e.target.value) : 0)} />
+              <TextField type='number' label="Διάρκεια" value={movie.duration} onChange={(e) => setMovie({ ...movie, duration: e.target.value ? parseInt(e.target.value) : 0 })} />
+            </Grid>
+            <Grid item>
+              <TextField label="Trailer" value={movie.trailerSrcUrl} onChange={(e) => setMovie({ ...movie, trailerSrcUrl: e.target.value })} />
             </Grid>
             <Grid item>
               <FormControl>
                 <FormLabel id="demo-radio-buttons-group-label">Εικόνα</FormLabel>
                 <input type="file"
-                  onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)} />
+                  onChange={(e) => fileChanged(e)} />
               </FormControl>
+              <CardMedia
+                component="img"
+                height="200"
+                width="200"
+                src={movie.image}
+              />
             </Grid>
           </Grid>
         </form>
