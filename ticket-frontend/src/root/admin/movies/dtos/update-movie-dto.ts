@@ -1,33 +1,22 @@
-import { TypeUtils } from '../../../../modules/core/type-utils';
+import { MovieDto } from '../../../../modules/movie/movie-dto';
 
 export class UpdateMovieRequestDto {
-    name: string = '';
-    description: string | null = null;
-    image: string = '';
+    movie: MovieDto | null = null;
 
-    static fromObj(obj: any): UpdateMovieRequestDto | null  {
+    static fromObj(obj: any): UpdateMovieRequestDto | null {
         if (!obj) {
             return null;
         }
         const updateMovieRequestDto: UpdateMovieRequestDto = new UpdateMovieRequestDto();
-        updateMovieRequestDto.name = obj.name;
-        updateMovieRequestDto.description = obj.description;
-        updateMovieRequestDto.image = obj.image;
+        updateMovieRequestDto.movie = obj.movie;
         return updateMovieRequestDto;
-    }
-
-    static listFromObjList(objs: any[]): UpdateMovieRequestDto[] | null  {
-        if (!objs) {
-            return null;
-        }
-        return objs.map(UpdateMovieRequestDto.fromObj).filter(TypeUtils.isNonNullable);
     }
 }
 
 export class UpdateMovieResponseDto {
     errors: string[] = [];
 
-    static fromObj(obj: any): UpdateMovieResponseDto | null  {
+    static fromObj(obj: any): UpdateMovieResponseDto | null {
         if (!obj) {
             return null;
         }

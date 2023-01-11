@@ -72,13 +72,13 @@ public class MoviesController {
         }
     }
 
-    @Path("/id/{id}")
+    @Path("/update")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public RestResponse<UpdateMovieResponseDto> handleUpdateMovie(UpdateMovieRequestDto updateMovieRequestDto, @RestPath Long id) {
+    public RestResponse<UpdateMovieResponseDto> handleUpdateMovie(UpdateMovieRequestDto updateMovieRequestDto) {
         Log.info("Start MoviesController.handleUpdateMovie");
         try {
-            UpdateMovieResponseDto updateMovieResponseDto = this.moviesActions.doUpdateMovie(updateMovieRequestDto, id);
+            UpdateMovieResponseDto updateMovieResponseDto = this.moviesActions.doUpdateMovie(updateMovieRequestDto);
             Log.info("End MoviesController.handleUpdateMovie");
             return RestResponse.ok(updateMovieResponseDto);
         } catch (TicketException e) {

@@ -69,20 +69,16 @@ public class MoviesActions {
     }
 
     @Transactional
-    public UpdateMovieResponseDto doUpdateMovie(UpdateMovieRequestDto updateMovieRequestDto, Long movieId) throws TicketException {
+    public UpdateMovieResponseDto doUpdateMovie(UpdateMovieRequestDto updateMovieRequestDto) throws TicketException {
         Log.info("Start MoviesActions.doCreateMovie");
+        if (updateMovieRequestDto == null) {
+            final String error = "updateMovieRequestDto was null";
+            throw new TicketException(new Exception(error), error, TicketErrorStatus.UNPROCESSABLE_ENTITY_422);
+
+        }
         UpdateMovieResponseDto updateMovieResponseDto = new UpdateMovieResponseDto();
-        MovieDto movieDto = new MovieDto()
-            .setMovieId(movieId)
-            .setName(updateMovieRequestDto.getName())
-            .setDescription(updateMovieRequestDto.getDescription())
-            .setImage(Base64.getEncoder().encodeToString(updateMovieRequestDto.getImage()))
-            .setDirectors(updateMovieRequestDto.getDirectors())
-            .setScript(updateMovieRequestDto.getScript())
-            .setActors(updateMovieRequestDto.getActors())
-            .setAppropriateness(updateMovieRequestDto.getAppropriateness())
-            .setDuration(updateMovieRequestDto.getDuration() != null ? Integer.parseInt(updateMovieRequestDto.getDuration()): 0);
-        String error = this.movieService.updateMovie(movieDto);
+
+        String error = this.movieService.updateMovie(updateMovieRequestDto.getMovie());
         if (error != null) {
             throw new TicketException(new Exception(error), error);
         }

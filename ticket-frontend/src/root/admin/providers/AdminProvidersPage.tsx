@@ -14,6 +14,7 @@ export default function AdminProvidersPage() {
     const [isDialogUpdateOpen, setIsDialogUpdateOpen] = useState<boolean>(false);
     const [isDialogDeleteOpen, setIsDialogDeleteOpen] = useState<boolean>(false);
     const [selectedProvider, setSelectedProvider] = useState<ProviderListItemDto | null>(null);
+    const [readonly, setReadonly] = useState<boolean>(false);
 
     useEffect(() => {
         loadData();
@@ -33,8 +34,15 @@ export default function AdminProvidersPage() {
         setIsDialogCreateOpen(true);
     }
 
+    function viewProviderClicked(selectedProvider: ProviderListItemDto) {
+        setSelectedProvider(selectedProvider);
+        setReadonly(true);
+        setIsDialogUpdateOpen(true);
+    }
+
     function updateProviderClicked(selectedProvider: ProviderListItemDto) {
         setSelectedProvider(selectedProvider);
+        setReadonly(false);
         setIsDialogUpdateOpen(true);
     }
 
@@ -75,7 +83,7 @@ export default function AdminProvidersPage() {
                 </Grid>
 
                 <ProvidersTableComponent providers={providers}
-                    onViewAction={(provider) => deleteProviderClicked(provider)}
+                    onViewAction={(provider) => viewProviderClicked(provider)}
                     onEditAction={(provider) => updateProviderClicked(provider)}
                     onDeleteAction={(provider) => deleteProviderClicked(provider)} />
 
@@ -87,6 +95,7 @@ export default function AdminProvidersPage() {
             )}
             {isDialogUpdateOpen && selectedProvider && (
                 <ProviderDialogUpdate open={isDialogUpdateOpen}
+                    readonly={readonly}
                     providerId={selectedProvider.providerId}
                     onCancel={() => setIsDialogUpdateOpen(false)}
                     afterUpdate={afterUpdate} />

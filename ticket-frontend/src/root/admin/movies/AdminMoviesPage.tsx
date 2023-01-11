@@ -2,18 +2,20 @@ import { Box, Button, Grid } from '@mui/material';
 import { Fragment, useEffect, useState } from 'react';
 import { MovieDto } from '../../../modules/movie/movie-dto';
 import { AdminMoviesService } from './admin-movies-service';
-import MovieCardComponent from './components/MovieCardComponent';
-import MovieDialogCreate from './components/MovieDialogCreate';
-import MovieDialogDelete from './components/MovieDialogDelete';
+import MovieDialogCreateComponent from './components/MovieDialogCreateComponent';
+import MovieDialogDeleteComponent from './components/MovieDialogDeleteComponent';
 import MoviesTable from './components/MoviesTable';
 import { Add } from '@mui/icons-material';
 import { MovieListItemDto } from '../../../modules/movie/movie-list-item-dto';
+import MovieDialogUpdateComponent from './components/MovieDialogUpdateComponent';
 
 export default function AdminMoviesPage() {
     const [movies, setMovies] = useState<MovieListItemDto[]>([]);
     const [isDialogCreateOpen, setIsDialogCreateOpen] = useState<boolean>(false);
     const [isDialogDeleteOpen, setIsDialogDeleteOpen] = useState<boolean>(false);
+    const [isDialogUpdateOpen, setIsDialogUpdateOpen] = useState<boolean>(false);
     const [selectedMovie, setSelectedMovie] = useState<MovieDto | null>(null);
+    const [readonly, setReadonly] = useState<boolean>(false);
 
     useEffect(() => {
         loadData();
@@ -23,7 +25,6 @@ export default function AdminMoviesPage() {
     async function loadData() {
         setMovies([]);
         const fetchMoviesListResponseDto = await AdminMoviesService.fetchMoviesList();
-        console.log('movies', fetchMoviesListResponseDto)
         setMovies(fetchMoviesListResponseDto.movies);
     }
 
@@ -33,6 +34,18 @@ export default function AdminMoviesPage() {
         setIsDialogCreateOpen(true);
     }
 
+    function viewMovieClicked(movie: MovieDto) {
+        setSelectedMovie(movie);
+        setReadonly(true);
+        setIsDialogUpdateOpen(true);
+    }
+
+    function updateMovieClicked(movie: MovieDto) {
+        setSelectedMovie(movie);
+        setReadonly(false);
+        setIsDialogUpdateOpen(true);
+    }
+
     function deleteMovieClicked(movie: MovieDto) {
         setSelectedMovie(movie);
         setIsDialogDeleteOpen(true);
@@ -40,6 +53,11 @@ export default function AdminMoviesPage() {
 
     async function afterAdd() {
         setIsDialogCreateOpen(false);
+        await loadData();
+    }
+
+    async function afterUpdate() {
+        setIsDialogUpdateOpen(false);
         await loadData();
     }
 
@@ -64,18 +82,25 @@ export default function AdminMoviesPage() {
                 </Grid>
 
                 <MoviesTable movies={movies}
-                    onViewAction={(movie) => deleteMovieClicked(movie)}
-                    onEditAction={(movie) => deleteMovieClicked(movie)}
+                    onViewAction={(movie) => viewMovieClicked(movie)}
+                    onEditAction={(movie) => updateMovieClicked(movie)}
                     onDeleteAction={(movie) => deleteMovieClicked(movie)} />
 
             </Box>
             {isDialogCreateOpen && (
-                <MovieDialogCreate open={isDialogCreateOpen}
+                <MovieDialogCreateComponent open={isDialogCreateOpen}
                     onCancel={() => setIsDialogCreateOpen(false)}
                     afterAdd={afterAdd} />
             )}
+            {isDialogUpdateOpen && selectedMovie?.movieId && (
+                <MovieDialogUpdateComponent open={isDialogUpdateOpen}
+                    movieId={selectedMovie.movieId}
+                    readonly={readonly}
+                    onCancel={() => setIsDialogUpdateOpen(false)}
+                    afterUpdate={afterUpdate} />
+            )}
             {isDialogDeleteOpen && selectedMovie && (
-                <MovieDialogDelete open={isDialogDeleteOpen}
+                <MovieDialogDeleteComponent open={isDialogDeleteOpen}
                     onCancel={() => setIsDialogDeleteOpen(false)}
                     afterDelete={afterDelete} movie={selectedMovie} />
             )}
