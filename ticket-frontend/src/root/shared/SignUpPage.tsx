@@ -9,8 +9,8 @@ import { ThemeProvider } from '@emotion/react';
 import GoogleIcon from '@mui/icons-material/Google'
 import { Link } from "react-router-dom";
 
-const LoginPage = () => { 
-    const [showPassword, setShowPassword] = React.useState(false);
+
+const SignUpPage = () => {const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -25,8 +25,8 @@ const LoginPage = () => {
         <Stack direction={'column'} alignContent='center' alignItems={'center'}>
 
             <Typography style={{marginTop:10}} variant='h5'> MovieScape </Typography>
-            <Typography style={{marginTop:10}} fontWeight={'bold'}> Συνέχεια με τον λογαριασμό σου </Typography>
-            <Typography style={{ marginTop:10, wordWrap:'break-word', textAlign:'center'}} fontWeight='normal' variant='subtitle2'> Κάνε σύνδεση ή εγγραφή με έναν από τους παρακάτω τρόπους </Typography>
+            <Typography style={{marginTop:10}} fontWeight={'bold'}> Δημιούργησε τον λογαριασμό σου </Typography>
+            <Typography style={{ marginTop:10, wordWrap:'break-word', textAlign:'center'}} fontWeight='normal' variant='subtitle2'> Κάνε εγγραφή με έναν από τους παρακάτω τρόπους </Typography>
             <Input color='primary' style={{marginTop:10, width:'60%'}} placeholder="Email" inputProps={{inputMode: 'email'}}/>
 
             <Input placeholder='Password' sx={{width:'60%', marginTop:2, marginBottom:2}} 
@@ -47,9 +47,6 @@ const LoginPage = () => {
             <Button variant='contained' 
             sx={{ ":hover": { backgroundColor: '#920b17' }, 
             borderRadius: 15, backgroundColor: '#E63946', height: 40, width: '60%' }} >ΣΥΝΔΕΣΗ</Button>
-            
-            <Button color="primary" sx={{marginTop:1 ,height: 40, textTransform:'none' }}>Ξέχασες τον κωδικό σου;</Button>
-            
           
         </Stack>
         <Divider variant='middle' sx={{marginTop:1}}>ή</Divider>
@@ -57,11 +54,10 @@ const LoginPage = () => {
         <Button variant='contained'
             sx={{ ":hover": { backgroundColor: '#E63946', color:'white'},backgroundColor:'white',color:'#E63946', borderRadius: 15, height: 40, width: '60%', marginTop:1, marginBottom:1, justifyContent:'flex' }} >
                 <GoogleIcon />
-                <Typography variant='subtitle2' fontWeight='normal' textTransform={'none'}>Σύνδεση μέσω Google</Typography>
+                <Typography variant='subtitle2' fontWeight='normal' textTransform={'none'}>Εγγραφή μέσω Google</Typography>
         </Button>
-        </Stack>
+                </Stack>
                 <Box m={1} display="flex" justifyContent="flex-end" alignItems="flex-end">
-                <Button color="primary" sx={{ height: 40, textTransform:'none' }} component={Link} to={'/signup'} >Δημιουργία Λογαριασμού</Button>
                 </Box>
         
             </Box>
@@ -70,4 +66,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default SignUpPage
