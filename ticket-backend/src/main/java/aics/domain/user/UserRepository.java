@@ -1,5 +1,6 @@
 package aics.domain.user;
 
+import aics.domain.user.entities.User;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;

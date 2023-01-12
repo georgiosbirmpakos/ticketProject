@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { CreateMovieRequestDto } from '../dtos/create-movie-dto';
 import { AdminMoviesService } from '../admin-movies-service';
 import { FileUtils } from '../../../../modules/core/file-utils';
+import { useSnackbar } from 'notistack';
 
 export interface MovieDialogCreateComponentProps {
     open: boolean;
@@ -15,6 +16,8 @@ export interface MovieDialogCreateComponentProps {
 
 export default function MovieDialogCreateComponent(props: MovieDialogCreateComponentProps) {
     const [movie, setMovie] = useState<MovieDto>(new MovieDto());
+
+    const { enqueueSnackbar } = useSnackbar();
 
     async function fileChanged(e: any) {
         const file = e.target.files[0] as File | null | undefined;
@@ -40,14 +43,19 @@ export default function MovieDialogCreateComponent(props: MovieDialogCreateCompo
                 imageMimePrefix: ''
             });
         }
-        setTimeout(() => console.log('movie', movie))
     }
 
     async function addClicked(e: any) {
         const createMovieRequestDto: CreateMovieRequestDto = new CreateMovieRequestDto();
         createMovieRequestDto.movie = movie;
-        const response = await AdminMoviesService.createMovie(createMovieRequestDto);
-        props.afterAdd(e);
+        try {
+            const response = await AdminMoviesService.createMovie(createMovieRequestDto);
+            enqueueSnackbar('Επιτυχής δημιουργία Ταινίας', { variant: 'success' })
+            props.afterAdd(e);
+        } catch (e) {
+            console.error(e);
+            enqueueSnackbar('Αποτυχημένη δημιουργία Ταινίας', { variant: 'error' })
+        }
     }
 
     return (

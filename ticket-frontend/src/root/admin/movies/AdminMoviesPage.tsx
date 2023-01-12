@@ -8,6 +8,7 @@ import MoviesTable from './components/MoviesTable';
 import { Add } from '@mui/icons-material';
 import { MovieListItemDto } from '../../../modules/movie/movie-list-item-dto';
 import MovieDialogUpdateComponent from './components/MovieDialogUpdateComponent';
+import { useSnackbar } from 'notistack';
 
 export default function AdminMoviesPage() {
     const [movies, setMovies] = useState<MovieListItemDto[]>([]);
@@ -17,6 +18,9 @@ export default function AdminMoviesPage() {
     const [selectedMovie, setSelectedMovie] = useState<MovieDto | null>(null);
     const [readonly, setReadonly] = useState<boolean>(false);
 
+    const { enqueueSnackbar } = useSnackbar();
+
+
     useEffect(() => {
         loadData();
     }, [])
@@ -24,8 +28,13 @@ export default function AdminMoviesPage() {
 
     async function loadData() {
         setMovies([]);
-        const fetchMoviesListResponseDto = await AdminMoviesService.fetchMoviesList();
-        setMovies(fetchMoviesListResponseDto.movies);
+        try {
+            const fetchMoviesListResponseDto = await AdminMoviesService.fetchMoviesList();
+            setMovies(fetchMoviesListResponseDto.movies);
+        } catch (e) {
+            console.error(e);
+            enqueueSnackbar('Αποτυχημένη εύρεση λίστας ταινιών', { variant: 'error' })
+        }
     }
 
 

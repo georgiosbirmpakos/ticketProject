@@ -2,6 +2,7 @@ import Button from '@mui/material/Button';
 import { MovieDto } from '../../../../modules/movie/movie-dto';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { AdminMoviesService } from '../admin-movies-service';
+import { useSnackbar } from 'notistack';
 
 export interface MovieDialogDeleteComponentProps {
     movie: MovieDto;
@@ -11,11 +12,18 @@ export interface MovieDialogDeleteComponentProps {
 }
 
 export default function MovieDialogDeleteComponent(props: MovieDialogDeleteComponentProps) {
+    const { enqueueSnackbar } = useSnackbar();
 
 
     async function deleteClicked(e: any) {
-        const response = await AdminMoviesService.deleteMovie(props.movie.movieId);
-        props.afterDelete(e);
+        try {
+            const response = await AdminMoviesService.deleteMovie(props.movie.movieId);
+            enqueueSnackbar('Επιτυχής διαγραφή Ταινίας', { variant: 'success' })
+            props.afterDelete(e);
+        } catch (e) {
+            console.error(e);
+            enqueueSnackbar('Αποτυχημένη δημιουργία Ταινίας', { variant: 'error' })
+        }
     }
 
     return (

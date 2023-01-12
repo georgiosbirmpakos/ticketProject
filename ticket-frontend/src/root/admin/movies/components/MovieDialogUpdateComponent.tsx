@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { AdminMoviesService } from '../admin-movies-service';
 import { FileUtils } from '../../../../modules/core/file-utils';
 import { UpdateMovieRequestDto } from '../dtos/update-movie-dto';
+import { useSnackbar } from 'notistack';
 
 export interface MovieDialogCreateComponentProps {
     open: boolean;
@@ -18,11 +19,18 @@ export interface MovieDialogCreateComponentProps {
 export default function MovieDialogCreateComponent(props: MovieDialogCreateComponentProps) {
     const [movie, setMovie] = useState<MovieDto | null>(null);
 
+    const { enqueueSnackbar } = useSnackbar();
+
     useEffect(() => {
         async function loadData() {
-            const fetchMovieDetailsResponseDto = await AdminMoviesService.fetchMovieDetails(props.movieId);
-            console.log('fetchMovieDetailsResponseDto', fetchMovieDetailsResponseDto)
-            setMovie(fetchMovieDetailsResponseDto.movie);
+            try {
+                const fetchMovieDetailsResponseDto = await AdminMoviesService.fetchMovieDetails(props.movieId);
+                console.log('fetchMovieDetailsResponseDto', fetchMovieDetailsResponseDto)
+                setMovie(fetchMovieDetailsResponseDto.movie);
+            } catch (e) {
+                console.error(e);
+                enqueueSnackbar('Αποτυχημένη εύρεση ταινίας', { variant: 'error' })
+            }
         }
 
         loadData();
@@ -60,8 +68,14 @@ export default function MovieDialogCreateComponent(props: MovieDialogCreateCompo
     async function updateClicked(e: any) {
         const updateMovieRequestDto: UpdateMovieRequestDto = new UpdateMovieRequestDto();
         updateMovieRequestDto.movie = movie;
-        const response = await AdminMoviesService.updateMovie(updateMovieRequestDto);
-        props.afterUpdate(e);
+        try {
+            const response = await AdminMoviesService.updateMovie(updateMovieRequestDto);
+            enqueueSnackbar('Επιτυχής αποθήκευση Ταινίας', { variant: 'success' })
+            props.afterUpdate(e);
+        } catch (e) {
+            console.error(e);
+            enqueueSnackbar('Αποτυχημένη αποθήκευση Ταινίας', { variant: 'error' })
+        }
     }
 
     return (

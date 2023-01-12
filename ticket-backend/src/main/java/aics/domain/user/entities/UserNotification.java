@@ -1,4 +1,4 @@
-package aics.domain.user;
+package aics.domain.user.entities;
 
 import lombok.Getter;
 import lombok.Setter;

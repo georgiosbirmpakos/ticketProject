@@ -1,6 +1,6 @@
 package aics.domain.user.models;
 
-import aics.domain.user.User;
+import aics.domain.user.entities.User;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

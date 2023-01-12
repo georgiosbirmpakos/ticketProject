@@ -1,4 +1,4 @@
-package aics.domain.event;
+package aics.domain.event.entities;
 
 import aics.domain.movie.entities.Movie;
 import aics.domain.provider.entities.Hall;

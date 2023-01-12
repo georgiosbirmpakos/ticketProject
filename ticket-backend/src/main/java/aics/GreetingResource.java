@@ -1,7 +1,7 @@
 package aics;
 
 import aics.domain.user.UserRepository;
-import aics.domain.user.User;
+import aics.domain.user.entities.User;
 import aics.domain.user.models.UserModel;
 
 import javax.inject.Inject;

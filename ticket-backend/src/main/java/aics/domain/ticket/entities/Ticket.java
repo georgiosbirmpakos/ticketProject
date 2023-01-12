@@ -1,8 +1,8 @@
-package aics.domain.ticket;
+package aics.domain.ticket.entities;
 
-import aics.domain.event.Event;
+import aics.domain.event.entities.Event;
 import aics.domain.provider.entities.Seat;
-import aics.domain.user.User;
+import aics.domain.user.entities.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

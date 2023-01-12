@@ -7,6 +7,7 @@ import { ProviderListItemDto } from '../../../modules/provider/provider-list-ite
 import ProviderDialogCreate from './components/ProviderDialogCreateComponent';
 import ProviderDialogUpdate from './components/ProviderDialogUpdateComponent';
 import ProviderDialogDeleteComponent from './components/ProviderDialogDeleteComponent';
+import { useSnackbar } from 'notistack';
 
 export default function AdminProvidersPage() {
     const [providers, setProviders] = useState<ProviderListItemDto[]>([]);
@@ -16,16 +17,23 @@ export default function AdminProvidersPage() {
     const [selectedProvider, setSelectedProvider] = useState<ProviderListItemDto | null>(null);
     const [readonly, setReadonly] = useState<boolean>(false);
 
+    const { enqueueSnackbar } = useSnackbar();
+
     useEffect(() => {
+
+
         loadData();
     }, [])
 
-
     async function loadData() {
         setProviders([]);
-        const fetchProvidersListResponseDto = await AdminProvidersService.fetchProvidersList();
-        console.log('fetchProvidersListResponseDto', fetchProvidersListResponseDto)
-        setProviders(fetchProvidersListResponseDto.providers);
+        try {
+            const fetchProvidersListResponseDto = await AdminProvidersService.fetchProvidersList();
+            setProviders(fetchProvidersListResponseDto.providers);
+        } catch (e) {
+            console.error(e);
+            enqueueSnackbar('Αποτυχημένη εύρεση λίστας ταινιών', { variant: 'error' })
+        }
     }
 
 

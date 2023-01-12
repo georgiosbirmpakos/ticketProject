@@ -13,64 +13,73 @@ import { CreateMovieRequestDto } from '../../movies/dtos/create-movie-dto';
 import { ProviderDto } from '../../../../modules/provider/provider-dto';
 import { AdminProvidersService } from '../admin-providers-service';
 import { CreateProviderRequestDto } from '../dtos/create-provider-dto';
+import { useSnackbar } from 'notistack';
 
 export interface MovieDialogCreateComponentProps {
-  open: boolean;
-  onCancel?: ((event: any) => void) | undefined;
-  afterAdd: (event: any) => void;
+    open: boolean;
+    onCancel?: ((event: any) => void) | undefined;
+    afterAdd: (event: any) => void;
 }
 
 export default function MovieDialogCreateComponent(props: MovieDialogCreateComponentProps) {
-  const [provider, setProvider] = useState<ProviderDto>(new ProviderDto());
+    const [provider, setProvider] = useState<ProviderDto>(new ProviderDto());
+
+    const { enqueueSnackbar } = useSnackbar();
 
 
-  const onClick = (id: string) => {
-    console.log({ id })
-  }
+    const onClick = (id: string) => {
+        console.log({ id })
+    }
 
-  function setSelectedFile(target: any) {
-    console.log('target', target)
-  }
+    function setSelectedFile(target: any) {
+        console.log('target', target)
+    }
 
-  async function addClicked(e: any) {
-    const createProviderRequestDto: CreateProviderRequestDto = new CreateProviderRequestDto();
-    createProviderRequestDto.provider = provider;
-    const response = await AdminProvidersService.createProvider(createProviderRequestDto);
-    props.afterAdd(e);
-  }
+    async function addClicked(e: any) {
+        const createProviderRequestDto: CreateProviderRequestDto = new CreateProviderRequestDto();
+        createProviderRequestDto.provider = provider;
+        try {
+            const response = await AdminProvidersService.createProvider(createProviderRequestDto);
+            enqueueSnackbar('Επιτυχής δημιουργία Καταστήματος', { variant: 'success' })
+            props.afterAdd(e);
+        } catch (e) {
+            console.error(e);
+            enqueueSnackbar('Αποτυχημένη δημιουργία Καταστήματος', { variant: 'error' })
+        }
+    }
 
-  return (
-    <Dialog onClose={props.onCancel} open={props.open}>
-      <DialogTitle id="alert-dialog-title">
-        Προσθήκη Καταστήματος
-      </DialogTitle>
-      <DialogContent>
-        {/* <DialogContentText id="alert-dialog-description">
+    return (
+        <Dialog onClose={props.onCancel} open={props.open}>
+            <DialogTitle id="alert-dialog-title">
+                Προσθήκη Καταστήματος
+            </DialogTitle>
+            <DialogContent>
+                {/* <DialogContentText id="alert-dialog-description">
         </DialogContentText> */}
-        <form>
-          <Grid container spacing={2}>
-            <Grid item>
-              <TextField label="Όνομα" value={provider.name} onChange={(e) => setProvider({ ...provider, name: e.target.value })} />
-            </Grid>
-            <Grid item>
-              <TextField label="Διεύθυνση" value={provider.address} onChange={(e) => setProvider({ ...provider, address: e.target.value })} />
-            </Grid>
-            <Grid item>
-              <TextField label="Τηλέφωνο" value={provider.phone} onChange={(e) => setProvider({ ...provider, phone: e.target.value })} />
-            </Grid>
-            <Grid item>
-              <TextField label="Περιγραφή" value={provider.description} onChange={(e) => setProvider({ ...provider, description: e.target.value })} />
-            </Grid>
-          </Grid>
-        </form>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={props.onCancel}>Ακύρωση</Button>
-        <Button onClick={addClicked} autoFocus>
-          Προσθήκη
-        </Button>
-      </DialogActions>
+                <form>
+                    <Grid container spacing={2}>
+                        <Grid item>
+                            <TextField label="Όνομα" value={provider.name} onChange={(e) => setProvider({ ...provider, name: e.target.value })} />
+                        </Grid>
+                        <Grid item>
+                            <TextField label="Διεύθυνση" value={provider.address} onChange={(e) => setProvider({ ...provider, address: e.target.value })} />
+                        </Grid>
+                        <Grid item>
+                            <TextField label="Τηλέφωνο" value={provider.phone} onChange={(e) => setProvider({ ...provider, phone: e.target.value })} />
+                        </Grid>
+                        <Grid item>
+                            <TextField label="Περιγραφή" value={provider.description} onChange={(e) => setProvider({ ...provider, description: e.target.value })} />
+                        </Grid>
+                    </Grid>
+                </form>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={props.onCancel}>Ακύρωση</Button>
+                <Button onClick={addClicked} autoFocus>
+                    Προσθήκη
+                </Button>
+            </DialogActions>
 
-    </Dialog>
-  )
+        </Dialog>
+    )
 }
