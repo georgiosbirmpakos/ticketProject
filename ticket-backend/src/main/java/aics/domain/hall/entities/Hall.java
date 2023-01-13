@@ -1,10 +1,13 @@
-package aics.domain.provider.entities;
+package aics.domain.hall.entities;
 
+import aics.domain.provider.entities.Provider;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "HALLS")
 @Getter
@@ -17,8 +20,12 @@ public class Hall {
     private Long hallId;
     @Column(name = "NAME", nullable = false, length = 255)
     private String name;
-    @Column(name = "DESCRIPTION", nullable = true, length = 255)
+    @Column(name = "DESCRIPTION", nullable = false, length = 2000)
     private String description;
+    @Column(name = "SEATS_ROWS", nullable = false)
+    private int seatsRows;
+    @Column(name = "SEATS_COLUMNS", nullable = false)
+    private int seatsColumns;
 
     // ASSOCIATIONS
     @ManyToOne

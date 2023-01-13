@@ -8,7 +8,7 @@ export class UpdateProviderRequestDto {
             return null;
         }
         const updateProviderRequestDto: UpdateProviderRequestDto = new UpdateProviderRequestDto();
-        updateProviderRequestDto.provider = obj.provider;
+        updateProviderRequestDto.provider = ProviderDto.fromObj(obj.provider);
         return updateProviderRequestDto;
     }
 }

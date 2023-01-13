@@ -8,7 +8,7 @@ export class FetchProvidersListResponseDto {
             return null;
         }
         const fetchProvidersListResponseDto: FetchProvidersListResponseDto = new FetchProvidersListResponseDto();
-        fetchProvidersListResponseDto.providers = obj.providers;
+        fetchProvidersListResponseDto.providers = ProviderListItemDto.listFromObjList(obj.providers);
         return fetchProvidersListResponseDto;
     }
 }

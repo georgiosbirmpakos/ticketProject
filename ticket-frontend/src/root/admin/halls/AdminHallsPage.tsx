@@ -1,61 +1,57 @@
 import { Box, Button, Grid } from '@mui/material';
 import { Fragment, useEffect, useState } from 'react';
-import ProvidersTableComponent from './components/ProvidersTableComponent';
+import HallsTableComponent from './components/HallsTableComponent';
 import { Add } from '@mui/icons-material';
-import { AdminProvidersService } from './admin-halls-service';
+import { AdminHallsService } from './admin-halls-service';
 import { ProviderListItemDto } from '../../../modules/provider/provider-list-item-dto';
-import ProviderDialogCreate from './components/ProviderDialogCreateComponent';
-import ProviderDialogUpdate from './components/ProviderDialogUpdateComponent';
-import ProviderDialogDeleteComponent from './components/ProviderDialogDeleteComponent';
 import { useSnackbar } from 'notistack';
+import { HallListItemDto } from '../../../modules/hall/hall-list-item-dto';
 
 export default function AdminHallsPage() {
-    const [providers, setProviders] = useState<ProviderListItemDto[]>([]);
+    const [halls, setHalls] = useState<HallListItemDto[]>([]);
     const [isDialogCreateOpen, setIsDialogCreateOpen] = useState<boolean>(false);
     const [isDialogUpdateOpen, setIsDialogUpdateOpen] = useState<boolean>(false);
     const [isDialogDeleteOpen, setIsDialogDeleteOpen] = useState<boolean>(false);
-    const [selectedProvider, setSelectedProvider] = useState<ProviderListItemDto | null>(null);
+    const [selectedHall, setSelectedHall] = useState<HallListItemDto | null>(null);
     const [readonly, setReadonly] = useState<boolean>(false);
 
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
-
-
         loadData();
     }, [])
 
     async function loadData() {
-        setProviders([]);
+        setHalls([]);
         try {
-            const fetchProvidersListResponseDto = await AdminProvidersService.fetchProvidersList();
-            setProviders(fetchProvidersListResponseDto.providers);
+            const fetchHallsListResponseDto = await AdminHallsService.fetchHallsList();
+            setHalls(fetchHallsListResponseDto.halls);
         } catch (e) {
             console.error(e);
-            enqueueSnackbar('Αποτυχημένη εύρεση λίστας ταινιών', { variant: 'error' })
+            enqueueSnackbar('Αποτυχημένη εύρεση λίστας αιθουσών', { variant: 'error' })
         }
     }
 
 
-    function createProviderClicked() {
-        setSelectedProvider(null);
+    function createHallClicked() {
+        setSelectedHall(null);
         setIsDialogCreateOpen(true);
     }
 
-    function viewProviderClicked(selectedProvider: ProviderListItemDto) {
-        setSelectedProvider(selectedProvider);
+    function viewProviderClicked(selectedHall: HallListItemDto) {
+        setSelectedHall(selectedHall);
         setReadonly(true);
         setIsDialogUpdateOpen(true);
     }
 
-    function updateProviderClicked(selectedProvider: ProviderListItemDto) {
-        setSelectedProvider(selectedProvider);
+    function updateProviderClicked(selectedHall: HallListItemDto) {
+        setSelectedHall(selectedHall);
         setReadonly(false);
         setIsDialogUpdateOpen(true);
     }
 
-    function deleteProviderClicked(selectedProvider: ProviderListItemDto) {
-        setSelectedProvider(selectedProvider);
+    function deleteProviderClicked(selectedHall: HallListItemDto) {
+        setSelectedHall(selectedHall);
         setIsDialogDeleteOpen(true);
     }
 
@@ -84,19 +80,19 @@ export default function AdminHallsPage() {
                     <Grid item>
                     </Grid>
                     <Grid item>
-                        <Button onClick={createProviderClicked} variant="contained" startIcon={<Add />}>
+                        <Button onClick={createHallClicked} variant="contained" startIcon={<Add />}>
                             Δημιουργία Καταστήματος
                         </Button>
                     </Grid>
                 </Grid>
 
-                <ProvidersTableComponent providers={providers}
-                    onViewAction={(provider) => viewProviderClicked(provider)}
-                    onEditAction={(provider) => updateProviderClicked(provider)}
-                    onDeleteAction={(provider) => deleteProviderClicked(provider)} />
+                <HallsTableComponent halls={halls}
+                    onViewAction={(hall) => viewProviderClicked(hall)}
+                    onEditAction={(hall) => updateProviderClicked(hall)}
+                    onDeleteAction={(hall) => deleteProviderClicked(hall)} />
 
             </Box>
-            {isDialogCreateOpen && (
+            {/* {isDialogCreateOpen && (
                 <ProviderDialogCreate open={isDialogCreateOpen}
                     onCancel={() => setIsDialogCreateOpen(false)}
                     afterAdd={afterAdd} />
@@ -112,7 +108,7 @@ export default function AdminHallsPage() {
                 <ProviderDialogDeleteComponent open={isDialogDeleteOpen}
                     onCancel={() => setIsDialogDeleteOpen(false)}
                     afterDelete={afterDelete} provider={selectedProvider} />
-            )}
+            )} */}
         </Fragment>
     );
 }

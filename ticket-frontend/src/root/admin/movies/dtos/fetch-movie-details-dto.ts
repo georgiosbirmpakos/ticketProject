@@ -8,7 +8,7 @@ export class FetchMovieDetailsResponseDto {
             return null;
         }
         const fetchMovieDetailsResponseDto: FetchMovieDetailsResponseDto = new FetchMovieDetailsResponseDto();
-        fetchMovieDetailsResponseDto.movie = obj.movie;
+        fetchMovieDetailsResponseDto.movie = MovieDto.fromObj(obj.movie);
         return fetchMovieDetailsResponseDto;
     }
 }

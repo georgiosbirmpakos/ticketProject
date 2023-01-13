@@ -9,7 +9,7 @@ export class FetchProviderDetailsResponseDto {
             return null;
         }
         const fetchProviderDetailsResponseDto: FetchProviderDetailsResponseDto = new FetchProviderDetailsResponseDto();
-        fetchProviderDetailsResponseDto.provider = obj.provider;
+        fetchProviderDetailsResponseDto.provider = ProviderDto.fromObj(obj.provider);
         return fetchProviderDetailsResponseDto;
     }
 }

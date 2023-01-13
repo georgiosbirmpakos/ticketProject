@@ -1,103 +1,70 @@
 import { GlobalState } from '../../../modules/core/global-state';
-import { ProviderDto } from '../../../modules/provider/provider-dto';
-import { MovieDto } from '../../../modules/movie/movie-dto';
-import { CreateMovieRequestDto, CreateMovieResponseDto } from '../movies/dtos/create-movie-dto';
-import { DeleteMovieResponseDto } from '../movies/dtos/delete-movie-dto';
-import { CreateProviderRequestDto, CreateProviderResponseDto } from './dtos/create-provider-dto';
-import { DeleteProviderResponseDto } from './dtos/delete-provider-dto';
-import { FetchProviderDetailsResponseDto } from './dtos/fetch-providers-details-dto';
-import { FetchProvidersListResponseDto } from './dtos/fetch-providers-list-dto';
-import { UpdateProviderRequestDto, UpdateProviderResponseDto } from './dtos/update-provider-dto';
+import { CreateHallRequestDto, CreateHallResponseDto } from './dtos/create-hall-dto';
+import { DeleteHallResponseDto } from './dtos/delete-hall-dto';
+import { FetchHallDetailsResponseDto } from './dtos/fetch-hall-details-dto';
+import { FetchHallsListResponseDto } from './dtos/fetch-halls-list-dto';
+import { UpdateHallRequestDto, UpdateHallResponseDto } from './dtos/update-hall-dto';
 
-export class AdminProvidersService {
+export class AdminHallsService {
 
-    static async fetchProvidersList(): Promise<FetchProvidersListResponseDto> {
+    static async fetchHallsList(): Promise<FetchHallsListResponseDto> {
         const apiConsumer = GlobalState.instance.apiConsumer;
-        const fetchProvidersListUrl = '/admin/providers/list'
+        const fetchHallsListUrl = '/admin/halls/list'
 
-        const response = await apiConsumer.get(fetchProvidersListUrl);
-        const fetchProvidersListResponseDto: FetchProvidersListResponseDto | null = FetchProvidersListResponseDto.fromObj(response.data)
+        const response = await apiConsumer.get(fetchHallsListUrl);
+        const fetchProvidersListResponseDto: FetchHallsListResponseDto | null = FetchHallsListResponseDto.fromObj(response.data)
         if (!fetchProvidersListResponseDto) {
             throw new Error('fetchProvidersListResponseDto was null');
         }
         return fetchProvidersListResponseDto;
     }
 
-    static async fetchProviderDetails(providerId: number): Promise<FetchProviderDetailsResponseDto> {
+    static async fetchHallDetails(hallId: number): Promise<FetchHallDetailsResponseDto> {
         const apiConsumer = GlobalState.instance.apiConsumer;
-        const fetchProviderDetailsUrl = '/admin/providers/details/' + providerId;
+        const fetchHallDetailsUrl = '/admin/halls/details/' + hallId;
 
-        const response = await apiConsumer.get(fetchProviderDetailsUrl);
-        const fetchProviderDetailsResponseDto: FetchProviderDetailsResponseDto | null = FetchProviderDetailsResponseDto.fromObj(response.data)
-        if (!fetchProviderDetailsResponseDto) {
-            throw new Error('fetchProviderDetailsResponseDto was null');
+        const response = await apiConsumer.get(fetchHallDetailsUrl);
+        const fetchHallDetailsResponseDto: FetchHallDetailsResponseDto | null = FetchHallDetailsResponseDto.fromObj(response.data)
+        if (!fetchHallDetailsResponseDto) {
+            throw new Error('fetchHallDetailsResponseDto was null');
         }
-        return fetchProviderDetailsResponseDto;
+        return fetchHallDetailsResponseDto;
     }
 
-    static async createProvider(createProviderRequestDto: CreateProviderRequestDto): Promise<CreateProviderResponseDto> {
+    static async createHall(createHallRequestDto: CreateHallRequestDto): Promise<CreateHallResponseDto> {
         const apiConsumer = GlobalState.instance.apiConsumer;
-        const createProviderUrl = '/admin/providers/new'
+        const createProviderUrl = '/admin/halls/new'
 
-        const response = await apiConsumer.post(createProviderUrl, createProviderRequestDto);
-        const createProviderResponseDto: CreateProviderResponseDto | null = CreateProviderResponseDto.fromObj(response.data)
-        if (!createProviderResponseDto) {
-            throw new Error('createProviderResponseDto was null');
+        const response = await apiConsumer.post(createProviderUrl, createHallRequestDto);
+        const createHallResponseDto: CreateHallResponseDto | null = CreateHallResponseDto.fromObj(response.data)
+        if (!createHallResponseDto) {
+            throw new Error('createHallResponseDto was null');
         }
-        return createProviderResponseDto;
+        return createHallResponseDto;
     }
 
-    static async updateProvider(updateProviderRequestDto: UpdateProviderRequestDto): Promise<UpdateProviderResponseDto> {
+    static async updateHall(updateHallRequestDto: UpdateHallRequestDto): Promise<UpdateHallResponseDto> {
         const apiConsumer = GlobalState.instance.apiConsumer;
-        const updateProviderUrl = '/admin/providers/update'
+        const updateHallUrl = '/admin/halls/update'
 
-        const response = await apiConsumer.put(updateProviderUrl, updateProviderRequestDto);
-        const updateProviderResponseDto: UpdateProviderResponseDto | null = UpdateProviderResponseDto.fromObj(response.data)
-        if (!updateProviderResponseDto) {
-            throw new Error('updateProviderResponseDto was null');
+        const response = await apiConsumer.put(updateHallUrl, updateHallRequestDto);
+        const updateHallResponseDto: UpdateHallResponseDto | null = UpdateHallResponseDto.fromObj(response.data)
+        if (!updateHallResponseDto) {
+            throw new Error('updateHallResponseDto was null');
         }
-        return updateProviderResponseDto;
+        return updateHallResponseDto;
     }
 
-    static async deleteProvider(providerId: number): Promise<DeleteProviderResponseDto> {
+    static async deleteHall(hallId: number): Promise<DeleteHallResponseDto> {
         const apiConsumer = GlobalState.instance.apiConsumer;
-        const deleteProviderUrl = '/admin/providers/id/' + providerId;
+        const deleteHallUrl = '/admin/halls/id/' + hallId;
 
-        const response = await apiConsumer.delete(deleteProviderUrl);
-        const deleteProviderResponseDto: DeleteProviderResponseDto | null = DeleteProviderResponseDto.fromObj(response.data)
-        if (!deleteProviderResponseDto) {
-            throw new Error('deleteProviderResponseDto was null');
+        const response = await apiConsumer.delete(deleteHallUrl);
+        const deleteHallResponseDto: DeleteHallResponseDto | null = DeleteHallResponseDto.fromObj(response.data)
+        if (!deleteHallResponseDto) {
+            throw new Error('deleteHallResponseDto was null');
         }
-        return deleteProviderResponseDto;
+        return deleteHallResponseDto;
     }
-
-
-    //     static async createMovie(createMovieRequestDto: CreateMovieRequestDto): Promise<CreateMovieResponseDto | null> {
-    //         const apiConsumer = GlobalState.instance.apiConsumer;
-    //         const fetchMoviesListUrl = '/admin/movies/new'
-    //         console.log('createMovieRequestDto', createMovieRequestDto)
-
-
-    //         const formData = new FormData();
-    //         formData.append('name', createMovieRequestDto.name);
-    //         formData.append('description', createMovieRequestDto.description ? createMovieRequestDto.description : '');
-    //         if (createMovieRequestDto.image) {
-    //             formData.append('image', createMovieRequestDto.image);
-    //         }
-    //         formData.append('directors', createMovieRequestDto.directors);
-    //         formData.append('script', createMovieRequestDto.script);
-    //         formData.append('actors', createMovieRequestDto.actors);
-    //         formData.append('appropriateness', createMovieRequestDto.appropriateness);
-    //         formData.append('duration', '' + createMovieRequestDto.duration);
-
-    //         const response = await apiConsumer.post(fetchMoviesListUrl, formData, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data'
-    //             }
-    //         });
-
-    //         return CreateMovieResponseDto.fromObj(response.data);
-    //     }
-
 
 }

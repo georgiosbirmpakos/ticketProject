@@ -1,4 +1,4 @@
-package aics.domain.provider.entities;
+package aics.domain.hall.entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,8 +19,8 @@ public class Seat {
     private int seatRow;
     @Column(name = "SEAT_COLUMN", nullable = false)
     private int seatColumn;
-    @Column(name = "FLOOR", nullable = false)
-    private int floor;
+//    @Column(name = "FLOOR", nullable = false)
+//    private int floor;
     @Column(name = "DESCRIPTION", nullable = true, length = 255)
     private String description;
 

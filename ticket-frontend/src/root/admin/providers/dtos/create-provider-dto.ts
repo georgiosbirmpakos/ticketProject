@@ -8,7 +8,7 @@ export class CreateProviderRequestDto {
             return null;
         }
         const createProviderRequestDto: CreateProviderRequestDto = new CreateProviderRequestDto();
-        createProviderRequestDto.provider = obj.provider;
+        createProviderRequestDto.provider = ProviderDto.fromObj(obj.provider);
         return createProviderRequestDto;
     }
 }

@@ -1,5 +1,6 @@
 package aics.domain.provider.entities;
 
+import aics.domain.hall.entities.Hall;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

@@ -17,6 +17,10 @@ export default function AdminPage() {
             to: '/admin/providers'
         },
         {
+            name: 'Αίθουσες',
+            to: '/admin/halls'
+        },
+        {
             name: 'Προβολές',
             to: '/admin/events'
         },
@@ -37,10 +41,12 @@ export default function AdminPage() {
                 setValue(0);
             } else if (location.pathname.startsWith('/admin/providers')) {
                 setValue(1);
-            } else if (location.pathname.startsWith('/admin/events')) {
+            } else if (location.pathname.startsWith('/admin/halls')) {
                 setValue(2);
-            } else if (location.pathname.startsWith('/admin/users')) {
+            } else if (location.pathname.startsWith('/admin/events')) {
                 setValue(3);
+            } else if (location.pathname.startsWith('/admin/users')) {
+                setValue(4);
             } else {
                 console.error('unknown location: ' + location.pathname);
                 navigate('/admin/movies');

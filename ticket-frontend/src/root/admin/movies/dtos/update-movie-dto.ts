@@ -8,7 +8,7 @@ export class UpdateMovieRequestDto {
             return null;
         }
         const updateMovieRequestDto: UpdateMovieRequestDto = new UpdateMovieRequestDto();
-        updateMovieRequestDto.movie = obj.movie;
+        updateMovieRequestDto.movie = MovieDto.fromObj(obj.movie);
         return updateMovieRequestDto;
     }
 }

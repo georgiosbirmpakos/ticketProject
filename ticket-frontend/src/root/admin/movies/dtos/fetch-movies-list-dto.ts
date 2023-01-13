@@ -8,7 +8,7 @@ export class FetchMoviesListResponseDto {
             return null;
         }
         const fetchMoviesListResponseDto: FetchMoviesListResponseDto = new FetchMoviesListResponseDto();
-        fetchMoviesListResponseDto.movies = obj.movies;
+        fetchMoviesListResponseDto.movies = MovieListItemDto.listFromObjList(obj.movies);
         return fetchMoviesListResponseDto;
     }
 }

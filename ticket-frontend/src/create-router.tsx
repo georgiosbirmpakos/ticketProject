@@ -11,6 +11,7 @@ export function createRouter() {
     const AdminPageLazy = React.lazy(() => import('./root/admin/AdminPage'));
     const AdminEventsPageLazy = React.lazy(() => import('./root/admin/events/AdminEventsPage'));
     const AdminProvidersPageLazy = React.lazy(() => import('./root/admin/providers/AdminProvidersPage'));
+    const AdminHallsPageLazy = React.lazy(() => import('./root/admin/halls/AdminHallsPage'));
     const AdminMoviesPageLazy = React.lazy(() => import('./root/admin/movies/AdminMoviesPage'));
     const AdminUsersPageLazy = React.lazy(() => import('./root/admin/users/AdminUsersPage'));
     const LoginPageLazy = React.lazy(() => import('./root/shared/LoginPage'));
@@ -78,6 +79,10 @@ export function createRouter() {
                         {
                             path: "providers",
                             element: <AdminProvidersPageLazy />
+                        },
+                        {
+                            path: "halls",
+                            element: <AdminHallsPageLazy />
                         },
                         {
                             path: "events",

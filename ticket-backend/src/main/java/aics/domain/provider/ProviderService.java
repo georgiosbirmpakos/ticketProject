@@ -36,7 +36,6 @@ public class ProviderService {
         }
 
         Provider newProvider = new Provider()
-            .setProviderId(providerDto.getProviderId())
             .setName(providerDto.getName())
             .setAddress(providerDto.getAddress())
             .setPhone(providerDto.getPhone())

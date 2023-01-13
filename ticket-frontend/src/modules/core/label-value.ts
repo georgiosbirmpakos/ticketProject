@@ -1,4 +1,4 @@
-export class LabelValue<V> {
+export class LabelValue<V extends string | number | boolean> {
     readonly label: string;
     readonly value: V;
 
@@ -7,7 +7,7 @@ export class LabelValue<V> {
         this.value = value;
     }
 
-    fromObj<V>(obj: any) {
+    static fromObj<V extends string | number | boolean>(obj: any): LabelValue<V> {
         return new LabelValue<V>(obj.label, obj.value);
     }
 }
