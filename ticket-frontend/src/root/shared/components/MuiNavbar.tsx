@@ -1,13 +1,16 @@
-import { AppBar, Toolbar, IconButton, Typography, Stack, Button, Tooltip } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Typography, Stack, Button, Tooltip} from "@mui/material";
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import React from 'react'
 import LanguageIcon from '@mui/icons-material/Language';
 import MovieIcon from '@mui/icons-material/Movie';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import { color, textTransform } from "@mui/system";
 import './MuiNavbar.css'
 import { Link } from "react-router-dom";
+import MenuIcon from '@mui/icons-material/Menu';
+import TemporaryDrawer from "./TemporaryDrawer";
+
 // Define our custom Navbar
+
 
 const MuiNavbar = () => {
 
@@ -53,7 +56,7 @@ const MuiNavbar = () => {
     <AppBar position='static' sx={{ background: 'white' }}>
 
       {/* pushing to left and right of the screen */}
-      <Toolbar style={{ justifyContent: 'space-between' }}>
+      <Toolbar style={{ justifyContent: 'space-between'}} sx={{display:{xs:'none', md:'flex'}}}>
         <div>
           {/* Icon and logo  */}
           {navbarLeftButtonsData.map((buttonData, index) => (
@@ -71,21 +74,42 @@ const MuiNavbar = () => {
             </IconButton>)
           )}
         </div>
-
-        <div>
           {/* Using a stack to have the other options */}
+            <Stack direction={'row'}>
+              <Button className="stackBtn" component={Link} to={'/login'}>Είσοδος/Σύνδεση</Button>
+              <Tooltip title='Change Language'>
+                <IconButton size="large" edge='end'>
+                  <LanguageIcon htmlColor="black" />
+                </IconButton>
+              </Tooltip>
+            </Stack>
+          </Toolbar>
+          {/* Creating a toolbar for mobile devices */}
+          <Toolbar style={{ justifyContent: 'space-between'}} sx={{display:{xs:'flex', md:'none'}}}>
+        <div>
           <Stack direction={'row'}>
-            <Button className="stackBtn" component={Link} to={'/login'}>Είσοδος/Σύνδεση</Button>
-            <Tooltip title='Change Language'>
-              <IconButton size="large" edge='end'>
-                <LanguageIcon htmlColor="black" />
-              </IconButton>
-            </Tooltip>
+          <TemporaryDrawer/>
+          <IconButton>
+            <ConfirmationNumberIcon  sx={{color:'black'}}/> 
+              
+          </IconButton>
           </Stack>
         </div>
-      </Toolbar>
+
+
+          {/* Using a stack to have the other options */}
+            <Stack direction={'row'}>
+              <Button className="stackBtn" component={Link} to={'/login'}>Είσοδος/Σύνδεση</Button>
+              <Tooltip title='Change Language'>
+                <IconButton size="large" edge='end'>
+                  <LanguageIcon htmlColor="black" />
+                </IconButton>
+              </Tooltip>
+            </Stack>
+          </Toolbar>
     </AppBar>
   )
+  
 }
 
 export default MuiNavbar
