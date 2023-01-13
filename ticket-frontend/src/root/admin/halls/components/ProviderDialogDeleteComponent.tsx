@@ -1,7 +1,7 @@
 
 import Button from '@mui/material/Button';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { AdminProvidersService } from '../admin-providers-service';
+import { AdminProvidersService } from '../admin-halls-service';
 import { ProviderListItemDto } from '../../../../modules/provider/provider-list-item-dto';
 import { useSnackbar } from 'notistack';
 

@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { ProviderDto } from '../../../../modules/provider/provider-dto';
-import { AdminProvidersService } from '../admin-providers-service';
+import { AdminProvidersService } from '../admin-halls-service';
 import { UpdateProviderRequestDto } from '../dtos/update-provider-dto';
 import { useSnackbar } from 'notistack';
 
@@ -57,22 +57,22 @@ export default function ProviderDialogUpdateComponent(props: ProviderDialogUpdat
             </DialogTitle>
             <DialogContent>
                 {provider && (
-                            <form>
-                                <Grid container spacing={2}>
-                                    <Grid item>
-                                        <TextField disabled={props.readonly} label="Όνομα" value={provider.name} onChange={(e) => setProvider({ ...provider, name: e.target.value })} />
-                                    </Grid>
-                                    <Grid item>
-                                        <TextField disabled={props.readonly} label="Διεύθυνση" value={provider.address} onChange={(e) => setProvider({ ...provider, address: e.target.value })} />
-                                    </Grid>
-                                    <Grid item>
-                                        <TextField disabled={props.readonly} label="Τηλέφωνο" value={provider.phone} onChange={(e) => setProvider({ ...provider, phone: e.target.value })} />
-                                    </Grid>
-                                    <Grid item>
-                                        <TextField disabled={props.readonly} label="Περιγραφή" value={provider.description} onChange={(e) => setProvider({ ...provider, description: e.target.value })} />
-                                    </Grid>
-                                </Grid>
-                            </form>
+                    <form>
+                        <Grid container spacing={2}>
+                            <Grid item>
+                                <TextField disabled={props.readonly} label="Όνομα" value={provider.name} onChange={(e) => setProvider({ ...provider, name: e.target.value })} />
+                            </Grid>
+                            <Grid item>
+                                <TextField disabled={props.readonly} label="Διεύθυνση" value={provider.address} onChange={(e) => setProvider({ ...provider, address: e.target.value })} />
+                            </Grid>
+                            <Grid item>
+                                <TextField disabled={props.readonly} label="Τηλέφωνο" value={provider.phone} onChange={(e) => setProvider({ ...provider, phone: e.target.value })} />
+                            </Grid>
+                            <Grid item>
+                                <TextField disabled={props.readonly} label="Περιγραφή" value={provider.description} onChange={(e) => setProvider({ ...provider, description: e.target.value })} />
+                            </Grid>
+                        </Grid>
+                    </form>
                 )}
             </DialogContent>
             <DialogActions>

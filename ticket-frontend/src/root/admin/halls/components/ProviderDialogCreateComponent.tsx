@@ -11,7 +11,7 @@ import { Input } from '@mui/icons-material';
 import { useState } from 'react';
 import { CreateMovieRequestDto } from '../../movies/dtos/create-movie-dto';
 import { ProviderDto } from '../../../../modules/provider/provider-dto';
-import { AdminProvidersService } from '../admin-providers-service';
+import { AdminProvidersService } from '../admin-halls-service';
 import { CreateProviderRequestDto } from '../dtos/create-provider-dto';
 import { useSnackbar } from 'notistack';
 

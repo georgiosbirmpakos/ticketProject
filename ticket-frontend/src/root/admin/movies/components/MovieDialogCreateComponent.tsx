@@ -59,7 +59,7 @@ export default function MovieDialogCreateComponent(props: MovieDialogCreateCompo
     }
 
     return (
-        <Dialog onClose={props.onCancel} open={props.open}>
+        <Dialog fullWidth={true} maxWidth={false} onClose={props.onCancel} open={props.open}>
             <DialogTitle id="alert-dialog-title">
                 Προσθήκη Ταινίας
             </DialogTitle>
