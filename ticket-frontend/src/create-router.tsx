@@ -15,11 +15,12 @@ export function createRouter() {
     const AdminUsersPageLazy = React.lazy(() => import('./root/admin/users/AdminUsersPage'));
     const LoginPageLazy = React.lazy(() => import('./root/shared/LoginPage'));
     const SignUpPageLazy = React.lazy(() => import('./root/shared/SignUpPage'));
+    const ErrorPage = React.lazy(() => import('./root/shared/ErrorPage'));
     const router = createBrowserRouter([
         {
             path: "/",
             element: <RootPageLazy />,
-            // errorElement: <ErrorPage />,
+            errorElement: <ErrorPage />,
             // loader: () => React.,
             // action: rootAction,
             children: [
