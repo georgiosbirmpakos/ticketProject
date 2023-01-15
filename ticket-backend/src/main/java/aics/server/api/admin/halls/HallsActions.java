@@ -3,8 +3,10 @@ package aics.server.api.admin.halls;
 import aics.domain.hall.HallService;
 import aics.domain.hall.dtos.HallDto;
 import aics.domain.hall.dtos.HallListItemDto;
+import aics.domain.hall.dtos.HallOptionsDto;
 import aics.domain.hall.entities.Hall;
 import aics.domain.hall.entities.Seat;
+import aics.domain.provider.ProviderService;
 import aics.infrastructure.errors.TicketErrorStatus;
 import aics.infrastructure.errors.TicketException;
 import aics.server.api.admin.halls.dtos.*;
@@ -21,6 +23,8 @@ import java.util.List;
 public class HallsActions {
     @Inject
     HallService hallService;
+    @Inject
+    ProviderService providerService;
 
     @Transactional()
     public FetchHallsListResponseDto doFetchHallsList() throws TicketException {
@@ -44,6 +48,17 @@ public class HallsActions {
         Log.info("End HallsActions.doFetchHallDetails");
         return fetchHallDetailsResponseDto;
     }
+
+    @Transactional()
+    public FetchHallsOptionsResponseDto doFetchHallsOptions() throws TicketException {
+        FetchHallsOptionsResponseDto fetchHallsOptionsResponseDto = new FetchHallsOptionsResponseDto();
+        Log.info("Start HallsActions.doFetchHallsOptions");
+        HallOptionsDto hallOptionsDto = this.hallService.fetchHallOptions();
+        fetchHallsOptionsResponseDto.setOptions(hallOptionsDto);
+        Log.info("End HallsActions.doFetchHallsOptions");
+        return fetchHallsOptionsResponseDto;
+    }
+
 
     @Transactional
     public CreateHallResponseDto doCreateHall(CreateHallRequestDto createHallRequestDto) throws TicketException {

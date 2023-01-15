@@ -53,6 +53,24 @@ public class HallsController {
         }
     }
 
+    @Path("/options")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public RestResponse<FetchHallsOptionsResponseDto> handleFetchHallsOptions() {
+        Log.info("Start HallsController.handleFetchHallsOptions");
+        try {
+            FetchHallsOptionsResponseDto fetchHallsOptionsResponseDto = this.hallsActions.doFetchHallsOptions();
+            Log.info("End HallsController.handleFetchHallsOptions");
+            return RestResponse.ok(fetchHallsOptionsResponseDto);
+        } catch (TicketException e) {
+            Log.error("End HallsController.handleFetchHallsOptions with error", e);
+            return RestResponse.status(e.getStatus(), null);
+        } catch (Exception e) {
+            Log.error("End HallsController.handleFetchHallsOptions with error", e);
+            return RestResponse.status(RestResponse.Status.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
     @Path("/new")
     @POST
     @Produces(MediaType.APPLICATION_JSON)

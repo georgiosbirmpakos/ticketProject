@@ -21,11 +21,9 @@ export default function MovieDialogCreateComponent(props: MovieDialogCreateCompo
 
     async function fileChanged(e: any) {
         const file = e.target.files[0] as File | null | undefined;
-        console.log('file', file)
         if (file) {
             try {
                 const fileToBase64Result = await FileUtils.fileToBase64(file);
-                console.log('fileToBase64Result', fileToBase64Result)
                 setMovie({
                     ...movie,
                     imageName: fileToBase64Result.fileName,
@@ -65,7 +63,7 @@ export default function MovieDialogCreateComponent(props: MovieDialogCreateCompo
             </DialogTitle>
             <DialogContent>
                 <form>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} sx={{ padding: 1 }}>
                         <Grid item>
                             <TextField label="Όνομα" value={movie.name} onChange={(e) => setMovie({ ...movie, name: e.target.value })} />
                         </Grid>
@@ -100,7 +98,7 @@ export default function MovieDialogCreateComponent(props: MovieDialogCreateCompo
                                 component="img"
                                 height="200"
                                 width="200"
-                                src={movie.image}
+                                src={`${movie.imageMimePrefix},${movie.image}`}
                             />
                         </Grid>
                     </Grid>

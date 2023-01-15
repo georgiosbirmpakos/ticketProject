@@ -1,27 +1,18 @@
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom'
-import { MovieDto } from '../../../../modules/movie/movie-dto';
-import { Modal, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, FormControl, FormLabel, Grid } from '@mui/material';
-import { Input } from '@mui/icons-material';
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Grid } from '@mui/material';
 import { useState } from 'react';
-import { CreateMovieRequestDto } from '../../movies/dtos/create-movie-dto';
 import { ProviderDto } from '../../../../modules/provider/provider-dto';
 import { AdminProvidersService } from '../admin-providers-service';
 import { CreateProviderRequestDto } from '../dtos/create-provider-dto';
 import { useSnackbar } from 'notistack';
 
-export interface MovieDialogCreateComponentProps {
+export interface ProviderDialogCreateComponentProps {
     open: boolean;
     onCancel?: ((event: any) => void) | undefined;
     afterAdd: (event: any) => void;
 }
 
-export default function MovieDialogCreateComponent(props: MovieDialogCreateComponentProps) {
+export default function ProviderDialogCreateComponent(props: ProviderDialogCreateComponentProps) {
     const [provider, setProvider] = useState<ProviderDto>(new ProviderDto());
 
     const { enqueueSnackbar } = useSnackbar();
@@ -57,7 +48,7 @@ export default function MovieDialogCreateComponent(props: MovieDialogCreateCompo
                 {/* <DialogContentText id="alert-dialog-description">
         </DialogContentText> */}
                 <form>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} sx={{ padding: 1 }}>
                         <Grid item>
                             <TextField label="Όνομα" value={provider.name} onChange={(e) => setProvider({ ...provider, name: e.target.value })} />
                         </Grid>

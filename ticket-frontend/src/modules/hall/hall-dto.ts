@@ -3,13 +3,13 @@ import { TypeUtils } from '../core/type-utils';
 import { SeatListItemDto } from './seat-list-item-dto';
 
 export class HallDto {
-    hallId: number = 0;
+    hallId: number | null = null;
     name: string = '';
     seatsRows: number = 0;
     seatsColumns: number = 0;
     description: string = '';
     seats: SeatListItemDto[] = [];
-    providerRef: LabelValue<number> = new LabelValue('', 0);
+    providerRef: LabelValue<number> | null = null;
 
     static fromObj(obj: any): HallDto | null {
         if (!obj) {

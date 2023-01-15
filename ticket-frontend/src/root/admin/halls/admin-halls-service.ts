@@ -3,6 +3,7 @@ import { CreateHallRequestDto, CreateHallResponseDto } from './dtos/create-hall-
 import { DeleteHallResponseDto } from './dtos/delete-hall-dto';
 import { FetchHallDetailsResponseDto } from './dtos/fetch-hall-details-dto';
 import { FetchHallsListResponseDto } from './dtos/fetch-halls-list-dto';
+import { FetchHallsOptionsResponseDto } from './dtos/fetch-halls-list-dto copy';
 import { UpdateHallRequestDto, UpdateHallResponseDto } from './dtos/update-hall-dto';
 
 export class AdminHallsService {
@@ -29,6 +30,18 @@ export class AdminHallsService {
             throw new Error('fetchHallDetailsResponseDto was null');
         }
         return fetchHallDetailsResponseDto;
+    }
+
+    static async fetchHallOptions(): Promise<FetchHallsOptionsResponseDto> {
+        const apiConsumer = GlobalState.instance.apiConsumer;
+        const fetchHallOptionsUrl = '/admin/halls/options';
+
+        const response = await apiConsumer.get(fetchHallOptionsUrl);
+        const fetchHallsOptionsResponseDto: FetchHallsOptionsResponseDto | null = FetchHallsOptionsResponseDto.fromObj(response.data)
+        if (!fetchHallsOptionsResponseDto) {
+            throw new Error('fetchHallsOptionsResponseDto was null');
+        }
+        return fetchHallsOptionsResponseDto;
     }
 
     static async createHall(createHallRequestDto: CreateHallRequestDto): Promise<CreateHallResponseDto> {

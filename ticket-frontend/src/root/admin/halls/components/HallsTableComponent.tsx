@@ -1,8 +1,9 @@
 
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams, GridValueGetterParams } from '@mui/x-data-grid';
 import { Box, IconButton, Stack, Tooltip } from '@mui/material';
 import { Delete, Visibility, Edit } from '@mui/icons-material';
 import { HallListItemDto } from '../../../../modules/hall/hall-list-item-dto';
+import { LabelValue } from '../../../../modules/core/label-value';
 
 export interface HallsTableComponentProps {
     halls: HallListItemDto[];
@@ -24,16 +25,16 @@ export default function HallsTableComponent(props: HallsTableComponentProps) {
             sortable: true
         },
         {
-            field: 'address',
-            headerName: 'Διεύθυνση',
+            field: 'seatsRows',
+            headerName: 'Σειρές Θέσεων',
             minWidth: 100,
             editable: true,
             flex: 1,
             sortable: false
         },
         {
-            field: 'phone',
-            headerName: 'Τηλέφωνο',
+            field: 'seatsColumns',
+            headerName: 'Στήλες Θέσεων',
             minWidth: 100,
             editable: true,
             flex: 1,
@@ -46,6 +47,15 @@ export default function HallsTableComponent(props: HallsTableComponentProps) {
             editable: true,
             flex: 1,
             sortable: false
+        },
+        {
+            field: 'providerRef',
+            headerName: 'Περιγραφή',
+            minWidth: 100,
+            editable: true,
+            flex: 1,
+            sortable: false,
+            valueGetter: (params: GridValueGetterParams<LabelValue<number>>) => params.value ? params.value.label : '',
         },
         {
             field: 'actions',

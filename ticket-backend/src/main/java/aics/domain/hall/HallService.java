@@ -1,10 +1,16 @@
 package aics.domain.hall;
 
 import aics.domain.hall.dtos.HallDto;
+import aics.domain.hall.dtos.HallOptionsDto;
 import aics.domain.hall.entities.Hall;
 import aics.domain.hall.entities.Seat;
+import aics.domain.provider.ProviderRepository;
+import aics.domain.provider.ProviderService;
 import aics.domain.provider.entities.Provider;
+import aics.infrastructure.core.LabelValue;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -18,7 +24,11 @@ public class HallService {
     @Inject
     SeatRepository seatRepository;
     @Inject
+    ProviderRepository providerRepository;
+    @Inject
     HallValidator hallValidator;
+    @Inject
+    ProviderService providerService;
 
     public List<Hall> fetchAllHalls() {
         List<Hall> halls = this.hallRepository.findAll().list();
@@ -37,6 +47,17 @@ public class HallService {
         return hall;
     }
 
+
+    public HallOptionsDto fetchHallOptions() {
+        List<Provider> providers = this.providerService.fetchAllProviders();
+        List<LabelValue<Long>> providersRefs = CollectionUtils.isNotEmpty(providers)
+            ? providers.stream().map((provider -> new LabelValue<Long>(provider.getName(), provider.getProviderId()))).toList()
+            : new ArrayList<>();
+
+        return new HallOptionsDto()
+            .setProvidersRefs(providersRefs);
+    }
+
     public String createHall(HallDto hallDto) {
 
         final String error = this.hallValidator.validateForCreateHall(hallDto);
@@ -44,7 +65,13 @@ public class HallService {
             return error;
         }
 
+        ImmutablePair<Provider, String> findValidProviderResult = this.findValidProvider(hallDto.getProviderRef());
+        if (findValidProviderResult.getRight() != null) {
+            return findValidProviderResult.getRight();
+        }
+
         Hall newHall = new Hall()
+            .setProvider(findValidProviderResult.getLeft())
             .setName(hallDto.getName())
             .setSeatsRows(hallDto.getSeatsRows())
             .setSeatsColumns(hallDto.getSeatsColumns())
@@ -103,5 +130,19 @@ public class HallService {
         this.hallRepository.delete(hall);
 
         return null;
+    }
+
+    private ImmutablePair<Provider, String> findValidProvider(LabelValue<Long> providerRef) {
+        if (providerRef == null) {
+            return new ImmutablePair<>(null, "providerRef was null");
+        }
+        if (providerRef.value() == null) {
+            return new ImmutablePair<>(null, "providerRef.value was null");
+        }
+        Provider provider = this.providerRepository.findById(providerRef.value());
+        if (provider == null) {
+            return new ImmutablePair<>(null, "provider was null");
+        }
+        return new ImmutablePair<>(provider, null);
     }
 }

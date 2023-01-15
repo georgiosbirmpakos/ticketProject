@@ -41,7 +41,6 @@ export default function MovieDialogCreateComponent(props: MovieDialogCreateCompo
             return;
         }
         const file = e.target.files[0] as File | null | undefined;
-        console.log('file', file)
         if (file) {
             try {
                 const fileToBase64Result = await FileUtils.fileToBase64(file);
@@ -86,7 +85,7 @@ export default function MovieDialogCreateComponent(props: MovieDialogCreateCompo
             <DialogContent>
                 {movie && (
                     <form>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={2} sx={{ padding: 1 }}>
                             <Grid item>
                                 <TextField disabled={props.readonly} label="Όνομα" value={movie.name} onChange={(e) => setMovie({ ...movie, name: e.target.value })} />
                             </Grid>

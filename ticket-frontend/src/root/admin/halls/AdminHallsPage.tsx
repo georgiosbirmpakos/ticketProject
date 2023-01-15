@@ -6,6 +6,7 @@ import { AdminHallsService } from './admin-halls-service';
 import { ProviderListItemDto } from '../../../modules/provider/provider-list-item-dto';
 import { useSnackbar } from 'notistack';
 import { HallListItemDto } from '../../../modules/hall/hall-list-item-dto';
+import HallDialogCreateComponent from './components/HallDialogCreateComponent';
 
 export default function AdminHallsPage() {
     const [halls, setHalls] = useState<HallListItemDto[]>([]);
@@ -81,7 +82,7 @@ export default function AdminHallsPage() {
                     </Grid>
                     <Grid item>
                         <Button onClick={createHallClicked} variant="contained" startIcon={<Add />}>
-                            Δημιουργία Καταστήματος
+                            Δημιουργία Αίθουσας
                         </Button>
                     </Grid>
                 </Grid>
@@ -92,12 +93,12 @@ export default function AdminHallsPage() {
                     onDeleteAction={(hall) => deleteProviderClicked(hall)} />
 
             </Box>
-            {/* {isDialogCreateOpen && (
-                <ProviderDialogCreate open={isDialogCreateOpen}
+            {isDialogCreateOpen && (
+                <HallDialogCreateComponent open={isDialogCreateOpen}
                     onCancel={() => setIsDialogCreateOpen(false)}
                     afterAdd={afterAdd} />
             )}
-            {isDialogUpdateOpen && selectedProvider && (
+            {/* {isDialogUpdateOpen && selectedProvider && (
                 <ProviderDialogUpdate open={isDialogUpdateOpen}
                     readonly={readonly}
                     providerId={selectedProvider.providerId}

@@ -5,6 +5,8 @@ export class MovieListItemDto {
     name: string = '';
     description: string | null = null;
     image: string = '';
+    imageName: string = '';
+    imageMimePrefix: string = '';
 
     static fromObj(obj: any): MovieListItemDto | null {
         if (!obj) {
@@ -15,6 +17,8 @@ export class MovieListItemDto {
         movieModel.name = obj.name;
         movieModel.description = obj.description;
         movieModel.image = obj.image;
+        movieModel.imageName = obj.imageName;
+        movieModel.imageMimePrefix = obj.imageMimePrefix;
         return movieModel;
     }
 

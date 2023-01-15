@@ -58,7 +58,7 @@ export default function ProviderDialogUpdateComponent(props: ProviderDialogUpdat
             <DialogContent>
                 {provider && (
                             <form>
-                                <Grid container spacing={2}>
+                                <Grid container spacing={2} sx={{ padding: 1 }}>
                                     <Grid item>
                                         <TextField disabled={props.readonly} label="Όνομα" value={provider.name} onChange={(e) => setProvider({ ...provider, name: e.target.value })} />
                                     </Grid>
