@@ -13,13 +13,13 @@
     bottom: 100px;
     width: fit-content !important;
     height: auto !important;
-    left: -40%;
+    left: -35%;
     border-radius: 20px !important;
     font-size: medium !important;
-    background-color: #E63946 !important;
+    /* background-color: #E63946 !important; */
 }
 .imageBtn:hover{
-    background-color: #920b17 !important;
+    /* background-color: #920b17 !important; */
 }
 .control-dots {
     bottom: 40px !important;

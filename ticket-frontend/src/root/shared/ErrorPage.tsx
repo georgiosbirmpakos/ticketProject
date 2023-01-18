@@ -1,5 +1,4 @@
-import { Stack, Typography } from '@mui/material'
-import Button from '@mui/material/Button'
+import { Stack, Typography, Button } from '@mui/material'
 import ErrorSvg from './horror_404.svg'
 import { Link } from 'react-router-dom'
 

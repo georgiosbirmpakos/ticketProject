@@ -51,7 +51,7 @@ export default function EventListPage() {
         flexWrap: 'wrap', marginTop: 10
       }}>
         <MovieIcon sx={{ marginLeft: 4 }} fontSize='large' />
-        <Typography sx={{ color: 'black', fontSize: 'xx-large', marginLeft: 3, fontWeight: 'bolder' }}>ΠΑΙΖΟΝΤΑΙ ΤΩΡΑ</Typography>
+        <Typography sx={{fontSize: 'xx-large', marginLeft: 3, fontWeight: 'bolder' }}>ΠΑΙΖΟΝΤΑΙ ΤΩΡΑ</Typography>
       </div>
       <Divider variant="middle" style={{ marginBottom: 10 }} />
       <GridLayout />

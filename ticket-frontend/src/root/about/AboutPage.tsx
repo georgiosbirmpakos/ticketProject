@@ -7,9 +7,9 @@ function AboutPage() {
   return (
     <div className='container'>
       <Stack direction={'column'}>
-        <Typography sx={{ marginTop: 2, color: 'black', fontSize: 'x-large', marginLeft: 2, fontWeight: 'bolder' }}>ΣΧΕΤΙΚΑ ΜΕ ΕΜΑΣ</Typography>
+        <Typography sx={{ marginTop: 2, fontSize: 'x-large', marginLeft: 2, fontWeight: 'bolder' }}>ΣΧΕΤΙΚΑ ΜΕ ΕΜΑΣ</Typography>
         <Divider variant="middle" style={{ marginBottom: 10, marginTop: 10 }} />
-        <Typography sx={{ whiteSpace: 'pre-wrap', color: 'black', fontSize: 'medium', marginLeft: 2 }}>{aboutInfo}</Typography>
+        <Typography sx={{ whiteSpace: 'pre-wrap',fontSize: 'medium', marginLeft: 2 }}>{aboutInfo}</Typography>
 
       </Stack>
     </div>

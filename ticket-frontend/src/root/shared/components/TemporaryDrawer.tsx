@@ -16,9 +16,21 @@ import TheatersIcon from '@mui/icons-material/Theaters';
 import InfoIcon from '@mui/icons-material/Info';
 import { Link } from 'react-router-dom';
 
-type Anchor = 'left';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import Brightness5Icon from '@mui/icons-material/Brightness5';
 
-export default function TemporaryDrawer() {
+type Anchor = 'left';
+type Props = {
+  isDark: boolean
+  setIsDark: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function TemporaryDrawer({isDark, setIsDark}:Props) {
+  const changeTheme = () =>{
+    setIsDark(!isDark);
+    console.log(isDark)
+  };
+
 
   const [state, setState] = React.useState({
     left: false
@@ -66,6 +78,14 @@ export default function TemporaryDrawer() {
             </ListItemButton>
           </ListItem>
         ))}
+        <ListItem disablePadding>
+          <ListItemButton onClick={changeTheme}>
+            <ListItemIcon>
+           {isDark ? <Brightness5Icon /> : <DarkModeIcon /> }
+           </ListItemIcon>
+            <ListItemText primary='Αλλαγή Θέματος'/>
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
@@ -75,7 +95,7 @@ export default function TemporaryDrawer() {
       {(['left'] as const).map((anchor) => (
         <React.Fragment key={anchor}>
           <IconButton onClick={toggleDrawer(anchor,true)} >
-            <MenuIcon sx={{color:'black'}}>
+            <MenuIcon >
             </MenuIcon>
           </IconButton>
           <Drawer

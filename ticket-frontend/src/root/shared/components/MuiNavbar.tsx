@@ -1,6 +1,6 @@
-import { AppBar, Toolbar, IconButton, Typography, Stack, Button, Tooltip} from "@mui/material";
+import { AppBar, Toolbar, IconButton, Typography, Stack, Button, Tooltip, FormControlLabel, Switch} from "@mui/material";
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import LanguageIcon from '@mui/icons-material/Language';
 import MovieIcon from '@mui/icons-material/Movie';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
@@ -8,52 +8,65 @@ import './MuiNavbar.css'
 import { Link } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import TemporaryDrawer from "./TemporaryDrawer";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { useState } from "react";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import Brightness5Icon from '@mui/icons-material/Brightness5';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 // Define our custom Navbar
+const light = createTheme({
+  palette: {
+    primary:{
+      main:'#FFFF'
+    },secondary:{
+      main:'#FFFF'
+    },
+    background: {default:'white', paper:'white'},
+  },
+});
+const dark = createTheme({
+  palette: {
+    background: {default:'gray'},
+    mode: 'dark',
+  },
+});
+type Props = {
+  isDarkTheme: boolean
+  setIsDarkTheme: React.Dispatch<React.SetStateAction<boolean>>
+}
 
+const MuiNavbar = ({isDarkTheme, setIsDarkTheme}:Props) => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [isDark, setIsDark] = useState(prefersDarkMode);
 
-const MuiNavbar = () => {
+  const changeTheme = () =>{
+    setIsDarkTheme(!isDarkTheme);
+    console.log(isDarkTheme)
+  };
 
   const navbarLeftButtonsData = [
     {
       label: 'MovieScape',
       to: '/',
-      icon: <ConfirmationNumberIcon className="navLogo" htmlColor='black' fontSize='large' />
+      icon: <ConfirmationNumberIcon className="navLogo" fontSize='large' />
     },
     {
       label: 'Προβολές',
       to: '/events',
-      icon: <MovieIcon htmlColor='black' />
+      icon: <MovieIcon/>
     },
     {
       label: 'Διαχείριση',
       to: '/admin',
-      icon: <AdminPanelSettingsIcon htmlColor='black' />
+      icon: <AdminPanelSettingsIcon/>
     }
   ];
   const settings: string[] = ['settings'];
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-    // navigate
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
-    <AppBar position='static' sx={{ background: 'white' }}>
+    <ThemeProvider theme={isDarkTheme ? dark: light}>
+    <AppBar position='static'>
 
       {/* pushing to left and right of the screen */}
       <Toolbar style={{ justifyContent: 'space-between'}} sx={{display:{xs:'none', md:'flex'}}}>
@@ -63,7 +76,6 @@ const MuiNavbar = () => {
             <IconButton key={index} size='large'
               component={Link}
               to={buttonData.to}
-              onClick={handleOpenNavMenu}
               edge='start'
               color='inherit'
               aria-label="logo">
@@ -76,22 +88,27 @@ const MuiNavbar = () => {
         </div>
           {/* Using a stack to have the other options */}
             <Stack direction={'row'}>
-              <Button className="stackBtn" component={Link} to={'/login'}>Είσοδος/Σύνδεση</Button>
+              <Button className="stackBtn" component={Link} to={'/login'} color='inherit'>Είσοδος/Σύνδεση</Button>
               <Tooltip title='Change Language'>
                 <IconButton size="large" edge='end'>
-                  <LanguageIcon htmlColor="black" />
+                  <LanguageIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title='Change theme'>
+                <IconButton size="large" edge='end' onClick={changeTheme}>
+                {isDarkTheme ? <Brightness5Icon /> : <DarkModeIcon /> }
                 </IconButton>
               </Tooltip>
             </Stack>
           </Toolbar>
+
           {/* Creating a toolbar for mobile devices */}
           <Toolbar style={{ justifyContent: 'space-between'}} sx={{display:{xs:'flex', md:'none'}}}>
         <div>
           <Stack direction={'row'}>
-          <TemporaryDrawer/>
+          <TemporaryDrawer isDark={isDarkTheme} setIsDark = {setIsDarkTheme}/>
           <IconButton>
-            <ConfirmationNumberIcon  sx={{color:'black'}}/> 
-              
+          <ConfirmationNumberIcon /> 
           </IconButton>
           </Stack>
         </div>
@@ -99,15 +116,16 @@ const MuiNavbar = () => {
 
           {/* Using a stack to have the other options */}
             <Stack direction={'row'}>
-              <Button className="stackBtn" component={Link} to={'/login'}>Είσοδος/Σύνδεση</Button>
+              <Button className="stackBtn" component={Link} to={'/login'} color='inherit'>Είσοδος/Σύνδεση</Button>
               <Tooltip title='Change Language'>
                 <IconButton size="large" edge='end'>
-                  <LanguageIcon htmlColor="black" />
+                  <LanguageIcon />
                 </IconButton>
               </Tooltip>
             </Stack>
           </Toolbar>
     </AppBar>
+    </ThemeProvider>
   )
   
 }

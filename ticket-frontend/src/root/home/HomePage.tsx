@@ -35,12 +35,12 @@ const HomePage = () => {
       <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}>
         <Stack direction={'row'} alignContent='center' alignItems={'center'}>
           <MovieIcon sx={{ marginLeft: 4 }} fontSize='large' />
-          <Typography sx={{ color: 'black', fontSize: 'xx-large', marginLeft: 2, fontWeight: 'bolder' }}>ΠΑΙΖΟΝΤΑΙ ΤΩΡΑ</Typography>
+          <Typography sx={{fontSize: 'xx-large', marginLeft: 2, fontWeight: 'bolder' }}>ΠΑΙΖΟΝΤΑΙ ΤΩΡΑ</Typography>
 
         </Stack>
 
         <Link to={'/events'}>
-          <Button sx={{ color: 'black', textDecoration: 'underline', marginRight: 5 }}> ΟΛΕΣ ΟΙ ΤΑΙΝΙΕΣ </Button>
+          <Button sx={{ textDecoration: 'underline', marginRight: 5 }}> ΟΛΕΣ ΟΙ ΤΑΙΝΙΕΣ </Button>
         </Link>
       </div>
 
