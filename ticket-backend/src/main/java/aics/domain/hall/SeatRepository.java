@@ -10,12 +10,13 @@ import java.util.List;
 @ApplicationScoped
 public class SeatRepository implements PanacheRepository<Seat> {
 
-    List<Seat> fetchListByHallId(Long hallId) {
+    public List<Seat> fetchListByHallId(Long hallId) {
         Parameters parameters = Parameters.with("hallId", hallId);
-        return find("hall.hallId = :hallId", parameters).list();
+        return find("hall.hallId = :hallId ORDER BY seatRow ASC, seatColumn", parameters)
+            .list();
     }
 
-    Long deleteByHallId(Long hallId) {
+    public Long deleteByHallId(Long hallId) {
         Parameters parameters = Parameters.with("hallId", hallId);
         return delete("hall.hallId = :hallId", parameters);
     }

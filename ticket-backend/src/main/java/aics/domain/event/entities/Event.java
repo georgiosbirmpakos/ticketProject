@@ -1,13 +1,16 @@
 package aics.domain.event.entities;
 
-import aics.domain.movie.entities.Movie;
 import aics.domain.hall.entities.Hall;
+import aics.domain.movie.entities.Movie;
+import aics.domain.ticket.entities.Ticket;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "EVENTS")
 @Getter
@@ -34,4 +37,7 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "HALL_ID_FK", nullable = false, updatable = false)
     private Hall hall;
+
+    @OneToMany
+    private List<Ticket> tickets = new ArrayList<>();
 }

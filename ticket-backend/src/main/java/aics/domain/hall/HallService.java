@@ -108,8 +108,7 @@ public class HallService {
             return "couldn't find hall";
         }
 
-        hall.setHallId(hallDto.getHallId())
-            .setName(hallDto.getName())
+        hall.setName(hallDto.getName())
             .setDescription(hallDto.getDescription());
 
         this.hallRepository.persist(hall);
