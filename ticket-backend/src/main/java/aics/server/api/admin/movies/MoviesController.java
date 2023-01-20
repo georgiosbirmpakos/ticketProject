@@ -1,6 +1,5 @@
 package aics.server.api.admin.movies;
 
-import aics.domain.movie.dtos.MovieDto;
 import aics.infrastructure.errors.TicketException;
 import aics.server.api.admin.admin_shared.AdminConstants;
 import aics.server.api.admin.movies.dtos.*;
@@ -11,7 +10,6 @@ import org.jboss.resteasy.reactive.RestResponse;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
 @Path(AdminConstants.ADMIN_PATH + "/movies")
 public class MoviesController {
@@ -21,7 +19,7 @@ public class MoviesController {
     @Path("/list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public RestResponse<FetchMoviesListResponseDto> handleFetchMoviesList() {
+    public RestResponse<FetchMoviesListResponseDto> handleFetchMovieDetails() {
         Log.info("Start MoviesController.handleFetchMoviesList");
         try {
             FetchMoviesListResponseDto fetchMoviesListResponseDto = this.moviesActions.doFetchAllMovies();
@@ -39,17 +37,17 @@ public class MoviesController {
     @Path("/details/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public RestResponse<FetchMovieDetailsResponseDto> handleFetchMoviesList(@RestPath Long id) {
-        Log.info("Start MoviesController.handleFetchMoviesList");
+    public RestResponse<FetchMovieDetailsResponseDto> handleFetchMovieDetails(@RestPath Long id) {
+        Log.info("Start MoviesController.handleFetchMovieDetails");
         try {
             FetchMovieDetailsResponseDto fetchMovieDetailsResponseDto = this.moviesActions.doFetchMovieDetails(id);
-            Log.info("End MoviesController.handleFetchMoviesList");
+            Log.info("End MoviesController.handleFetchMovieDetails");
             return RestResponse.ok(fetchMovieDetailsResponseDto);
         } catch (TicketException e) {
-            Log.error("End MoviesController.handleFetchMoviesList with error", e);
+            Log.error("End MoviesController.handleFetchMovieDetails with error", e);
             return RestResponse.status(e.getStatus(), null);
         } catch (Exception e) {
-            Log.error("End MoviesController.handleFetchMoviesList with error", e);
+            Log.error("End MoviesController.handleFetchMovieDetails with error", e);
             return RestResponse.status(RestResponse.Status.INTERNAL_SERVER_ERROR, null);
         }
     }

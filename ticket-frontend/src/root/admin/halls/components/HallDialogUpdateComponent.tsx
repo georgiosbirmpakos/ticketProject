@@ -8,15 +8,18 @@ import { AdminHallsService } from '../admin-halls-service';
 import { LabelValue } from '../../../../modules/core/label-value';
 import { HallOptionsDto } from '../../../../modules/hall/hall-options-dto';
 import SeatsMapComponent from '../../../../modules/hall/components/SeatsMapComponent';
+import { UpdateHallRequestDto } from '../dtos/update-hall-dto';
 
-export interface HallDialogCreateComponentProps {
+export interface HallDialogUpdateComponentProps {
     open: boolean;
+    readonly: boolean;
+    hallId: number;
     onCancel?: ((event: any) => void) | undefined;
-    afterAdd: (event: any) => void;
+    afterUpdate: (event: any) => void;
 }
 
-export default function HallDialogCreateComponent(props: HallDialogCreateComponentProps) {
-    const [hall, setHall] = useState<HallDto>(new HallDto());
+export default function HallDialogUpdateComponent(props: HallDialogUpdateComponentProps) {
+    const [hall, setHall] = useState<HallDto | null>(null);
     const [options, setOptions] = useState<HallOptionsDto | null>(null);
 
     const { enqueueSnackbar } = useSnackbar();
@@ -25,7 +28,9 @@ export default function HallDialogCreateComponent(props: HallDialogCreateCompone
         async function loadData() {
             try {
                 const fetchHallsOptionsResponseDto = await AdminHallsService.fetchHallOptions();
+                const fetchHallDetailsResponseDto = await AdminHallsService.fetchHallDetails(props.hallId);
                 setOptions(fetchHallsOptionsResponseDto.options);
+                setHall(fetchHallDetailsResponseDto.hall);
             } catch (e) {
                 console.error(e);
                 enqueueSnackbar('Αποτυχημένη εύρεση Επιλογών αίθουσας', { variant: 'error' })
@@ -35,23 +40,23 @@ export default function HallDialogCreateComponent(props: HallDialogCreateCompone
         loadData();
     }, [])
 
-    async function addClicked(e: any) {
-        const createHallRequestDto: CreateHallRequestDto = new CreateHallRequestDto();
-        createHallRequestDto.hall = hall;
+    async function updateClicked(e: any) {
+        const updateHallRequestDto: UpdateHallRequestDto = new UpdateHallRequestDto();
+        updateHallRequestDto.hall = hall;
         try {
-            const response = await AdminHallsService.createHall(createHallRequestDto);
-            enqueueSnackbar('Επιτυχής δημιουργία Αίθουσας', { variant: 'success' })
-            props.afterAdd(e);
+            const response = await AdminHallsService.updateHall(updateHallRequestDto);
+            enqueueSnackbar('Επιτυχής αποθήκευση Αίθουσας', { variant: 'success' })
+            props.afterUpdate(e);
         } catch (e) {
             console.error(e);
-            enqueueSnackbar('Αποτυχημένη δημιουργία Αίθουσας', { variant: 'error' })
+            enqueueSnackbar('Αποτυχημένη αποθήκευση Αίθουσας', { variant: 'error' })
         }
     }
 
     return (
         <Dialog fullWidth={true} maxWidth={false} onClose={props.onCancel} open={props.open}>
             <DialogTitle id="alert-dialog-title">
-                Προσθήκη Αίθουσας
+                Επεξεργασία Αίθουσας
             </DialogTitle>
             <DialogContent>
                 {hall && options && (
@@ -60,7 +65,7 @@ export default function HallDialogCreateComponent(props: HallDialogCreateCompone
                             <Grid item>
                                 <FormControl fullWidth sx={{ minWidth: 140 }}>
                                     <InputLabel id="providerref-select-label-id">Κατάστημα</InputLabel>
-                                    <Select labelId="providerref-select-label-id"
+                                    <Select disabled={props.readonly} labelId="providerref-select-label-id"
                                         value={hall.providerRef ? JSON.stringify(hall.providerRef) : ''}
                                         label="Κατάστημα"
                                         onChange={(e) => setHall({ ...hall, providerRef: LabelValue.fromObj<number>(e.target.value ? JSON.parse(e.target.value) : '') })}
@@ -74,16 +79,16 @@ export default function HallDialogCreateComponent(props: HallDialogCreateCompone
                             </Grid>
 
                             <Grid item>
-                                <TextField label="Όνομα" value={hall.name} onChange={(e) => setHall({ ...hall, name: e.target.value })} />
+                                <TextField disabled={props.readonly} label="Όνομα" value={hall.name} onChange={(e) => setHall({ ...hall, name: e.target.value })} />
                             </Grid>
                             <Grid item>
-                                <TextField type="number" label="Γραμμές Θέσεων" value={hall.seatsRows} onChange={(e) => setHall({ ...hall, seatsRows: e.target.value ? parseInt(e.target.value) : 0 })} />
+                                <TextField disabled={true} type="number" label="Γραμμές Θέσεων" value={hall.seatsRows} onChange={(e) => setHall({ ...hall, seatsRows: e.target.value ? parseInt(e.target.value) : 0 })} />
                             </Grid>
                             <Grid item>
-                                <TextField type="number" label="Στήλες Θέσεων" value={hall.seatsColumns} onChange={(e) => setHall({ ...hall, seatsColumns: e.target.value ? parseInt(e.target.value) : 0 })} />
+                                <TextField disabled={true} type="number" label="Στήλες Θέσεων" value={hall.seatsColumns} onChange={(e) => setHall({ ...hall, seatsColumns: e.target.value ? parseInt(e.target.value) : 0 })} />
                             </Grid>
                             <Grid item>
-                                <TextField label="Περιγραφή" value={hall.description} onChange={(e) => setHall({ ...hall, description: e.target.value })} />
+                                <TextField disabled={props.readonly} label="Περιγραφή" value={hall.description} onChange={(e) => setHall({ ...hall, description: e.target.value })} />
                             </Grid>
                         </Grid>
                         <Grid container spacing={2} justifyContent='center' sx={{ padding: 1 }}>
@@ -96,9 +101,11 @@ export default function HallDialogCreateComponent(props: HallDialogCreateCompone
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.onCancel}>Ακύρωση</Button>
-                <Button onClick={addClicked} autoFocus>
-                    Προσθήκη
-                </Button>
+                {!props.readonly && (
+                    <Button onClick={updateClicked} autoFocus>
+                        Αποθήκευση
+                    </Button>
+                )}
             </DialogActions>
 
         </Dialog >

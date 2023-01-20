@@ -1,0 +1,18 @@
+.seatsTable {
+    /* width: 1em; */
+    table-layout: fixed;
+    /* border-radius: 2px;
+    border-color: black; */
+}
+
+.seatsTable tr {
+    /* background-color: lightgray; */
+    /* border-radius: 2px;
+    border-color: black; */
+}
+
+.seatsTable td {
+    width: 1em;
+    height: 1em;
+    background-color: lightgray;
+}

@@ -4,6 +4,7 @@ import { Box, IconButton, Stack, Tooltip } from '@mui/material';
 import { Delete, Visibility, Edit } from '@mui/icons-material';
 import { HallListItemDto } from '../../../../modules/hall/hall-list-item-dto';
 import { LabelValue } from '../../../../modules/core/label-value';
+import SeatsMapComponent from '../../../../modules/hall/components/SeatsMapComponent';
 
 export interface HallsTableComponentProps {
     halls: HallListItemDto[];
@@ -50,7 +51,7 @@ export default function HallsTableComponent(props: HallsTableComponentProps) {
         },
         {
             field: 'providerRef',
-            headerName: 'Περιγραφή',
+            headerName: 'Κατάστημα',
             minWidth: 100,
             editable: true,
             flex: 1,

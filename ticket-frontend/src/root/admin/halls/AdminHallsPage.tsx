@@ -3,10 +3,11 @@ import { Fragment, useEffect, useState } from 'react';
 import HallsTableComponent from './components/HallsTableComponent';
 import { Add } from '@mui/icons-material';
 import { AdminHallsService } from './admin-halls-service';
-import { ProviderListItemDto } from '../../../modules/provider/provider-list-item-dto';
 import { useSnackbar } from 'notistack';
 import { HallListItemDto } from '../../../modules/hall/hall-list-item-dto';
 import HallDialogCreateComponent from './components/HallDialogCreateComponent';
+import HallDialogUpdateComponent from './components/HallDialogUpdateComponent';
+import HallDialogDeleteComponent from './components/HallDialogDeleteComponent';
 
 export default function AdminHallsPage() {
     const [halls, setHalls] = useState<HallListItemDto[]>([]);
@@ -98,18 +99,18 @@ export default function AdminHallsPage() {
                     onCancel={() => setIsDialogCreateOpen(false)}
                     afterAdd={afterAdd} />
             )}
-            {/* {isDialogUpdateOpen && selectedProvider && (
-                <ProviderDialogUpdate open={isDialogUpdateOpen}
+            {isDialogUpdateOpen && selectedHall && (
+                <HallDialogUpdateComponent open={isDialogUpdateOpen}
                     readonly={readonly}
-                    providerId={selectedProvider.providerId}
+                    hallId={selectedHall.hallId}
                     onCancel={() => setIsDialogUpdateOpen(false)}
                     afterUpdate={afterUpdate} />
             )}
-            {isDialogDeleteOpen && selectedProvider && (
-                <ProviderDialogDeleteComponent open={isDialogDeleteOpen}
+            {isDialogDeleteOpen && selectedHall && (
+                <HallDialogDeleteComponent open={isDialogDeleteOpen}
                     onCancel={() => setIsDialogDeleteOpen(false)}
-                    afterDelete={afterDelete} provider={selectedProvider} />
-            )} */}
+                    afterDelete={afterDelete} hall={selectedHall} />
+            )}
         </Fragment>
     );
 }
