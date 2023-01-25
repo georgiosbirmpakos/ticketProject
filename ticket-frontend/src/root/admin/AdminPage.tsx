@@ -1,8 +1,6 @@
-import { Box, Drawer, Tab, Tabs } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Box, Tab, Tabs } from '@mui/material';
+import React, { useEffect } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { AdminMoviesService } from './movies/admin-movies-service';
-import TabPanel from './TabPanelComponent';
 
 export default function AdminPage() {
     const [value, setValue] = React.useState(0);
@@ -48,8 +46,8 @@ export default function AdminPage() {
             } else if (location.pathname.startsWith('/admin/users')) {
                 setValue(4);
             } else {
-                console.error('unknown location: ' + location.pathname);
-                navigate('/admin/movies');
+                // console.error('unknown location: ' + location.pathname);
+                // navigate('/admin/movies');
             }
         };
     }, [location, navigate]);

@@ -3,7 +3,7 @@ import { CreateHallRequestDto, CreateHallResponseDto } from './dtos/create-hall-
 import { DeleteHallResponseDto } from './dtos/delete-hall-dto';
 import { FetchHallDetailsResponseDto } from './dtos/fetch-hall-details-dto';
 import { FetchHallsListResponseDto } from './dtos/fetch-halls-list-dto';
-import { FetchHallsOptionsResponseDto } from './dtos/fetch-halls-list-dto copy';
+import { FetchHallsOptionsResponseDto } from './dtos/fetch-halls-options-dto';
 import { UpdateHallRequestDto, UpdateHallResponseDto } from './dtos/update-hall-dto';
 
 export class AdminHallsService {
