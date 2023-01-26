@@ -3,28 +3,46 @@ import { TypeUtils } from '../../core/type-utils';
 import { TicketDto } from '../../ticket/dtos/ticket-dto';
 
 export class EventDto {
-    eventId: number | null = null;
-    name: string | null = null;
-    eventDatetime: Date | null = null;
-    description: string | null = null;
-    eventPrice: number | null = null;
-    movieRef: LabelValue<number> | null = null;
-    hallRef: LabelValue<number> | null = null;
-    tickets: TicketDto[] = [];
+    eventId: number | null;
+    name: string;
+    eventDatetime: Date | null;
+    description: string;
+    eventPrice: number;
+    movieRef: LabelValue<number> | null;
+    hallRef: LabelValue<number> | null;
+    tickets: TicketDto[];
+
+    constructor(obj: {
+        eventId?: number | null | undefined,
+        name: string,
+        eventDatetime?: Date | null | undefined,
+        description: string,
+        eventPrice: number,
+        movieRef?: LabelValue<number> | null | undefined,
+        hallRef?: LabelValue<number> | null | undefined,
+        tickets: TicketDto[],
+    }) {
+        this.eventId = obj.eventId ? obj.eventId : null;
+        this.name = obj.name;
+        this.eventDatetime = obj.eventDatetime ? obj.eventDatetime : null;
+        this.description = obj.description;
+        this.eventPrice = obj.eventPrice;
+        this.movieRef = obj.movieRef ? obj.movieRef : null;
+        this.hallRef = obj.hallRef ? obj.hallRef : null;
+        this.tickets = obj.tickets;
+    }
 
     static fromObj(obj: any): EventDto | null {
         if (!obj) {
             return null;
         }
-        const eventDto: EventDto = new EventDto();
-        eventDto.eventId = obj.eventId;
-        eventDto.name = obj.name;
-        eventDto.eventDatetime = obj.ventDatetime ? new Date(obj.eventDatetime) : null;
-        eventDto.description = obj.description;
-        eventDto.eventPrice = obj.eventPrice;
-        eventDto.movieRef = LabelValue.fromObj(obj.movieRef);
-        eventDto.hallRef = LabelValue.fromObj(obj.hallRef);
-        eventDto.tickets = TicketDto.listFromObjList(obj.tickets);
+        const eventDto: EventDto = new EventDto({
+            ...obj,
+            eventDatetime: obj.eventDatetime ? new Date(obj.eventDatetime) : null,
+            movieRef: LabelValue.fromObj(obj.movieRef),
+            hallRef: LabelValue.fromObj(obj.hallRef),
+            tickets: TicketDto.listFromObjList(obj.tickets),
+        });
         return eventDto;
     }
 

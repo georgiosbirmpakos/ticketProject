@@ -7,7 +7,7 @@ export class HallListItemDto {
     seatsRows: number = 0;
     seatsColumns: number = 0;
     description: string = '';
-    providerRef: LabelValue<number> = new LabelValue('', 0);
+    providerRef: LabelValue<number> | null = null;
 
     static fromObj(obj: any): HallListItemDto | null {
         if (!obj) {

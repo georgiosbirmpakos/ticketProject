@@ -38,6 +38,6 @@ public class Event {
     @JoinColumn(name = "HALL_ID_FK", nullable = false, updatable = false)
     private Hall hall;
 
-    @OneToMany
+    @OneToMany(mappedBy = "event")
     private List<Ticket> tickets = new ArrayList<>();
 }

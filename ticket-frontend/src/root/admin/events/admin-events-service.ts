@@ -69,7 +69,7 @@ export class AdminEventsService {
         return updateEventResponseDto;
     }
 
-    static async deleteEvent(hallId: number): Promise<DeleteEventResponseDto> {
+    static async deleteEvent(hallId: number | null): Promise<DeleteEventResponseDto> {
         const apiConsumer = GlobalState.instance.apiConsumer;
         const deleteEventUrl = '/admin/events/id/' + hallId;
 

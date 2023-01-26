@@ -1,14 +1,14 @@
-import { HallDto } from '../../../../modules/hall/hall-dto';
+import { EventDto } from '../../../../modules/event/dtos/event-dto';
 
 export class UpdateEventRequestDto {
-    event: HallDto | null = null;
+    event: EventDto | null = null;
 
     static fromObj(obj: any): UpdateEventRequestDto | null {
         if (!obj) {
             return null;
         }
         const updateEventRequestDto: UpdateEventRequestDto = new UpdateEventRequestDto();
-        updateEventRequestDto.event = HallDto.fromObj(obj.event);
+        updateEventRequestDto.event = EventDto.fromObj(obj.event);
         return updateEventRequestDto;
     }
 }

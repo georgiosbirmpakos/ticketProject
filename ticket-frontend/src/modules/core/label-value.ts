@@ -9,7 +9,10 @@ export class LabelValue<V extends string | number | boolean> {
         this.value = value;
     }
 
-    static fromObj<V extends string | number | boolean>(obj: any): LabelValue<V> {
+    static fromObj<V extends string | number | boolean>(obj: any): LabelValue<V> | null {
+        if (!obj) {
+            return null;
+        }
         return new LabelValue<V>(obj.label, obj.value);
     }
 

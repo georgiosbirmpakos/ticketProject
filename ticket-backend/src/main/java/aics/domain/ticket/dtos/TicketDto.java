@@ -37,7 +37,7 @@ public class TicketDto implements Serializable {
             .setDateOfBooking(ticket.getDateOfBooking())
             .setDescription(ticket.getDescription())
             .setEventRef(eventRef)
-            .setEventRef(seatRef)
-            .setEventRef(userRef);
+            .setSeatRef(seatRef)
+            .setUserRef(userRef);
     }
 }

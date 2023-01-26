@@ -27,6 +27,6 @@ export class TicketDto {
         if (!objs) {
             return [];
         }
-        return objs.map(TicketDto.fromObj).filter(TypeUtils.isNonNullable);
+        return objs.filter(TypeUtils.isNonNullable).map(TicketDto.fromObj).filter(TypeUtils.isNonNullable);
     }
 }

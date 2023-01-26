@@ -5,20 +5,24 @@ import './App.css';
 import { CircularProgress } from '@mui/material';
 import { RouterProvider } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
-import { useState } from 'react';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 const router = createRouter();
 
-  
+
 
 function App() {
 
     return (
+
+        <LocalizationProvider dateAdapter={AdapterMoment}>
             <SnackbarProvider maxSnack={3}>
                 <React.Suspense fallback={<CircularProgress />}>
                     <RouterProvider router={router} />
                 </React.Suspense>
             </SnackbarProvider>
+        </LocalizationProvider>
     );
 }
 

@@ -2,17 +2,19 @@ import { Box, Button, Grid } from '@mui/material';
 import { Fragment, useEffect, useState } from 'react';
 import { Add } from '@mui/icons-material';
 import { useSnackbar } from 'notistack';
-import { HallListItemDto } from '../../../modules/hall/hall-list-item-dto';
-import { AdminEventsService } from './admin-halls-service';
+import { AdminEventsService } from './admin-events-service';
 import { EventDto } from '../../../modules/event/dtos/event-dto';
 import EventsTableComponent from './components/EventsTableComponent';
+import EventDialogCreateComponent from './components/EventDialogCreateComponent';
+import EventDialogDeleteComponent from './components/EventDialogDeleteComponent';
+import EventDialogUpdateComponent from './components/EventDialogUpdateComponent';
 
 export default function AdminEventsPage() {
     const [events, setEvents] = useState<EventDto[]>([]);
     const [isDialogCreateOpen, setIsDialogCreateOpen] = useState<boolean>(false);
     const [isDialogUpdateOpen, setIsDialogUpdateOpen] = useState<boolean>(false);
     const [isDialogDeleteOpen, setIsDialogDeleteOpen] = useState<boolean>(false);
-    const [selectedHall, setSelectedHall] = useState<HallListItemDto | null>(null);
+    const [selectedEvent, setSelectedEvent] = useState<EventDto | null>(null);
     const [readonly, setReadonly] = useState<boolean>(false);
 
     const { enqueueSnackbar } = useSnackbar();
@@ -33,25 +35,25 @@ export default function AdminEventsPage() {
     }
 
 
-    function createHallClicked() {
-        setSelectedHall(null);
+    function createEventClicked() {
+        setSelectedEvent(null);
         setIsDialogCreateOpen(true);
     }
 
-    function viewProviderClicked(selectedHall: HallListItemDto) {
-        setSelectedHall(selectedHall);
+    function viewProviderClicked(selectedEvent: EventDto) {
+        setSelectedEvent(selectedEvent);
         setReadonly(true);
         setIsDialogUpdateOpen(true);
     }
 
-    function updateProviderClicked(selectedHall: HallListItemDto) {
-        setSelectedHall(selectedHall);
+    function updateProviderClicked(selectedEvent: EventDto) {
+        setSelectedEvent(selectedEvent);
         setReadonly(false);
         setIsDialogUpdateOpen(true);
     }
 
-    function deleteProviderClicked(selectedHall: HallListItemDto) {
-        setSelectedHall(selectedHall);
+    function deleteProviderClicked(selectedEvent: EventDto) {
+        setSelectedEvent(selectedEvent);
         setIsDialogDeleteOpen(true);
     }
 
@@ -80,7 +82,7 @@ export default function AdminEventsPage() {
                     <Grid item>
                     </Grid>
                     <Grid item>
-                        <Button onClick={createHallClicked} variant="contained" startIcon={<Add />}>
+                        <Button onClick={createEventClicked} variant="contained" startIcon={<Add />}>
                             Δημιουργία Προβολής
                         </Button>
                     </Grid>
@@ -92,23 +94,23 @@ export default function AdminEventsPage() {
                     onDeleteAction={(event) => deleteProviderClicked(event)} />
 
             </Box>
-            {/* {isDialogCreateOpen && (
-                <HallDialogCreateComponent open={isDialogCreateOpen}
+            {isDialogCreateOpen && (
+                <EventDialogCreateComponent open={isDialogCreateOpen}
                     onCancel={() => setIsDialogCreateOpen(false)}
                     afterAdd={afterAdd} />
             )}
-            {isDialogUpdateOpen && selectedHall && (
-                <HallDialogUpdateComponent open={isDialogUpdateOpen}
+            {isDialogUpdateOpen && selectedEvent?.eventId && (
+                <EventDialogUpdateComponent open={isDialogUpdateOpen}
                     readonly={readonly}
-                    hallId={selectedHall.hallId}
+                    eventId={selectedEvent.eventId}
                     onCancel={() => setIsDialogUpdateOpen(false)}
                     afterUpdate={afterUpdate} />
             )}
-            {isDialogDeleteOpen && selectedHall && (
-                <HallDialogDeleteComponent open={isDialogDeleteOpen}
+            {isDialogDeleteOpen && selectedEvent?.eventId && (
+                <EventDialogDeleteComponent open={isDialogDeleteOpen}
                     onCancel={() => setIsDialogDeleteOpen(false)}
-                    afterDelete={afterDelete} hall={selectedHall} />
-            )} */}
+                    afterDelete={afterDelete} event={selectedEvent} />
+            )}
         </Fragment>
     );
 }
