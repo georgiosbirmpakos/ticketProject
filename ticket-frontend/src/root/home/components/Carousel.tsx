@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import React from "react";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { MovieListItemDto } from '../../../modules/movie/movie-list-item-dto';
+import { MovieListItemDto } from '../../../modules/movie/dtos/movie-list-item-dto';
 import './Carousel.css';
 
 export interface CarouselComponentProps {

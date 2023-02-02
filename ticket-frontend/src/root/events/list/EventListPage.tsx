@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Divider } from '@mui/material';
 import Footer from '../../shared/components/Footer';
 import ScrollToTopOnMount from '../../shared/components/ScrollToTopOnMount';
-import GridLayoutComponent from '../../home/GridLayoutComponent';
+import MoviesGridLayoutComponent from '../../../modules/movie/components/MoviesGridLayoutComponent';
 import MovieIcon from '@mui/icons-material/Movie';
 
 export default function EventListPage() {
@@ -54,7 +54,7 @@ export default function EventListPage() {
                 <Typography sx={{ fontSize: 'xx-large', marginLeft: 3, fontWeight: 'bolder' }}>ΠΑΙΖΟΝΤΑΙ ΤΩΡΑ</Typography>
             </div>
             <Divider variant="middle" style={{ marginBottom: 10 }} />
-            <GridLayoutComponent movies={[]} />
+            <MoviesGridLayoutComponent movies={[]} />
         </React.Fragment>
     );
 }

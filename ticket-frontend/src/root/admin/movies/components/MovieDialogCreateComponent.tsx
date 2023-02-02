@@ -1,6 +1,6 @@
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import { MovieDto } from '../../../../modules/movie/movie-dto';
+import { MovieDto } from '../../../../modules/movie/dtos/movie-dto';
 import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, FormControl, FormLabel, Grid } from '@mui/material';
 import { useState } from 'react';
 import { CreateMovieRequestDto } from '../dtos/create-movie-dto';

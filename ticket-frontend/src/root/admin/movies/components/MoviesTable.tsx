@@ -1,10 +1,10 @@
 
 import CardMedia from '@mui/material/CardMedia';
-import { MovieDto } from '../../../../modules/movie/movie-dto';
+import { MovieDto } from '../../../../modules/movie/dtos/movie-dto';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, IconButton, Stack, Tooltip } from '@mui/material';
 import { Delete, Visibility, Edit } from '@mui/icons-material';
-import { MovieListItemDto } from '../../../../modules/movie/movie-list-item-dto';
+import { MovieListItemDto } from '../../../../modules/movie/dtos/movie-list-item-dto';
 
 export interface MoviesTableProps {
     movies: MovieListItemDto[];

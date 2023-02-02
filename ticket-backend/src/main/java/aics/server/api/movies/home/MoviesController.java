@@ -1,8 +1,8 @@
-package aics.server.api.home;
+package aics.server.api.movies.home;
 
 import aics.infrastructure.errors.TicketException;
 import aics.server.api.api_shared.ApiConstants;
-import aics.server.api.home.dtos.FetchMoviesPlayingNowResponseDto;
+import aics.server.api.movies.home.dtos.FetchMoviesPlayingNowResponseDto;
 import io.quarkus.logging.Log;
 import org.jboss.resteasy.reactive.RestResponse;
 
@@ -12,25 +12,25 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path(ApiConstants.API_PATH + "/home")
-public class HomeController {
+@Path(ApiConstants.API_PATH + "/movies")
+public class MoviesController {
     @Inject
-    HomeActions homeActions;
+    MoviesActions moviesActions;
 
     @Path("/movies-playing-now")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public RestResponse<FetchMoviesPlayingNowResponseDto> handleFetchMoviesPlayingNow() {
-        Log.info("Start HomeController.handleFetchMoviesPlayingNow");
+        Log.info("Start MoviesController.handleFetchMoviesPlayingNow");
         try {
-            FetchMoviesPlayingNowResponseDto fetchMoviesPlayingNowResponseDto = this.homeActions.doFetchMoviesPlayingNow();
-            Log.info("End HomeController.handleFetchMoviesPlayingNow");
+            FetchMoviesPlayingNowResponseDto fetchMoviesPlayingNowResponseDto = this.moviesActions.doFetchMoviesPlayingNow();
+            Log.info("End MoviesController.handleFetchMoviesPlayingNow");
             return RestResponse.ok(fetchMoviesPlayingNowResponseDto);
         } catch (TicketException e) {
-            Log.error("End HomeController.handleFetchMoviesPlayingNow with error", e);
+            Log.error("End MoviesController.handleFetchMoviesPlayingNow with error", e);
             return RestResponse.status(e.getStatus(), null);
         } catch (Exception e) {
-            Log.error("End HomeController.handleFetchMoviesPlayingNow with error", e);
+            Log.error("End MoviesController.handleFetchMoviesPlayingNow with error", e);
             return RestResponse.status(RestResponse.Status.INTERNAL_SERVER_ERROR, null);
         }
     }

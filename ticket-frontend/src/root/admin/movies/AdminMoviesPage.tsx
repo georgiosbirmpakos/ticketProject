@@ -1,12 +1,12 @@
 import { Box, Button, Grid } from '@mui/material';
 import { Fragment, useEffect, useState } from 'react';
-import { MovieDto } from '../../../modules/movie/movie-dto';
+import { MovieDto } from '../../../modules/movie/dtos/movie-dto';
 import { AdminMoviesService } from './admin-movies-service';
 import MovieDialogCreateComponent from './components/MovieDialogCreateComponent';
 import MovieDialogDeleteComponent from './components/MovieDialogDeleteComponent';
 import MoviesTable from './components/MoviesTable';
 import { Add } from '@mui/icons-material';
-import { MovieListItemDto } from '../../../modules/movie/movie-list-item-dto';
+import { MovieListItemDto } from '../../../modules/movie/dtos/movie-list-item-dto';
 import MovieDialogUpdateComponent from './components/MovieDialogUpdateComponent';
 import { useSnackbar } from 'notistack';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import GridLayoutComponent from '../home/GridLayoutComponent';
+import MoviesGridLayoutComponent from '../../modules/movie/components/MoviesGridLayoutComponent';
 import { Divider, Typography } from '@mui/material';
 import MovieIcon from '@mui/icons-material/Movie';
 import Footer from '../shared/components/Footer';

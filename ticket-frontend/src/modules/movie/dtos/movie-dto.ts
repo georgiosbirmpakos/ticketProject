@@ -1,4 +1,4 @@
-import { TypeUtils } from '../core/type-utils';
+import { TypeUtils } from '../../core/type-utils';
 
 export class MovieDto {
     movieId: number | null = null;

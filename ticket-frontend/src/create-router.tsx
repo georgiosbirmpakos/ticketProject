@@ -5,6 +5,9 @@ export function createRouter() {
     const RootPageLazy = React.lazy(() => import('./root/RootPage'));
     const HomePageLazy = React.lazy(() => import('./root/home/HomePage'));
     const AboutPageLazy = React.lazy(() => import('./root/about/AboutPage'));
+    const MoviesPageLazy = React.lazy(() => import('./root/movies/MoviesPage'));
+    const MoviesListPageLazy = React.lazy(() => import('./root/movies/list/MoviesListPage'));
+    const MovieDetailsPageLazy = React.lazy(() => import('./root/movies/details/MovieDetailsPage'));
     const EventsPageLazy = React.lazy(() => import('./root/events/EventsPage'));
     const EventListPageLazy = React.lazy(() => import('./root/events/list/EventListPage'));
     const EventDetailsPageLazy = React.lazy(() => import('./root/events/details/EventDetailsPage'));
@@ -45,7 +48,24 @@ export function createRouter() {
                     path: "signup",
                     element: <SignUpPageLazy />
                 },
-
+                {
+                    path: "movies",
+                    element: <MoviesPageLazy />,
+                    children: [
+                        {
+                            path: "",
+                            element: <Navigate to="list" />
+                        },
+                        {
+                            path: "list",
+                            element: <MoviesListPageLazy />
+                        },
+                        {
+                            path: "details/:id",
+                            element: <MovieDetailsPageLazy />
+                        },
+                    ]
+                },
                 {
                     path: "events",
                     element: <EventsPageLazy />,

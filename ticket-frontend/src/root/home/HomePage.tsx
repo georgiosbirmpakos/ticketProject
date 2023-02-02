@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import CarouselComponent from './components/Carousel';
 import { Link } from 'react-router-dom'
 import { Typography, Divider, Button, CircularProgress } from '@mui/material';
-import GridLayoutComponent from './GridLayoutComponent';
+import MoviesGridLayoutComponent from '../../modules/movie/components/MoviesGridLayoutComponent';
 import MovieIcon from '@mui/icons-material/Movie';
 import { Stack } from '@mui/system';
 import '../shared/components/Footer.css';
-import { MovieListItemDto } from '../../modules/movie/movie-list-item-dto';
+import { MovieListItemDto } from '../../modules/movie/dtos/movie-list-item-dto';
 import { AdminMoviesService } from '../admin/movies/admin-movies-service';
 import { useSnackbar } from 'notistack';
+import { HomeService } from './home-service';
 
 const HomePage = () => {
     const [isWaitingFetch, setIsWaitingFetch] = useState<boolean>(false);
@@ -21,7 +22,7 @@ const HomePage = () => {
             setIsWaitingFetch(true);
             setMovies([]);
             try {
-                const fetchMoviesListResponseDto = await AdminMoviesService.fetchMoviesList();
+                const fetchMoviesListResponseDto = await HomeService.fetchMoviesPlayingNow();
                 console.log('fetchMoviesListResponseDto', fetchMoviesListResponseDto)
                 setMovies(fetchMoviesListResponseDto.movies);
                 setIsWaitingFetch(false);
@@ -79,7 +80,7 @@ const HomePage = () => {
                         </div>
 
                         <Divider variant="middle" style={{ marginBottom: 10 }} />
-                        <GridLayoutComponent movies={movies} />
+                        <MoviesGridLayoutComponent movies={movies} />
                     </React.Fragment>
                 )}
 

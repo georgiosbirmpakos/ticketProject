@@ -1,4 +1,4 @@
-import { MovieDto } from '../../../../modules/movie/movie-dto';
+import { MovieDto } from '../../../../modules/movie/dtos/movie-dto';
 
 export class CreateMovieRequestDto {
     movie: MovieDto | null = null;

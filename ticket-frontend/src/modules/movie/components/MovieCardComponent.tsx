@@ -5,14 +5,14 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom'
-import { MovieListItemDto } from '../../../modules/movie/movie-list-item-dto';
+import { MovieListItemDto } from '../dtos/movie-list-item-dto';
 
-export interface CardComponentProps {
+export interface MovieCardComponentProps {
     movie: MovieListItemDto
 }
 
 //Probably have to use arrays in order to load them dynamically
-const CardComponent = (props: CardComponentProps) => {
+const MovieCardComponent = (props: MovieCardComponentProps) => {
 
 
     //Create a custom onClick function for our ticket buttons
@@ -36,10 +36,10 @@ const CardComponent = (props: CardComponentProps) => {
             </CardContent>
             <CardActions>
                 <Button onClick={() => onClick(props.movie.name)} variant='contained' sx={{ ":hover": { backgroundColor: 'secondary' }, borderRadius: 20, backgroundColor: 'primary' }} size="small">ΕΙΣΙΤΗΡΙΑ</Button>
-                <Button component={Link} to={'/events/details/:' + props.movie.name} key={'Events'} variant='outlined' sx={{ ":hover": { borderColor: '#920b17', color: '#920b17' }, color: '#E63946', backgroundColor: 'white', borderColor: '#E63946', borderRadius: 20, marginLeft: 1 }} size="small">ΠΛΗΡΟΦΟΡΙΕΣ</Button>
+                <Button component={Link} to={'/movies/details/:' + props.movie.movieId} variant='outlined' sx={{ ":hover": { borderColor: '#920b17', color: '#920b17' }, color: '#E63946', backgroundColor: 'white', borderColor: '#E63946', borderRadius: 20, marginLeft: 1 }} size="small">ΠΛΗΡΟΦΟΡΙΕΣ</Button>
             </CardActions>
         </Card>
     )
 }
 
-export default CardComponent
+export default MovieCardComponent

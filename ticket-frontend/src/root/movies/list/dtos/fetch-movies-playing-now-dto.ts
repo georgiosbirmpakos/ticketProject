@@ -1,4 +1,4 @@
-import { MovieListItemDto } from '../../../modules/movie/dtos/movie-list-item-dto';
+import { MovieListItemDto } from '../../../../modules/movie/dtos/movie-list-item-dto';
 
 export class FetchMoviesPlayingNowResponseDto {
     movies: MovieListItemDto[] = [];

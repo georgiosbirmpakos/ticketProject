@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { MovieDto } from '../../../../modules/movie/movie-dto';
+import { MovieDto } from '../../../../modules/movie/dtos/movie-dto';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { AdminMoviesService } from '../admin-movies-service';
 import { useSnackbar } from 'notistack';
