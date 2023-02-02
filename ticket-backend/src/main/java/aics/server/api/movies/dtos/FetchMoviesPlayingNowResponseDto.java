@@ -1,4 +1,4 @@
-package aics.server.api.movies.home.dtos;
+package aics.server.api.movies.dtos;
 
 import aics.domain.movie.dtos.MovieListItemDto;
 import lombok.Data;

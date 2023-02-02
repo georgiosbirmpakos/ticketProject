@@ -1,10 +1,12 @@
-package aics.server.api.movies.home;
+package aics.server.api.movies;
 
 import aics.domain.movie.MovieService;
+import aics.domain.movie.dtos.MovieDto;
 import aics.domain.movie.dtos.MovieListItemDto;
 import aics.domain.movie.entities.Movie;
 import aics.infrastructure.errors.TicketException;
-import aics.server.api.movies.home.dtos.FetchMoviesPlayingNowResponseDto;
+import aics.server.api.movies.dtos.FetchMovieDetailsResponseDto;
+import aics.server.api.movies.dtos.FetchMoviesPlayingNowResponseDto;
 import io.quarkus.logging.Log;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -31,5 +33,17 @@ public class MoviesActions {
         fetchMoviesPlayingNowResponseDto.setMovies(movieDtos);
         Log.info("End MoviesActions.doFetchMoviesPlayingNow");
         return fetchMoviesPlayingNowResponseDto;
+    }
+
+    @Transactional()
+    public FetchMovieDetailsResponseDto doFetchMovieDetails(Long movieId) throws TicketException {
+        Log.info("Start MoviesActions.doFetchMovieDetails");
+        FetchMovieDetailsResponseDto fetchMovieDetailsResponseDto = new FetchMovieDetailsResponseDto();
+        Movie movie = this.movieService.fetchMovieById(movieId);
+        MovieDto movieDto = MovieDto.fromMovie(movie);
+
+        fetchMovieDetailsResponseDto.setMovie(movieDto);
+        Log.info("End MoviesActions.doFetchMovieDetails");
+        return fetchMovieDetailsResponseDto;
     }
 }
