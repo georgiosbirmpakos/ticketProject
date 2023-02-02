@@ -61,7 +61,7 @@ export function createRouter() {
                             element: <MoviesListPageLazy />
                         },
                         {
-                            path: "details/:id",
+                            path: "details",
                             element: <MovieDetailsPageLazy />
                         },
                     ]

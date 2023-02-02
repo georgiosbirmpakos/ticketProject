@@ -35,8 +35,8 @@ const MovieCardComponent = (props: MovieCardComponentProps) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button onClick={() => onClick(props.movie.name)} variant='contained' sx={{ ":hover": { backgroundColor: 'secondary' }, borderRadius: 20, backgroundColor: 'primary' }} size="small">ΕΙΣΙΤΗΡΙΑ</Button>
-                <Button component={Link} to={'/movies/details/:' + props.movie.movieId} variant='outlined' sx={{ ":hover": { borderColor: '#920b17', color: '#920b17' }, color: '#E63946', backgroundColor: 'white', borderColor: '#E63946', borderRadius: 20, marginLeft: 1 }} size="small">ΠΛΗΡΟΦΟΡΙΕΣ</Button>
+                <Button component={Link} to={'/events/list?movieId=' + props.movie.movieId} variant='contained' sx={{ ":hover": { backgroundColor: 'secondary' }, borderRadius: 20, backgroundColor: 'primary' }} size="small">ΠΡΟΒΟΛΕΣ</Button>
+                <Button component={Link} to={'/movies/details?movieId=' + props.movie.movieId} variant='outlined' sx={{ ":hover": { borderColor: '#920b17', color: '#920b17' }, color: '#E63946', backgroundColor: 'white', borderColor: '#E63946', borderRadius: 20, marginLeft: 1 }} size="small">ΠΛΗΡΟΦΟΡΙΕΣ</Button>
             </CardActions>
         </Card>
     )
