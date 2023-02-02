@@ -2,15 +2,15 @@ import React from 'react';
 import { Typography, Divider } from '@mui/material';
 import Footer from '../../shared/components/Footer';
 import ScrollToTopOnMount from '../../shared/components/ScrollToTopOnMount';
-import GridLayout from '../../home/GridLayout';
+import GridLayoutComponent from '../../home/GridLayoutComponent';
 import MovieIcon from '@mui/icons-material/Movie';
 
 export default function EventListPage() {
-  const movieDescription = 'O Νικ Φιούρι, διευθυντής της κατασκοπευτικής οργάνωσης Α.Σ.Π.Ι.Δ.Α., στρατολογεί τους Τόνι Σταρκ, Στιβ Ρότζερς, Μπρους Μπάνερ και Θορ για τη δημιουργία μιας ομάδας με σκοπό να σταματήσουν τον αδελφό του Θορ, τον Λόκι, στην προσπάθειά του να υποτάξει τη Γη.'
+    const movieDescription = 'O Νικ Φιούρι, διευθυντής της κατασκοπευτικής οργάνωσης Α.Σ.Π.Ι.Δ.Α., στρατολογεί τους Τόνι Σταρκ, Στιβ Ρότζερς, Μπρους Μπάνερ και Θορ για τη δημιουργία μιας ομάδας με σκοπό να σταματήσουν τον αδελφό του Θορ, τον Λόκι, στην προσπάθειά του να υποτάξει τη Γη.'
 
-  return (
-    <React.Fragment>
-      {/* <Stack direction={'row'} justifyContent='space-between' alignItems='center'>
+    return (
+        <React.Fragment>
+            {/* <Stack direction={'row'} justifyContent='space-between' alignItems='center'>
     <Typography sx={{color:'black', fontSize:'xx-large', marginLeft:2, fontWeight:'bolder'}}>Movie Title</Typography>
     <Button variant='contained' sx={{":hover":{backgroundColor: '#920b17'},borderRadius:15, backgroundColor: '#E63946',height:40,  width:100, marginRight:2}} >ΕΙΣΙΤΗΡΙΑ</Button>
     </Stack>
@@ -44,17 +44,17 @@ export default function EventListPage() {
       <Typography sx={{color:'black', fontSize:'medium', marginLeft:2,float:'left'}}>{movieDescription}</Typography>
       </Stack> */}
 
-      <ScrollToTopOnMount />
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        flexWrap: 'wrap', marginTop: 10
-      }}>
-        <MovieIcon sx={{ marginLeft: 4 }} fontSize='large' />
-        <Typography sx={{fontSize: 'xx-large', marginLeft: 3, fontWeight: 'bolder' }}>ΠΑΙΖΟΝΤΑΙ ΤΩΡΑ</Typography>
-      </div>
-      <Divider variant="middle" style={{ marginBottom: 10 }} />
-      <GridLayout />
-    </React.Fragment>
-  );
+            <ScrollToTopOnMount />
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                flexWrap: 'wrap', marginTop: 10
+            }}>
+                <MovieIcon sx={{ marginLeft: 4 }} fontSize='large' />
+                <Typography sx={{ fontSize: 'xx-large', marginLeft: 3, fontWeight: 'bolder' }}>ΠΑΙΖΟΝΤΑΙ ΤΩΡΑ</Typography>
+            </div>
+            <Divider variant="middle" style={{ marginBottom: 10 }} />
+            <GridLayoutComponent movies={[]} />
+        </React.Fragment>
+    );
 }

@@ -3,6 +3,7 @@ package aics.domain.event;
 import aics.domain.event.dtos.EventDto;
 import aics.domain.event.dtos.EventOptionsDto;
 import aics.domain.event.entities.Event;
+import aics.domain.event.models.EventFilters;
 import aics.domain.hall.HallRepository;
 import aics.domain.hall.SeatRepository;
 import aics.domain.hall.entities.Hall;
@@ -12,12 +13,15 @@ import aics.domain.movie.entities.Movie;
 import aics.domain.ticket.TicketRepository;
 import aics.domain.ticket.entities.Ticket;
 import aics.infrastructure.core.LabelValue;
+import aics.infrastructure.errors.TicketErrorStatus;
+import aics.infrastructure.errors.TicketException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,12 +46,29 @@ public class EventService {
         return events;
     }
 
+    public List<Event> fetchFilteredEvents(EventFilters eventFilters) throws TicketException {
+        if (eventFilters == null) {
+            final String errorMsg = "eventFIlters was null";
+            throw new TicketException(new Exception(errorMsg), errorMsg, TicketErrorStatus.UNPROCESSABLE_ENTITY_422);
+        }
+        List<Event> events = this.eventRepository.findFiltered(eventFilters);
+
+        return events;
+    }
+
     public Event fetchEventById(Long eventId) {
         Event event = this.eventRepository.findById(eventId);
 
         return event;
     }
 
+
+    public List<Event> fetchEventsPlayingNow() {
+        EventFilters eventFilters = new EventFilters()
+            .setFromDate(LocalDateTime.now());
+        List<Event> events = this.eventRepository.findFiltered(eventFilters);
+        return events;
+    }
 
     public EventOptionsDto fetchEventOptions() {
         List<Movie> movies = this.movieRepository.findAll().list();
@@ -145,7 +166,7 @@ public class EventService {
         this.eventRepository.delete(event);
 
         // TODO Alert Users
-        
+
         return null;
     }
 

@@ -1,18 +1,25 @@
 package aics.domain.movie;
 
-import aics.domain.movie.entities.Movie;
+import aics.domain.event.EventRepository;
+import aics.domain.event.entities.Event;
+import aics.domain.event.models.EventFilters;
 import aics.domain.movie.dtos.MovieDto;
+import aics.domain.movie.entities.Movie;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class MovieService {
     @Inject
     MovieRepository movieRepository;
+    @Inject
+    EventRepository eventRepository;
     @Inject
     MovieValidator movieValidator;
 
@@ -21,11 +28,22 @@ public class MovieService {
 
         return movies;
     }
+
     public Movie fetchMovieById(Long movieId) {
         Movie movie = this.movieRepository.findById(movieId);
 
         return movie;
     }
+
+
+    public List<Movie> fetchMoviesPlayingNow() {
+        EventFilters eventFilters = new EventFilters()
+            .setFromDate(LocalDateTime.now());
+        List<Event> eventsPlayingNow = this.eventRepository.findFiltered(eventFilters);
+        List<Movie> moviesPlayingNow = eventsPlayingNow.stream().map(Event::getMovie).collect(Collectors.toList());
+        return moviesPlayingNow;
+    }
+
 
     public String createMovie(MovieDto movieDto) {
         final String error = this.movieValidator.validateForCreateMovie(movieDto);
