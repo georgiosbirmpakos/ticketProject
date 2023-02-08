@@ -12,4 +12,5 @@ public class TicketApp implements QuarkusApplication {
         Quarkus.waitForExit();
         return 0;
     }
+
 }

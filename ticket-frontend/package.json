@@ -31,8 +31,8 @@
     },
     "scripts": {
         "start": "dotenv -e .env.development react-scripts start",
-        "build:dev": "dotenv -e .env.development react-scripts build",
-        "build:prod": "dotenv -e .env.production react-scripts build",
+        "build:dev": "dotenv -e .env.development react-scripts build && mv build/* ../ticket-backend/src/main/resources/META-INF/resources",
+        "build:prod": "dotenv -e .env.production react-scripts build && mv build/* ../ticket-backend/src/main/resources/META-INF/resources",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
