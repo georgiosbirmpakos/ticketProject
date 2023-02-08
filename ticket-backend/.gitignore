@@ -40,4 +40,4 @@ nb-configuration.xml
 .env
 
 # react built app
-#src/main/resources/META-INF/resources
+src/main/resources/META-INF/resources
