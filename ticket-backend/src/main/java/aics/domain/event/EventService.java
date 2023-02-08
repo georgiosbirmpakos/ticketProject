@@ -2,6 +2,7 @@ package aics.domain.event;
 
 import aics.domain.event.dtos.EventDto;
 import aics.domain.event.dtos.EventOptionsDto;
+import aics.domain.event.dtos.EventsFilterOptionsDto;
 import aics.domain.event.entities.Event;
 import aics.domain.event.models.EventFilters;
 import aics.domain.hall.HallRepository;
@@ -9,7 +10,10 @@ import aics.domain.hall.SeatRepository;
 import aics.domain.hall.entities.Hall;
 import aics.domain.hall.entities.Seat;
 import aics.domain.movie.MovieRepository;
+import aics.domain.movie.MovieService;
 import aics.domain.movie.entities.Movie;
+import aics.domain.provider.ProviderRepository;
+import aics.domain.provider.entities.Provider;
 import aics.domain.ticket.TicketRepository;
 import aics.domain.ticket.entities.Ticket;
 import aics.infrastructure.core.LabelValue;
@@ -34,11 +38,15 @@ public class EventService {
     @Inject
     HallRepository hallRepository;
     @Inject
+    ProviderRepository providerRepository;
+    @Inject
     TicketRepository ticketRepository;
     @Inject
     SeatRepository seatRepository;
     @Inject
     EventValidator eventValidator;
+    @Inject
+    MovieService movieService;
 
     public List<Event> fetchAllEvents() {
         List<Event> events = this.eventRepository.findAll().list();
@@ -50,6 +58,10 @@ public class EventService {
         if (eventFilters == null) {
             final String errorMsg = "eventFIlters was null";
             throw new TicketException(new Exception(errorMsg), errorMsg, TicketErrorStatus.UNPROCESSABLE_ENTITY_422);
+        }
+        LocalDateTime currentDate = LocalDateTime.now();
+        if (eventFilters.getFromDate() != null && currentDate.isAfter(eventFilters.getFromDate())) {
+            eventFilters.setFromDate(currentDate);
         }
         List<Event> events = this.eventRepository.findFiltered(eventFilters);
 
@@ -84,6 +96,29 @@ public class EventService {
         return new EventOptionsDto()
             .setMoviesRefs(moviesRefs)
             .setHallsRefs(hallsRefs);
+    }
+
+
+    public EventsFilterOptionsDto fetchEventsFilterOptions() {
+        List<Movie> movies = this.movieService.fetchMoviesPlayingNow();
+        List<LabelValue<Long>> moviesRefs = new ArrayList<>();
+        moviesRefs.add(new LabelValue<Long>("ΟΛΕΣ", 0L));
+        moviesRefs.addAll(CollectionUtils.isNotEmpty(movies)
+            ? movies.stream().map((movie -> new LabelValue<Long>(movie.getName(), movie.getMovieId()))).toList()
+            : new ArrayList<>()
+        );
+
+        List<Provider> providers = this.providerRepository.findAll().list();
+        List<LabelValue<Long>> providersRefs = new ArrayList<>();
+        providersRefs.add(new LabelValue<Long>("ΟΛΑ", 0L));
+        providersRefs.addAll(CollectionUtils.isNotEmpty(providers)
+            ? providers.stream().map((provider -> new LabelValue<Long>(provider.getName(), provider.getProviderId()))).toList()
+            : new ArrayList<>()
+        );
+
+        return new EventsFilterOptionsDto()
+            .setMoviesRefs(moviesRefs)
+            .setProvidersRefs(providersRefs);
     }
 
     public String createEvent(EventDto eventDto) {

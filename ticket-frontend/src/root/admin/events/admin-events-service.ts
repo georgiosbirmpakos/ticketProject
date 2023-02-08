@@ -2,7 +2,7 @@ import { GlobalState } from '../../../modules/core/global-state';
 import { CreateEventRequestDto, CreateEventResponseDto } from './dtos/create-event-dto';
 import { DeleteEventResponseDto } from './dtos/delete-event-dto';
 import { FetchEventDetailsResponseDto } from './dtos/fetch-event-details-dto';
-import { FetchEventOptionsResponseDto } from './dtos/fetch-event-options';
+import { FetchEventOptionsResponseDto } from './dtos/fetch-event-options-dto';
 import { FetchEventsListResponseDto } from './dtos/fetch-events-list-dto';
 import { UpdateEventRequestDto, UpdateEventResponseDto } from './dtos/update-event-dto';
 

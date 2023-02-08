@@ -84,8 +84,7 @@ export default function MovieDetailsPage() {
                                         src={`${movie.imageMimePrefix},${movie.image}`} />
 
                                     <Stack direction={'column'}>
-                                        <Typography sx={{
-                                            fontSize: 'small', marginLeft: 2,
+                                        <Typography sx={{movieIdinLeft: 2,
                                             float: 'left', display: 'block'
                                         }}>
                                             Σκηνοθεσία: {movie.directors}

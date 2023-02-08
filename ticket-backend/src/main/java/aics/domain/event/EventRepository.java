@@ -14,10 +14,21 @@ public class EventRepository implements PanacheRepository<Event> {
     public List<Event> findFiltered(EventFilters eventFilters) {
         Parameters parameters = new Parameters();
         String queryString = "1 = 1";
-
+        if (eventFilters.getMovieId() != null) {
+            parameters.and("movieId", eventFilters.getMovieId());
+            queryString += " AND (movie.movieId = :movieId)";
+        }
+        if (eventFilters.getProviderId() != null) {
+            parameters.and("providerId", eventFilters.getProviderId());
+            queryString += " AND (hall.provider.providerId = :providerId)";
+        }
         if (eventFilters.getFromDate() != null) {
             parameters.and("fromDate", eventFilters.getFromDate());
-            queryString += " AND eventDatetime > :fromDate";
+            queryString += " AND (eventDatetime >= :fromDate)";
+        }
+        if (eventFilters.getToDate() != null) {
+            parameters.and("toDate", eventFilters.getToDate());
+            queryString += " AND (eventDatetime <= :toDate)";
         }
         return find(queryString, parameters)
             .list();
