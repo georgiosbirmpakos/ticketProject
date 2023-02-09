@@ -9,9 +9,11 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { AuthService } from './modules/auth/AuthService';
 
-function main() {
+async function main() {
     GlobalState.initializeDefault();
+    await AuthService.init();
     console.log(GlobalState.instance)
 
     const root = ReactDOM.createRoot(

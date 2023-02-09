@@ -13,6 +13,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import Brightness5Icon from '@mui/icons-material/Brightness5';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { CameraRoll } from '@mui/icons-material';
+import { AuthService } from '../../../modules/auth/AuthService';
 
 // Define our custom Navbar
 const light = createTheme({
@@ -69,6 +70,11 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
     ];
     const settings: string[] = ['settings'];
 
+
+    async function onLoginClicked() {
+        await AuthService.login();
+    }
+
     return (
         <ThemeProvider theme={isDarkTheme ? dark : light}>
             <AppBar position='static'>
@@ -93,7 +99,7 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
                     </div>
                     {/* Using a stack to have the other options */}
                     <Stack direction={'row'}>
-                        <Button className="stackBtn" component={Link} to={'/login'} color='inherit'>Είσοδος/Σύνδεση</Button>
+                        <Button className="stackBtn" color='inherit' onClick={onLoginClicked}>Είσοδος/Σύνδεση</Button>
                         <Tooltip title='Change Language'>
                             <IconButton size="large" edge='end'>
                                 <LanguageIcon />
