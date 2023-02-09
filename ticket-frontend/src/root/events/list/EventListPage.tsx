@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Divider, Card, CardContent, Grid, FormControl, InputLabel, MenuItem, Select, CircularProgress, TextField, SelectChangeEvent, Button } from '@mui/material';
+import { Typography, Divider, Card, CardContent, Grid, FormControl, InputLabel, MenuItem, Select, CircularProgress, TextField, SelectChangeEvent, Button, Box } from '@mui/material';
 import Footer from '../../shared/components/Footer';
 import ScrollToTopOnMount from '../../shared/components/ScrollToTopOnMount';
 import MoviesGridLayoutComponent from '../../../modules/movie/components/MoviesGridLayoutComponent';
@@ -141,7 +141,7 @@ export default function EventListPage() {
     }
 
     return (
-        <React.Fragment>
+        <Box style={{ width: '100%', height: '100%' }}>
             <ScrollToTopOnMount />
             {options && events
                 ? (
@@ -221,6 +221,6 @@ export default function EventListPage() {
                     <CircularProgress />
                 )}
 
-        </React.Fragment >
+        </Box >
     );
 }

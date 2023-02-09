@@ -17,9 +17,10 @@ export function createRouter() {
     const AdminHallsPageLazy = React.lazy(() => import('./root/admin/halls/AdminHallsPage'));
     const AdminMoviesPageLazy = React.lazy(() => import('./root/admin/movies/AdminMoviesPage'));
     const AdminUsersPageLazy = React.lazy(() => import('./root/admin/users/AdminUsersPage'));
-    const LoginPageLazy = React.lazy(() => import('./root/shared/LoginPage'));
-    const SignUpPageLazy = React.lazy(() => import('./root/shared/SignUpPage'));
-    const ErrorPage = React.lazy(() => import('./root/shared/ErrorPage'));
+    const LoginPageLazy = React.lazy(() => import('./root/account/LoginPage'));
+    const AccountPageLazy = React.lazy(() => import('./root/account/AccountPage'));
+    const SignUpPageLazy = React.lazy(() => import('./root/account/SignUpPage'));
+    const ErrorPage = React.lazy(() => import('./root/error/ErrorPage'));
     const router = createBrowserRouter([
         {
             path: "/",
@@ -41,13 +42,17 @@ export function createRouter() {
                     element: <AboutPageLazy />
                 },
                 {
-                    path: "login",
-                    element: <LoginPageLazy />
+                    path: "account",
+                    element: <AccountPageLazy />
                 },
-                {
-                    path: "signup",
-                    element: <SignUpPageLazy />
-                },
+                // {
+                //     path: "login",
+                //     element: <LoginPageLazy />
+                // },
+                // {
+                //     path: "signup",
+                //     element: <SignUpPageLazy />
+                // },
                 {
                     path: "movies",
                     element: <MoviesPageLazy />,

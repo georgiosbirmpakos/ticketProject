@@ -14,6 +14,9 @@ import Brightness5Icon from '@mui/icons-material/Brightness5';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { CameraRoll } from '@mui/icons-material';
 import { AuthService } from '../../../modules/auth/AuthService';
+import { Global } from '@emotion/react';
+import { GlobalState } from '../../../modules/core/global-state';
+import { UserDetails } from '../../../modules/auth/user-details';
 
 // Define our custom Navbar
 const light = createTheme({
@@ -40,6 +43,7 @@ type Props = {
 const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
     const [isDark, setIsDark] = useState(prefersDarkMode);
+    const [user, setUser] = useState<UserDetails | null>(GlobalState.instance.user);
 
     const changeTheme = () => {
         setIsDarkTheme(!isDarkTheme);
@@ -75,6 +79,10 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
         await AuthService.login();
     }
 
+    async function onUserClicked() {
+        // await AuthService.login();
+    }
+
     return (
         <ThemeProvider theme={isDarkTheme ? dark : light}>
             <AppBar position='static'>
@@ -99,12 +107,27 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
                     </div>
                     {/* Using a stack to have the other options */}
                     <Stack direction={'row'}>
-                        <Button className="stackBtn" color='inherit' onClick={onLoginClicked}>Είσοδος/Σύνδεση</Button>
-                        <Tooltip title='Change Language'>
-                            <IconButton size="large" edge='end'>
-                                <LanguageIcon />
-                            </IconButton>
-                        </Tooltip>
+                        {user ? (
+                            <React.Fragment>
+                                <Button className="stackBtn" color='inherit' component={Link} to="/account">{user.name}</Button>
+                                <Tooltip title='Change Language'>
+                                    <IconButton size="large" edge='end'>
+                                        <LanguageIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <Button className="stackBtn" color='inherit' onClick={onLoginClicked}>Είσοδος/Σύνδεση</Button>
+                                <Tooltip title='Change Language'>
+                                    <IconButton size="large" edge='end'>
+                                        <LanguageIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </React.Fragment>
+                        )}
+
+
                         <Tooltip title='Change theme'>
                             <IconButton size="large" edge='end' onClick={changeTheme}>
                                 {isDarkTheme ? <Brightness5Icon /> : <DarkModeIcon />}

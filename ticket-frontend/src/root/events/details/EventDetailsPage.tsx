@@ -16,7 +16,7 @@ export default function EventDetailsPage() {
 
 
   return (
-    <React.Fragment>
+    <Box style={{ width: '100%', height: '100%' }}>
       <ScrollToTopOnMount />
       <div style={{ justifyContent: 'center', display: 'flex', marginTop: 10, marginBottom: 10 }}>
         <Box sx={{ width: '75%', border: 0.5, borderColor: '#bdbdbd', borderRadius: 5 }} justifyContent='center' display={'block'}>
@@ -90,6 +90,6 @@ export default function EventDetailsPage() {
 
         </Box>
       </div>
-    </React.Fragment>
+    </Box>
   );
 }

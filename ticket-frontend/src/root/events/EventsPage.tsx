@@ -1,16 +1,10 @@
-import React from 'react';
 import { Outlet } from 'react-router-dom';
-import MoviesGridLayoutComponent from '../../modules/movie/components/MoviesGridLayoutComponent';
-import { Divider, Typography } from '@mui/material';
-import MovieIcon from '@mui/icons-material/Movie';
-import Footer from '../shared/components/Footer';
-import MuiNavbar from '../shared/components/MuiNavbar';
-import ScrollToTopOnMount from '../shared/components/ScrollToTopOnMount';
+import { Box } from '@mui/material';
 
 export default function EventsPage() {
     return (
-        <React.Fragment>
+        <Box style={{ width: '100%', height: '100%' }}>
             <Outlet />
-        </React.Fragment>
+        </Box>
     );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CarouselComponent from './components/Carousel';
 import { Link } from 'react-router-dom'
-import { Typography, Divider, Button, CircularProgress } from '@mui/material';
+import { Typography, Divider, Button, CircularProgress, Box } from '@mui/material';
 import MoviesGridLayoutComponent from '../../modules/movie/components/MoviesGridLayoutComponent';
 import MovieIcon from '@mui/icons-material/Movie';
 import { Stack } from '@mui/system';
@@ -58,7 +58,7 @@ const HomePage = () => {
     };
 
     return (
-        <React.Fragment>
+        <Box style={{ width: '100%', height: '100%' }}>
             {isWaitingFetch
                 ? (
                     <CircularProgress />
@@ -84,7 +84,7 @@ const HomePage = () => {
                     </React.Fragment>
                 )}
 
-        </React.Fragment>
+        </Box>
     )
 }
 
