@@ -148,14 +148,26 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
                     </div>
 
 
-                    {/* Using a stack to have the other options */}
                     <Stack direction={'row'}>
-                        <Button className="stackBtn" component={Link} to={'/login'} color='inherit'>Είσοδος/Σύνδεση</Button>
-                        <Tooltip title='Change Language'>
-                            <IconButton size="large" edge='end'>
-                                <LanguageIcon />
-                            </IconButton>
-                        </Tooltip>
+                        {user ? (
+                            <React.Fragment>
+                                <Button className="stackBtn" color='inherit' component={Link} to="/account">{user.name}</Button>
+                                <Tooltip title='Change Language'>
+                                    <IconButton size="large" edge='end'>
+                                        <LanguageIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <Button className="stackBtn" color='inherit' onClick={onLoginClicked}>Είσοδος/Σύνδεση</Button>
+                                <Tooltip title='Change Language'>
+                                    <IconButton size="large" edge='end'>
+                                        <LanguageIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </React.Fragment>
+                        )}
                     </Stack>
                 </Toolbar>
             </AppBar>

@@ -18,16 +18,7 @@ const LoginPage = () => {
 
     const tabs = [
         {
-            name: 'Διαχείριση',
-            // to: '/admin/movies'
-        },
-        {
-            name: 'Λεπτομέριες',
-            // to: '/admin/providers'
-        },
-        {
-            name: 'Εισιτήρια',
-            // to: '/admin/halls'
+            name: 'ΔΙΑΧΕΙΡΙΣΗ ΛΟΓΑΡΙΑΣΜΟΥ',
         },
     ];
 
@@ -38,8 +29,6 @@ const LoginPage = () => {
                 <Tabs value={value} onChange={(e, newValue) => setValue(newValue)} aria-label="nav tabs example">
                     {tabs.map((tab, index) =>
                         <Tab key={index}
-                            // component={Link}
-                            // to={tab.to}
                             label={tab.name}
                         />
                     )}
@@ -51,16 +40,6 @@ const LoginPage = () => {
             {value === 0 && (
                 <Box sx={{ width: '100%' }}>
                     <TabManageComponent></TabManageComponent>
-                </Box>
-            )}
-            {value === 1 && (
-                <Box sx={{ width: '100%' }}>
-                    tab 1
-                </Box>
-            )}
-            {value === 2 && (
-                <Box sx={{ width: '100%' }}>
-                    tab 2
                 </Box>
             )}
         </Box>

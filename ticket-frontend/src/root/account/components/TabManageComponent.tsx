@@ -1,29 +1,52 @@
-import React from 'react'
-import { Box, Button, Stack, Typography, Input, Divider, Tab, Tabs, Grid } from '@mui/material'
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Visibility from '@mui/icons-material/Visibility';
-import GoogleIcon from '@mui/icons-material/Google'
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { Box, Button, Grid } from '@mui/material'
+import { useNavigate } from "react-router-dom";
 import { AuthService } from '../../../modules/auth/AuthService';
+import LogoutConfirmationDialogComponent from './LogoutConfirmationDialogComponent';
+import { GlobalState } from '../../../modules/core/global-state';
 
 const TabManageComponent = () => {
+    const [isLogoutConfirmationDialogOpen, setIsLogoutConfirmationDialogOpen] = useState(false);
 
-    async function onLogout() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!GlobalState.instance.user) {
+            navigate('/')
+        }
+    }, [])
+
+    async function onLogoutConfirm() {
         await AuthService.logout();
+        setIsLogoutConfirmationDialogOpen(false);
+    }
+
+    async function onAccountManagement() {
+        await AuthService.accountManagement();
     }
 
     return (
         <Box style={{ width: '100%' }}>
-            <Grid container direction="row" padding={2}
+            <Grid container direction="row" padding={2} spacing={2}
                 justifyContent="start"
                 alignItems="center">
                 <Grid item>
-                    <Button color='error' variant='contained' onClick={onLogout}>Αποσύνδεση</Button>
+                    <Button color='info' variant='contained' onClick={onAccountManagement}>Διαχείριση Λογαριασμού</Button>
                 </Grid>
+                <Grid item>
+                    <Button color='error' variant='contained' onClick={() => setIsLogoutConfirmationDialogOpen(true)}>Αποσύνδεση</Button>
+                </Grid>
+
             </Grid>
-        </Box>
+
+            {isLogoutConfirmationDialogOpen && (
+                <LogoutConfirmationDialogComponent open={isLogoutConfirmationDialogOpen}
+                    onCancel={() => setIsLogoutConfirmationDialogOpen(false)}
+                    onConfirm={onLogoutConfirm}
+                ></LogoutConfirmationDialogComponent>
+            )}
+
+        </Box >
     )
 }
 
