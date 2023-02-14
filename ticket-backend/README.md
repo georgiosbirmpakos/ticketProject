@@ -10,7 +10,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 mvn -e io.quarkus.platform:quarkus-maven-plugin:2.15.1.Final:create \
     -DprojectGroupId=aics \
     -DprojectArtifactId=ticket-backend \
-    -Dextensions='resteasy-reactive,resteasy-reactive-jackson,hibernate-orm,hibernate-orm-panache,jdbc-h2'
+    -Dextensions='resteasy-reactive,resteasy-reactive-jackson,hibernate-orm,hibernate-orm-panache,jdbc-h2,quarkus-smallrye-openapi,quarkus-oidc,quarkus-keycloak-authorization'
 ```
 
 ## Running the application in dev mode
