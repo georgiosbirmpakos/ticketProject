@@ -53,6 +53,7 @@
         "composites": {
           "realm": [
             "offline_access",
+            "TICKET_USER",
             "uma_authorization"
           ],
           "client": {
@@ -67,24 +68,6 @@
         "attributes": {}
       },
       {
-        "id": "53469709-8139-48c1-b359-d811d6f84404",
-        "name": "SUPER_ADMIN",
-        "description": "SUPER_ADMIN",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "165328ea-0caf-45d3-a548-5020ead72f6a",
-        "attributes": {}
-      },
-      {
-        "id": "28cd2f51-af59-4b06-a697-1541bd8baf14",
-        "name": "USER",
-        "description": "USER",
-        "composite": false,
-        "clientRole": false,
-        "containerId": "165328ea-0caf-45d3-a548-5020ead72f6a",
-        "attributes": {}
-      },
-      {
         "id": "749efba3-4e8d-43d3-9ba6-08ca4a500bf2",
         "name": "offline_access",
         "description": "${role_offline-access}",
@@ -94,9 +77,18 @@
         "attributes": {}
       },
       {
-        "id": "3d90d858-8e21-490f-b901-25e7f9f30b2b",
-        "name": "ADMIN",
-        "description": "ADMIN",
+        "id": "fbed7220-bdcf-4f37-b78c-5aef217bb8da",
+        "name": "TICKET_ADMIN",
+        "description": "TICKET_ADMIN",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "165328ea-0caf-45d3-a548-5020ead72f6a",
+        "attributes": {}
+      },
+      {
+        "id": "e6e7b843-fdf0-4f65-9a12-05f24f48a430",
+        "name": "TICKET_USER",
+        "description": "TICKET_USER",
         "composite": false,
         "clientRole": false,
         "containerId": "165328ea-0caf-45d3-a548-5020ead72f6a",
@@ -327,6 +319,16 @@
       ],
       "ticket": [],
       "security-admin-console": [],
+      "ticket-backend": [
+        {
+          "id": "e54f452d-05b0-4db9-be74-51c9e4517390",
+          "name": "uma_protection",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "344163e7-48dd-4cb7-8eda-23e60de69204",
+          "attributes": {}
+        }
+      ],
       "admin-cli": [],
       "account-console": [],
       "broker": [
@@ -477,6 +479,29 @@
   "webAuthnPolicyPasswordlessCreateTimeout": 0,
   "webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister": false,
   "webAuthnPolicyPasswordlessAcceptableAaguids": [],
+  "users": [
+    {
+      "id": "14605a09-053d-4844-9fb9-56c1e5cd896b",
+      "createdTimestamp": 1676405936455,
+      "username": "service-account-ticket-backend",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "serviceAccountClientId": "ticket-backend",
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-ticket"
+      ],
+      "clientRoles": {
+        "ticket-backend": [
+          "uma_protection"
+        ]
+      },
+      "notBefore": 0,
+      "groups": []
+    }
+  ],
   "scopeMappings": [
     {
       "clientScope": "offline_access",
@@ -828,6 +853,149 @@
         "offline_access",
         "microprofile-jwt"
       ]
+    },
+    {
+      "id": "344163e7-48dd-4cb7-8eda-23e60de69204",
+      "clientId": "ticket-backend",
+      "name": "ticket-backend",
+      "description": "ticket-backend",
+      "rootUrl": "http://localhost:8080",
+      "adminUrl": "",
+      "baseUrl": "http://localhost:8080",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "**********",
+      "redirectUris": [
+        "http://localhost:8080/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8080/*"
+      ],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": true,
+      "publicClient": false,
+      "frontchannelLogout": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "oidc.ciba.grant.enabled": "false",
+        "client.secret.creation.time": "1676405936",
+        "backchannel.logout.session.required": "true",
+        "post.logout.redirect.uris": "http://localhost:8080",
+        "display.on.consent.screen": "false",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "protocolMappers": [
+        {
+          "id": "7aa83f80-f031-465d-bd2a-1f12b5227b31",
+          "name": "Client IP Address",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientAddress",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientAddress",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "37755bc9-2363-4318-8b1d-a69935265337",
+          "name": "Client ID",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientId",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientId",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "3e5723a7-17fd-4df5-b813-441d71150441",
+          "name": "Client Host",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientHost",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientHost",
+            "jsonType.label": "String"
+          }
+        }
+      ],
+      "defaultClientScopes": [
+        "web-origins",
+        "acr",
+        "roles",
+        "profile",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ],
+      "authorizationSettings": {
+        "allowRemoteResourceManagement": true,
+        "policyEnforcementMode": "ENFORCING",
+        "resources": [
+          {
+            "name": "Default Resource",
+            "type": "urn:ticket-backend:resources:default",
+            "ownerManagedAccess": false,
+            "attributes": {},
+            "_id": "af596c7a-3e3b-41f7-8a54-b85c035056b1",
+            "uris": [
+              "/*"
+            ]
+          }
+        ],
+        "policies": [
+          {
+            "id": "5ba6d97a-b4b8-4cd5-8085-a5820cafcb0a",
+            "name": "Default Policy",
+            "description": "A policy that grants access only for users within this realm",
+            "type": "js",
+            "logic": "POSITIVE",
+            "decisionStrategy": "AFFIRMATIVE",
+            "config": {
+              "code": "// by default, grants any permission associated with this policy\n$evaluation.grant();\n"
+            }
+          },
+          {
+            "id": "0d4079c5-dbc8-4c9e-baa2-8ae5c0515c32",
+            "name": "Default Permission",
+            "description": "A permission that applies to the default resource type",
+            "type": "resource",
+            "logic": "POSITIVE",
+            "decisionStrategy": "UNANIMOUS",
+            "config": {
+              "defaultResourceType": "urn:ticket-backend:resources:default",
+              "applyPolicies": "[\"Default Policy\"]"
+            }
+          }
+        ],
+        "scopes": [],
+        "decisionStrategy": "UNANIMOUS"
+      }
     }
   ],
   "clientScopes": [
