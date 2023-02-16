@@ -1,5 +1,6 @@
 package aics.server.api.admin.halls;
 
+import aics.domain.user.RoleEnum;
 import aics.infrastructure.errors.TicketException;
 import aics.server.api.admin.admin_shared.AdminConstants;
 import aics.server.api.admin.halls.dtos.*;
@@ -7,12 +8,14 @@ import io.quarkus.logging.Log;
 import org.jboss.resteasy.reactive.RestPath;
 import org.jboss.resteasy.reactive.RestResponse;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 
 @Path(AdminConstants.ADMIN_PATH + "/halls")
+@RolesAllowed(RoleEnum.Values.TICKET_ADMIN)
 public class HallsController {
     @Inject
     HallsActions hallsActions;

@@ -1,5 +1,6 @@
 package aics.server.api.admin.providers;
 
+import aics.domain.user.RoleEnum;
 import aics.infrastructure.errors.TicketException;
 import aics.server.api.admin.admin_shared.AdminConstants;
 import aics.server.api.admin.providers.dtos.*;
@@ -7,11 +8,13 @@ import io.quarkus.logging.Log;
 import org.jboss.resteasy.reactive.RestPath;
 import org.jboss.resteasy.reactive.RestResponse;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path(AdminConstants.ADMIN_PATH + "/providers")
+@RolesAllowed(RoleEnum.Values.TICKET_ADMIN)
 public class ProvidersController {
     @Inject
     ProvidersActions providersActions;
@@ -51,6 +54,7 @@ public class ProvidersController {
             return RestResponse.status(RestResponse.Status.INTERNAL_SERVER_ERROR, null);
         }
     }
+
     @Path("/new")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -86,6 +90,7 @@ public class ProvidersController {
             return RestResponse.status(RestResponse.Status.INTERNAL_SERVER_ERROR, null);
         }
     }
+
     @Path("/id/{id}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
