@@ -11,7 +11,7 @@ const TabManageComponent = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!GlobalState.instance.user) {
+        if (!GlobalState.instance.loggedUser) {
             navigate('/')
         }
     }, [])

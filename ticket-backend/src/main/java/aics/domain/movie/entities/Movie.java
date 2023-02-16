@@ -3,8 +3,11 @@ package aics.domain.movie.entities;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity(name = "MOVIES")
 @Getter
@@ -38,4 +41,10 @@ public class Movie {
     private String trailerSrcUrl;
     @Column(name = "DURATION", nullable = false, length = 255)
     private int duration;
+    @Column(name = "CREATED_ON", nullable = false)
+    @CreationTimestamp
+    private LocalDateTime createdOn;
+    @Column(name = "UPDATED_ON", nullable = false)
+    @UpdateTimestamp
+    private LocalDateTime updatedOn;
 }

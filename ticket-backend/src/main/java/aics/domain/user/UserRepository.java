@@ -4,15 +4,16 @@ import aics.domain.user.entities.User;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;
+import java.util.Optional;
 
 @ApplicationScoped
 public class UserRepository implements PanacheRepository<User> {
 
     // put your custom logic here as instance methods
 
-//    public User findByName(String name){
-//        return find("name", name).firstResult();
-//    }
+    public Optional<User> findByName(String name) {
+        return find("name", name).stream().findFirst();
+    }
 //
 //    public List<Person> findAlive(){
 //        return list("status", Status.Alive);

@@ -4,10 +4,11 @@ import aics.domain.provider.entities.Provider;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity(name = "HALLS")
 @Getter
@@ -26,6 +27,12 @@ public class Hall {
     private int seatsRows;
     @Column(name = "SEATS_COLUMNS", nullable = false)
     private int seatsColumns;
+    @Column(name = "CREATED_ON", nullable = false)
+    @CreationTimestamp
+    private LocalDateTime createdOn;
+    @Column(name = "UPDATED_ON", nullable = false)
+    @UpdateTimestamp
+    private LocalDateTime updatedOn;
 
     // ASSOCIATIONS
     @ManyToOne

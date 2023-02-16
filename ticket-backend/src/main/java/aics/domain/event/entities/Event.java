@@ -6,6 +6,8 @@ import aics.domain.ticket.entities.Ticket;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -29,6 +31,12 @@ public class Event {
     private String description;
     @Column(name = "EVENT_PRICE", nullable = false, precision = 10, scale = 2)
     private Double eventPrice;
+    @Column(name = "CREATED_ON", nullable = false)
+    @CreationTimestamp
+    private LocalDateTime createdOn;
+    @Column(name = "UPDATED_ON", nullable = false)
+    @UpdateTimestamp
+    private LocalDateTime updatedOn;
 
     // ASSOCIATIONS
     @ManyToOne

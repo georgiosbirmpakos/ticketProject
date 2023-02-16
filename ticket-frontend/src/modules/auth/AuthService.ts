@@ -1,7 +1,8 @@
 import Keycloak, { KeycloakError, KeycloakPromise } from 'keycloak-js';
 import { EnvConfig } from '../core/env-config';
 import { GlobalState } from '../core/global-state';
-import { UserDetails } from './user-details';
+import { FetchLoggedUserDetailsDto } from './dtos/fetch-logged-user-details-dto';
+import { LoggedUserDetails } from './logged-user-details';
 
 export class AuthService {
     static async init(): Promise<KeycloakPromise<boolean, KeycloakError>> {
@@ -49,21 +50,27 @@ export class AuthService {
             if (kc.realmAccess?.roles) {
                 roles = kc.realmAccess.roles
             }
-            const userDetails = new UserDetails({
-                sub: kc.idTokenParsed.sub,
-                email: kc.idTokenParsed['email'],
-                givenName: kc.idTokenParsed['given_name'],
-                familyName: kc.idTokenParsed['family_name'],
-                name: kc.idTokenParsed['name'],
-                roles: roles
-            });
-            GlobalState.instance.user = userDetails;
-
             GlobalState.instance.apiConsumer.defaults.headers['Authorization'] = 'Bearer ' + kc.token
+            const fetchLoggedUserDetailsDto: FetchLoggedUserDetailsDto = await this.fetchLoggedUserDetails();
+            const loggedUserDetails = fetchLoggedUserDetailsDto.loggedUserDetails;
+            GlobalState.instance.loggedUser = loggedUserDetails;
+
         } else {
             console.log('USER not loggedIn')
-            GlobalState.instance.user = null;
+            GlobalState.instance.loggedUser = null;
             delete GlobalState.instance.apiConsumer.defaults.headers['Authorization'];
         }
+    }
+
+    static async fetchLoggedUserDetails(): Promise<FetchLoggedUserDetailsDto> {
+        const apiConsumer = GlobalState.instance.apiConsumer;
+        const fetchLoggedUserDetailsUrl = '/general/logged-user-details'
+
+        const response = await apiConsumer.get(fetchLoggedUserDetailsUrl);
+        const fetchLoggedUserDetailsDto: FetchLoggedUserDetailsDto | null = FetchLoggedUserDetailsDto.fromObj(response.data)
+        if (!fetchLoggedUserDetailsDto) {
+            throw new Error('fetchLoggedUserDetailsDto was null');
+        }
+        return fetchLoggedUserDetailsDto;
     }
 }

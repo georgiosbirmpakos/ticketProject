@@ -4,8 +4,11 @@ import aics.domain.hall.entities.Hall;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +29,12 @@ public class Provider {
     private String phone;
     @Column(name = "DESCRIPTION", nullable = false, length = 255)
     private String description;
+    @Column(name = "CREATED_ON", nullable = false)
+    @CreationTimestamp
+    private LocalDateTime createdOn;
+    @Column(name = "UPDATED_ON", nullable = false)
+    @UpdateTimestamp
+    private LocalDateTime updatedOn;
 
     // ASSOCIATIONS
     @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY)

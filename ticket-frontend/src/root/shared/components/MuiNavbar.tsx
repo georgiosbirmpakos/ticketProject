@@ -16,7 +16,7 @@ import { CameraRoll } from '@mui/icons-material';
 import { AuthService } from '../../../modules/auth/AuthService';
 import { Global } from '@emotion/react';
 import { GlobalState } from '../../../modules/core/global-state';
-import { UserDetails } from '../../../modules/auth/user-details';
+import { LoggedUserDetails } from '../../../modules/auth/logged-user-details';
 
 // Define our custom Navbar
 const light = createTheme({
@@ -43,7 +43,7 @@ type Props = {
 const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
     const [isDark, setIsDark] = useState(prefersDarkMode);
-    const [user, setUser] = useState<UserDetails | null>(GlobalState.instance.user);
+    const [loggedUser, setLogged] = useState<LoggedUserDetails | null>(GlobalState.instance.loggedUser);
 
     const changeTheme = () => {
         setIsDarkTheme(!isDarkTheme);
@@ -107,9 +107,9 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
                     </div>
                     {/* Using a stack to have the other options */}
                     <Stack direction={'row'}>
-                        {user ? (
+                        {loggedUser ? (
                             <React.Fragment>
-                                <Button className="stackBtn" color='inherit' component={Link} to="/account">{user.name}</Button>
+                                <Button className="stackBtn" color='inherit' component={Link} to="/account">{loggedUser.fullName}</Button>
                                 <Tooltip title='Change Language'>
                                     <IconButton size="large" edge='end'>
                                         <LanguageIcon />
@@ -149,9 +149,9 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
 
 
                     <Stack direction={'row'}>
-                        {user ? (
+                        {loggedUser ? (
                             <React.Fragment>
-                                <Button className="stackBtn" color='inherit' component={Link} to="/account">{user.name}</Button>
+                                <Button className="stackBtn" color='inherit' component={Link} to="/account">{loggedUser.fullName}</Button>
                                 <Tooltip title='Change Language'>
                                     <IconButton size="large" edge='end'>
                                         <LanguageIcon />

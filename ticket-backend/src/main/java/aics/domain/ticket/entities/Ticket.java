@@ -6,6 +6,8 @@ import aics.domain.user.entities.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,6 +25,12 @@ public class Ticket {
     private LocalDateTime dateOfBooking;
     @Column(name = "DESCRIPTION", nullable = true, length = 255)
     private String description;
+    @Column(name = "CREATED_ON", nullable = false)
+    @CreationTimestamp
+    private LocalDateTime createdOn;
+    @Column(name = "UPDATED_ON", nullable = false)
+    @UpdateTimestamp
+    private LocalDateTime updatedOn;
 
     // ASSOCIATIONS
     @ManyToOne

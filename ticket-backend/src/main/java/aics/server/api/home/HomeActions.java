@@ -32,6 +32,7 @@ public class HomeActions {
         System.out.println("THANOS_principal: " + principal);
         System.out.println("THANOS_principal_name: " + (principal != null ? principal.getName() : ""));
         System.out.println("THANOS_roles: " + this.authService.getRoles());
+        this.authService.getLoggedUserDetails();
 
         FetchMoviesPlayingNowResponseDto fetchMoviesPlayingNowResponseDto = new FetchMoviesPlayingNowResponseDto();
         List<Movie> moviesPlayingNow = this.movieService.fetchMoviesPlayingNow();
