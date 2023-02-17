@@ -7,6 +7,7 @@ import aics.domain.event.entities.Event;
 import aics.domain.event.models.EventFilters;
 import aics.infrastructure.errors.TicketErrorStatus;
 import aics.infrastructure.errors.TicketException;
+import aics.server.api.admin.events.dtos.FetchEventDetailsResponseDto;
 import aics.server.api.events.dtos.FetchEventsFilterOptionsDto;
 import aics.server.api.events.dtos.FetchEventsFilteredRequestDto;
 import aics.server.api.events.dtos.FetchEventsFilteredResponseDto;
@@ -55,5 +56,15 @@ public class EventsActions {
         return fetchEventsFilterOptionsDto;
     }
 
+    @Transactional()
+    public FetchEventDetailsResponseDto doFetchEventDetails(Long eventId) throws TicketException {
+        FetchEventDetailsResponseDto fetchEventDetailsResponseDto = new FetchEventDetailsResponseDto();
+        Log.info("Start EventsActions.doFetchEventDetails");
+        Event event = this.eventService.fetchEventById(eventId);
+        EventDto eventDto = EventDto.fromEvent(event);
+        fetchEventDetailsResponseDto.setEvent(eventDto);
+        Log.info("End EventsActions.doFetchEventDetails");
+        return fetchEventDetailsResponseDto;
+    }
 
 }

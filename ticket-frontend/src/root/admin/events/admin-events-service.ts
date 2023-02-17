@@ -21,9 +21,9 @@ export class AdminEventsService {
         return fetchProvidersListResponseDto;
     }
 
-    static async fetchEventDetails(hallId: number): Promise<FetchEventDetailsResponseDto> {
+    static async fetchEventDetails(eventId: number): Promise<FetchEventDetailsResponseDto> {
         const apiConsumer = GlobalState.instance.apiConsumer;
-        const fetchEventDetailsUrl = '/admin/events/details/' + hallId;
+        const fetchEventDetailsUrl = '/admin/events/details/' + eventId;
 
         const response = await apiConsumer.get(fetchEventDetailsUrl);
         const fetchEventDetailsResponseDto: FetchEventDetailsResponseDto | null = FetchEventDetailsResponseDto.fromObj(response.data)
@@ -69,9 +69,9 @@ export class AdminEventsService {
         return updateEventResponseDto;
     }
 
-    static async deleteEvent(hallId: number | null): Promise<DeleteEventResponseDto> {
+    static async deleteEvent(eventId: number | null): Promise<DeleteEventResponseDto> {
         const apiConsumer = GlobalState.instance.apiConsumer;
-        const deleteEventUrl = '/admin/events/id/' + hallId;
+        const deleteEventUrl = '/admin/events/id/' + eventId;
 
         const response = await apiConsumer.delete(deleteEventUrl);
         const deleteEventResponseDto: DeleteEventResponseDto | null = DeleteEventResponseDto.fromObj(response.data)
