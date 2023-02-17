@@ -6,6 +6,7 @@ import aics.server.api.home.dtos.FetchMoviesPlayingNowResponseDto;
 import io.quarkus.logging.Log;
 import org.jboss.resteasy.reactive.RestResponse;
 
+import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path(ApiConstants.API_PATH + "/home")
+@PermitAll
 public class HomeController {
     @Inject
     HomeActions homeActions;

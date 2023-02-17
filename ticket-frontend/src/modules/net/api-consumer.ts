@@ -15,10 +15,13 @@ export function createApiConsumer(envConfig: EnvConfig): AxiosInstance {
 
     apiConsumer.interceptors.request.use(
         async (axiosRequestConfig) => {
-            await AuthService.updateToken();
-            const headers = { ...axiosRequestConfig.headers } as Partial<AxiosRequestHeaders>;
-            headers["Authorization"] = GlobalState.instance.apiConsumer.defaults.headers['Authorization'];
-            axiosRequestConfig.headers = headers;
+            const kc = GlobalState.instance.kc;
+            if (kc.authenticated) {
+                await AuthService.updateToken();
+                const headers = { ...axiosRequestConfig.headers } as Partial<AxiosRequestHeaders>;
+                headers["Authorization"] = GlobalState.instance.apiConsumer.defaults.headers['Authorization'];
+                axiosRequestConfig.headers = headers;
+            }
             return axiosRequestConfig
         },
         error => {

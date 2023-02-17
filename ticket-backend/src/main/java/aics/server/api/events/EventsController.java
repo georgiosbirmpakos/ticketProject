@@ -11,6 +11,7 @@ import io.quarkus.logging.Log;
 import org.jboss.resteasy.reactive.RestPath;
 import org.jboss.resteasy.reactive.RestResponse;
 
+import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 
 @Path(ApiConstants.API_PATH + "/events")
+@PermitAll
 public class EventsController {
     @Inject
     EventsActions eventsActions;

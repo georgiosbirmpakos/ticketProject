@@ -42,7 +42,7 @@ export class AuthService {
 
         console.log('kc.tokenParsed', kc.tokenParsed)
 
-        if (kc.idToken && kc.idTokenParsed && kc.token && kc.tokenParsed) {
+        if (kc.authenticated) {
             this.setAccessToken();
             const fetchLoggedUserDetailsDto: FetchLoggedUserDetailsDto = await this.fetchLoggedUserDetails();
             const loggedUserDetails = fetchLoggedUserDetailsDto.loggedUserDetails;
