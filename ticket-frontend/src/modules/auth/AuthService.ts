@@ -7,6 +7,7 @@ export class AuthService {
         const kc = GlobalState.instance.kc;
         const initResult = await kc.init({
             onLoad: 'check-sso',
+            redirectUri: 'http://localhost:3000',
         });
         await this.setUserDetails();
         return initResult;

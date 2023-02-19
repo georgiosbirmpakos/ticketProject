@@ -63,7 +63,7 @@ export default function EventsTableComponent(props: EventsTableComponentProps) {
             editable: true,
             sortable: false,
             renderCell: (params) => (
-                <Button component={Link} to={'/events/booking?eventId=' + params.row.eventId} variant='outlined' sx={{ ":hover": { borderColor: '#920b17', color: '#920b17' }, color: '#E63946', backgroundColor: 'white', borderColor: '#E63946', borderRadius: 20, marginLeft: 1 }} size="small">ΕΙΣΙΤΗΡΙΑ</Button>
+                <Button component={Link} to={'/events/details?eventId=' + params.row.eventId} variant='outlined' sx={{ ":hover": { borderColor: '#920b17', color: '#920b17' }, color: '#E63946', backgroundColor: 'white', borderColor: '#E63946', borderRadius: 20, marginLeft: 1 }} size="small">ΕΙΣΙΤΗΡΙΑ</Button>
             ),
         }
     ];

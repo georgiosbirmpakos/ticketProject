@@ -84,7 +84,7 @@ export function createRouter() {
                             element: <EventListPageLazy />
                         },
                         {
-                            path: "details/:id",
+                            path: "details",
                             element: <EventDetailsPageLazy />
                         },
                     ]
