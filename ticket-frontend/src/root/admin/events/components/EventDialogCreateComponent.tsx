@@ -8,6 +8,7 @@ import { EventDto } from '../../../../modules/event/dtos/event-dto';
 import { EventOptionsDto } from '../../../../modules/event/dtos/event-options-dto';
 import { CreateEventRequestDto } from '../dtos/create-event-dto';
 import { DateTimePicker } from '@mui/x-date-pickers';
+import { MovieListItemDto } from '../../../../modules/movie/dtos/movie-list-item-dto';
 
 export interface EventDialogCreateComponentProps {
     open: boolean;
@@ -68,7 +69,7 @@ export default function EventDialogCreateComponent(props: EventDialogCreateCompo
                                     <Select labelId="movieRef-select-label-id"
                                         value={event.movieRef ? JSON.stringify(event.movieRef) : ''}
                                         label="Κατάστημα"
-                                        onChange={(e) => setEvent({ ...event, movieRef: LabelValue.fromObj<number>(e.target.value ? JSON.parse(e.target.value) : '') })}
+                                        onChange={(e) => setEvent({ ...event, movieRef: MovieListItemDto.fromObj(e.target.value ? JSON.parse(e.target.value) : '') })}
                                     >
                                         {options.moviesRefs.map((movieRef, index) => (
                                             <MenuItem key={index} value={JSON.stringify(movieRef)}>{movieRef.label}</MenuItem>

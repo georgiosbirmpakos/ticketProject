@@ -11,6 +11,7 @@ import aics.domain.hall.entities.Hall;
 import aics.domain.hall.entities.Seat;
 import aics.domain.movie.MovieRepository;
 import aics.domain.movie.MovieService;
+import aics.domain.movie.dtos.MovieListItemDto;
 import aics.domain.movie.entities.Movie;
 import aics.domain.provider.ProviderRepository;
 import aics.domain.provider.entities.Provider;
@@ -205,14 +206,14 @@ public class EventService {
         return null;
     }
 
-    private ImmutablePair<Movie, String> findValidMovie(LabelValue<Long> movieRef) {
+    private ImmutablePair<Movie, String> findValidMovie(MovieListItemDto movieRef) {
         if (movieRef == null) {
             return new ImmutablePair<>(null, "movieRef was null");
         }
-        if (movieRef.value() == null) {
+        if (movieRef.getMovieId() == null) {
             return new ImmutablePair<>(null, "movieRef.value was null");
         }
-        Movie movie = this.movieRepository.findById(movieRef.value());
+        Movie movie = this.movieRepository.findById(movieRef.getMovieId());
         if (movie == null) {
             return new ImmutablePair<>(null, "movie was null");
         }

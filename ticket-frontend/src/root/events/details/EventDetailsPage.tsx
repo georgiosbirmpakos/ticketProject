@@ -1,95 +1,82 @@
-import React, { useRef } from 'react';
-import { Typography, Divider, Stack, Button, Box } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
+import { Typography, Divider, Stack, Button, Box, Card, CardContent, CircularProgress, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import ReactPlayer from 'react-player';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import ScrollToTopOnMount from '../../shared/components/ScrollToTopOnMount';
+import { EventDto } from '../../../modules/event/dtos/event-dto';
+import { useSnackbar } from 'notistack';
+import { EventsDetailsService } from './events-details-service';
+import { DatePicker } from '@mui/x-date-pickers';
+import MovieCardComponent from './components/MovieCardComponent';
+import EventOtherDetailsCardComponent from './components/EventOtherDetailsCardComponent';
 
 export default function EventDetailsPage() {
-  const movieDescription = 'O Νικ Φιούρι, διευθυντής της κατασκοπευτικής οργάνωσης Α.Σ.Π.Ι.Δ.Α., στρατολογεί τους Τόνι Σταρκ, Στιβ Ρότζερς, Μπρους Μπάνερ και Θορ για τη δημιουργία μιας ομάδας με σκοπό να σταματήσουν τον αδελφό του Θορ, τον Λόκι, στην προσπάθειά του να υποτάξει τη Γη.'
-  const { id } = useParams();
+    const [searchParams] = useSearchParams();
 
-  const myRef = useRef<HTMLDivElement>(null);
-
-  const ticketClick = () => {
-    (myRef.current as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
-  };
+    const [isWaitingFetch, setIsWaitingFetch] = useState<boolean>(false);
+    const [event, setEvent] = useState<EventDto | null>(null);
+    const [currentDate, setCurrentDate] = useState<Date>(new Date());
+    const { enqueueSnackbar } = useSnackbar();
 
 
-  return (
-    <Box style={{ width: '100%', height: '100%' }}>
-      <ScrollToTopOnMount />
-      <div style={{ justifyContent: 'center', display: 'flex', marginTop: 10, marginBottom: 10 }}>
-        <Box sx={{ width: '75%', border: 0.5, borderColor: '#bdbdbd', borderRadius: 5 }} justifyContent='center' display={'block'}>
-          <Stack direction={'row'} justifyContent='space-between' alignItems='center'>
-            <Typography sx={{fontSize: 'xx-large', marginLeft: 2, fontWeight: 'bolder' }}>Movie Title {id}</Typography>
-            <Button onClick={ticketClick} variant='contained' sx={{borderRadius: 15, height: 40, width: 100, marginRight: 2 }} >ΕΙΣΙΤΗΡΙΑ</Button>
-          </Stack>
+    useEffect(() => {
+        const eventIdStr = searchParams.get('eventId');
+        const eventId = eventIdStr ? parseInt(eventIdStr) : NaN;
+        if (isNaN(eventId)) {
+            enqueueSnackbar('Η παράμετρος eventId απαιτείται για αυτή την σελίδα', { variant: 'error' });
+            return;
+        }
 
-          <Divider variant="middle" style={{ marginBottom: 10 }} />
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <ReactPlayer controls url={'https://www.youtube.com/watch?v=6ZfuNTqbHE8'} width='75%' />
+        async function loadData() {
+            setIsWaitingFetch(true);
+            setEvent(null);
+            try {
+                const fetchEventDetailsResponseDto = await EventsDetailsService.fetchEventDetails(eventId);
+                console.log('fetchMoviesListResponseDto', fetchEventDetailsResponseDto)
+                setEvent(fetchEventDetailsResponseDto.event);
+                setIsWaitingFetch(false);
+            } catch (e) {
+                console.error(e);
+                enqueueSnackbar('Αποτυχημένη εύρεση επιλογών φίλτρων', { variant: 'error' });
+            }
 
-          </div>
-          <Divider variant="middle" style={{ marginBottom: 10, marginTop: 10 }} />
+        }
 
-          <Box
-            component="img"
-            sx={{
-              height: 300,
-              width: 200,
-              maxHeight: { xs: 300, md: 300 },
-              maxWidth: { xs: 150, md: 200 },
-              float: 'left',
-              display: 'inline',
-              marginLeft: 2,
-              borderRadius: 3,
-              marginBottom: 2
 
-            }}
-            src={require('./avengers_portrait.jpg')} />
+        loadData();
+    }, [])
 
-          <Stack direction={'column'}>
-            <Typography sx={{
-              fontSize: 'small', marginLeft: 2,
-              float: 'left', display: 'block'
-            }}>
-              Σκηνοθεσία: Anthony Russo & Joe Russo</Typography>
-            <Typography sx={{ fontSize: 'small', marginLeft: 2, float: 'left' }}>Σενάριο:	ΚΡΙΣΤΟΦΕΡ ΜΑΡΚΟΥΣ & ΣΤΙΒΕΝ ΜακΦΙΛΙ</Typography>
-            <Typography sx={{ fontSize: 'small', maxWidth: { xs: 300, md: 500 }, marginLeft: 2, float: 'left' }}>Ηθοποιοί:	ΓΚΟΥΙΝΕΘ ΠΑΛΤΡΟΟΥ, ΣΚΑΡΛΕΤ ΓΙΟΧΑΝΣΟΝ, ΠΟΛ ΡΑΝΤ, ΚΡΙΣ ΕΒΑΝΣ, Chris Hemsworth, Bradley Cooper, Pom Klementieff, Dave Bautista, Tilda Swinton, ΡΟΜΠΕΡΤ ΝΤΑΟΥΝΙ ΤΖΟΥΝΙΟΡ, ΤΖΟΝ ΦΑΒΡΟ, ΣΕΜΠΑΣΤΙΑΝ ΣΤΑΝ, ΤΖΟΣ ΜΠΡΟΛΙΝ, ΤΖΕΡΕΜΙ ΡΕΝΕΡ, ΚΡΙΣ ΧΕΜΣΓΟΥΟΡΘ, ΕΒΑΝΤΖΕΛΙΝ ΛΙΛΙ, ΜΠΡΙ ΛΑΡΣΟΝ, ΕΛΙΖΑΜΠΕΘ ΟΛΣΕΝ, ΤΟΜ ΧΟΛΑΝΤ, ΜΠΡΑΝΤΛΕΪ ΚΟΥΠΕΡ, ΜΑΡΚ ΡΑΦΑΛΟ, ΤΣΑΝΤΓΟΥΙΚ ΜΠΟΟΥΖΜΑΝ, ΝΤΕΪΒ ΜΠΑΟΥΤΙΣΤΑ, ΠΟΜ ΚΛΕΜΕΝΤΙΕΦ, ΜΙΣΕΛ ΦΑΪΦΕΡ, ΤΙΛΝΤΑ ΣΟΥΪΝΤΟΝ, Elizabeth Olsen, Chris Evans</Typography>
-            <Typography sx={{
-              fontSize: 'small', marginLeft: 2,
-              float: 'left', display: 'block'
-            }}>
-              Διάρκεια:	188 λεπτά</Typography>
-            <Typography sx={{
-              fontSize: 'small', marginLeft: 2,
-              float: 'left', display: 'block'
-            }}>
-              Πρεμιέρα:	Τετάρτη, 24 Απριλίου 2019</Typography>
-            <Typography sx={{
-              fontSize: 'small', marginLeft: 2,
-              float: 'left', display: 'block'
-            }}>
-              :	ΚΑΤΑΛΛΗΛΗ ΑΝΩ ΤΩΝ 12 ΕΤΩΝ</Typography>
-Καταλληλότητα ταινίας
-          </Stack>
-          <Typography sx={{
-            fontSize: 'x-large', marginLeft: 2, fontWeight: 'bolder', clear: 'both',
-            float: 'left', display: 'block'
-          }}>ΠΕΡΙΛΗΨΗ</Typography>
-          <Divider variant="middle" style={{ marginBottom: 10, marginTop: 10, clear: 'both' }} />
-          <Typography sx={{ fontSize: 'medium', marginLeft: 2, float: 'left' }}>{movieDescription}</Typography>
+    return (
+        <Box style={{ width: '100%', height: '100%' }}>
+            <ScrollToTopOnMount />
+            {isWaitingFetch
+                ? (
+                    <CircularProgress />
+                ) : (event?.movieRef
+                    ? (
+                        <React.Fragment>
 
-          <div ref={myRef}>
-            <Typography sx={{
-              fontSize: 'x-large', marginLeft: 2, fontWeight: 'bolder', clear: 'both',
-              float: 'left', display: 'block'
-            }}>ΕΙΣΙΤΗΡΙΑ</Typography>
-            <Divider variant="middle" style={{ marginBottom: 10, marginTop: 10, clear: 'both' }} />
-          </div>
-
-        </Box>
-      </div>
-    </Box>
-  );
+                            <Grid container>
+                                <Grid item xs={12} justifyItems="center" justifyContent="center" textAlign="center">
+                                    <h2>
+                                        Εισιτήρια
+                                    </h2>
+                                </Grid>
+                                <Grid item xs={6} justifyItems="center" justifyContent="center" textAlign="center">
+                                    <MovieCardComponent style={{ margin: 2 }} movie={event.movieRef} />
+                                </Grid>
+                                <Grid item xs={6} justifyItems="center" justifyContent="center" textAlign="center">
+                                    <EventOtherDetailsCardComponent style={{ margin: 2 }} event={event} />
+                                </Grid>
+                                <Grid item xs={12} justifyItems="center" justifyContent="center" textAlign="center">
+                                    <MovieCardComponent movie={event.movieRef} />
+                                </Grid>
+                            </Grid>
+                        </React.Fragment>
+                    ) : (
+                        <p>Σφάλμα στην εύρεση προβολής</p>
+                    )
+                )}
+        </Box >
+    );
 }

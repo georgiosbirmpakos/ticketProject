@@ -1,6 +1,7 @@
 package aics.domain.event.dtos;
 
 import aics.domain.event.entities.Event;
+import aics.domain.movie.dtos.MovieListItemDto;
 import aics.domain.ticket.dtos.TicketDto;
 import aics.infrastructure.core.LabelValue;
 import lombok.Data;
@@ -19,7 +20,7 @@ public class EventDto implements Serializable {
     private LocalDateTime eventDatetime;
     private String description;
     private Double eventPrice;
-    private LabelValue<Long> movieRef;
+    private MovieListItemDto movieRef;
     private LabelValue<Long> hallRef;
     private List<TicketDto> tickets;
 
@@ -27,9 +28,6 @@ public class EventDto implements Serializable {
         if (event == null) {
             return null;
         }
-        LabelValue<Long> movieRef = event.getMovie() != null
-            ? new LabelValue<>(event.getMovie().getName(), event.getMovie().getMovieId())
-            : null;
         LabelValue<Long> hallRef = event.getHall() != null
             ? new LabelValue<>(event.getHall().getProvider().getName() + "-" + event.getHall().getName(), event.getHall().getHallId())
             : null;
@@ -39,7 +37,7 @@ public class EventDto implements Serializable {
             .setEventDatetime(event.getEventDatetime())
             .setDescription(event.getDescription())
             .setEventPrice(event.getEventPrice())
-            .setMovieRef(movieRef)
+            .setMovieRef(MovieListItemDto.fromMovie(event.getMovie()))
             .setHallRef(hallRef)
             .setTickets(event.getTickets().stream().map(TicketDto::fromTicket).collect(Collectors.toList()));
     }
