@@ -17,6 +17,8 @@ public class TicketDto implements Serializable {
 
     private LabelValue<Long> eventRef;
     private LabelValue<Long> seatRef;
+    private int seatRow;
+    private int seatColumn;
     private LabelValue<Long> userRef;
 
     public static TicketDto fromTicket(Ticket ticket) {
@@ -38,6 +40,8 @@ public class TicketDto implements Serializable {
             .setDescription(ticket.getDescription())
             .setEventRef(eventRef)
             .setSeatRef(seatRef)
+            .setSeatRow(ticket.getSeat().getSeatRow())
+            .setSeatColumn(ticket.getSeat().getSeatColumn())
             .setUserRef(userRef);
     }
 }

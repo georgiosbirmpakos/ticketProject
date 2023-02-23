@@ -6,7 +6,9 @@ export class TicketDto {
     dateOfBooking: Date | null = null;
     description: string = '';
     eventRef: LabelValue<number> | null = null;
-    eatRef: LabelValue<number> | null = null;
+    seatRef: LabelValue<number> | null = null;
+    seatRow: number = 0;
+    seatColumn: number = 0;
     userRef: LabelValue<number> | null = null;
 
     static fromObj(obj: any): TicketDto | null {
@@ -18,7 +20,9 @@ export class TicketDto {
         ticketDto.dateOfBooking = obj.dateOfBooking ? new Date(obj.dateOfBooking) : null;
         ticketDto.description = obj.description;
         ticketDto.eventRef = LabelValue.fromObj(obj.eventRef);
-        ticketDto.eatRef = LabelValue.fromObj(obj.eatRef);
+        ticketDto.seatRef = LabelValue.fromObj(obj.seatRef);
+        ticketDto.seatRow = obj.seatRow;
+        ticketDto.seatColumn = obj.seatColumn;
         ticketDto.userRef = LabelValue.fromObj(obj.userRef);
         return ticketDto;
     }

@@ -1,0 +1,30 @@
+.seatsTable {
+    /* width: 1em; */
+    table-layout: fixed;
+    /* border-radius: 2px;
+    border-color: black; */
+}
+
+.seatsTable tr {
+    /* background-color: lightgray; */
+    /* border-radius: 2px;
+    border-color: black; */
+}
+
+.seatsTable td {
+    width: 2em;
+    height: 2em;
+    background-color: lightgray;
+}
+
+.seatsTable td:hover {
+    transform: scale(1.05)
+}
+
+.seatsTable td.selected {
+    background-color: lightgreen;
+}
+
+.seatsTable td.taken {
+    background-color: red;
+}

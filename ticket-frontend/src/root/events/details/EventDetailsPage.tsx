@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Typography, Divider, Stack, Button, Box, Card, CardContent, CircularProgress, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import ReactPlayer from 'react-player';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import ScrollToTopOnMount from '../../shared/components/ScrollToTopOnMount';
 import { EventDto } from '../../../modules/event/dtos/event-dto';
 import { useSnackbar } from 'notistack';
@@ -9,6 +8,8 @@ import { EventsDetailsService } from './events-details-service';
 import { DatePicker } from '@mui/x-date-pickers';
 import MovieCardComponent from './components/MovieCardComponent';
 import EventOtherDetailsCardComponent from './components/EventOtherDetailsCardComponent';
+import TicketsMapComponent from './components/TicketsMapComponent';
+import { TicketDto } from '../../../modules/ticket/dtos/ticket-dto';
 
 export default function EventDetailsPage() {
     const [searchParams] = useSearchParams();
@@ -17,6 +18,8 @@ export default function EventDetailsPage() {
     const [event, setEvent] = useState<EventDto | null>(null);
     const [currentDate, setCurrentDate] = useState<Date>(new Date());
     const { enqueueSnackbar } = useSnackbar();
+    const [selectedTickets, setSelectedTickets] = useState<Record<number, TicketDto>>({});
+
 
 
     useEffect(() => {
@@ -56,22 +59,40 @@ export default function EventDetailsPage() {
                     ? (
                         <React.Fragment>
 
-                            <Grid container>
+                            <Grid container spacing={2} className="center">
                                 <Grid item xs={12} justifyItems="center" justifyContent="center" textAlign="center">
                                     <h2>
                                         Εισιτήρια
                                     </h2>
                                 </Grid>
-                                <Grid item xs={6} justifyItems="center" justifyContent="center" textAlign="center">
+                                <Grid item xs={6} className="center">
                                     <MovieCardComponent style={{ margin: 2 }} movie={event.movieRef} />
                                 </Grid>
-                                <Grid item xs={6} justifyItems="center" justifyContent="center" textAlign="center">
+                                <Grid item xs={6} className="center" style={{ minHeight: "100%", flexGrow: 1 }}>
                                     <EventOtherDetailsCardComponent style={{ margin: 2 }} event={event} />
                                 </Grid>
-                                <Grid item xs={12} justifyItems="center" justifyContent="center" textAlign="center">
-                                    <MovieCardComponent movie={event.movieRef} />
+                            </Grid>
+                            <br></br>
+                            <Grid container spacing={2} className="center">
+                                <Grid item padding={1} xs={6} className="center" >
+                                    <TicketsMapComponent tickets={event.tickets}
+                                        onSelectedTicketsChange={(selectedTickets) => { setSelectedTickets(selectedTickets) }} />
+                                </Grid>
+                                <Grid item padding={1} xs={6} className="center" >
+                                    <Card>
+                                        <CardContent sx={{ justifyItems: "center", justifyContent: "center", textAlign: "center" }}>
+                                            {Object.values(selectedTickets).map((ticket) => (
+                                                <div></div>
+                                            ))}
+                                            <p>{`Selected Tickets: ${Object.values(selectedTickets).length} `}</p>
+                                            <p>{`Total Cost is: ${Object.values(selectedTickets).length * event.eventPrice} €`}</p>
+                                            <Button color='primary' variant='contained' disabled={!Object.values(selectedTickets).length}>ΑΓΟΡΑ</Button>
+
+                                        </CardContent>
+                                    </Card>
                                 </Grid>
                             </Grid>
+                            <br></br>
                         </React.Fragment>
                     ) : (
                         <p>Σφάλμα στην εύρεση προβολής</p>

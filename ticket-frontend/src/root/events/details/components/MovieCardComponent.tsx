@@ -15,7 +15,8 @@ const MovieCardComponent = (props: MovieCardComponentProps) => {
         <Card style={{ ...props.style }} sx={{ ":hover": { transform: 'scale(1.05)', boxShadow: 3 }, transition: 'ease', margin: 2 }}>
             <CardMedia
                 component="img"
-                height="200"
+                height={200}
+                width="auto"
                 src={props.movie.imageMimePrefix + ',' + props.movie.image}
             />
             <CardContent>
