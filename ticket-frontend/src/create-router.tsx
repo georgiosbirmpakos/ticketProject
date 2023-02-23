@@ -8,6 +8,7 @@ export function createRouter() {
     const MoviesPageLazy = React.lazy(() => import('./root/movies/MoviesPage'));
     const MoviesListPageLazy = React.lazy(() => import('./root/movies/list/MoviesListPage'));
     const MovieDetailsPageLazy = React.lazy(() => import('./root/movies/details/MovieDetailsPage'));
+    const ProvidersPageLazy = React.lazy(() => import('./root/providers/ProvidersPage'));
     const EventsPageLazy = React.lazy(() => import('./root/events/EventsPage'));
     const EventListPageLazy = React.lazy(() => import('./root/events/list/EventListPage'));
     const EventDetailsPageLazy = React.lazy(() => import('./root/events/details/EventDetailsPage'));
@@ -70,6 +71,10 @@ export function createRouter() {
                             element: <MovieDetailsPageLazy />
                         },
                     ]
+                },
+                {
+                    path: "providers",
+                    element: <ProvidersPageLazy />,
                 },
                 {
                     path: "events",

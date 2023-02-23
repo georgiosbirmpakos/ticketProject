@@ -1,12 +1,18 @@
-.logoTypo{
+.logoTypo {
     /* color: black; */
     font: weight 500px;
     font-size: large !important;
     padding-left: 20px;
 
 }
-.stackBtn{
+
+.stackBtn {
     /* color: black !important; */
     text-transform: none !important;
     font-size: medium;
+}
+
+.selectedNav {
+    background-color: rgb(245, 245, 245);
+
 }

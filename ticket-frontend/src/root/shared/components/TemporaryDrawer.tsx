@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom';
 
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import Brightness5Icon from '@mui/icons-material/Brightness5';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 
 // label: 'Διαχείριση',
 //             to: '/admin',
@@ -60,6 +61,7 @@ export default function TemporaryDrawer({ isDark, setIsDark }: Props) {
     const routes: { [key: string]: string } = {
         'Αρχική': '/',
         'Ταινίες': '/movies',
+        'Καταστήματα': '/providers',
         'Προβολές': '/events',
         'Διαχείριση': '/admin',
         'Σχετικά': '/about'
@@ -73,12 +75,13 @@ export default function TemporaryDrawer({ isDark, setIsDark }: Props) {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Αρχική', 'Ταινίες', 'Προβολές', 'Διαχείριση', 'Σχετικά'].map((text, index) => (
+                {['Αρχική', 'Ταινίες', 'Καταστήματα', 'Προβολές', 'Διαχείριση', 'Σχετικά'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton component={Link} to={routes[text]} onClick={toggleDrawer(anchor, false)}>
                             <ListItemIcon>
                                 {text === 'Αρχική' && <ConfirmationNumberIcon />}
                                 {text === 'Ταινίες' && <MovieIcon />}
+                                {text === 'Καταστήματα' && <LocationCityIcon />}
                                 {text === 'Προβολές' && <CameraRollIcon />}
                                 {text === 'Διαχείριση' && <AdminPanelSettingsIcon />}
                                 {text === 'Σχετικά' && <InfoIcon />}

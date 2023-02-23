@@ -1,6 +1,6 @@
-import { AppBar, Toolbar, IconButton, Typography, Stack, Button, Tooltip, FormControlLabel, Switch } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Typography, Stack, Button, Tooltip } from "@mui/material";
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import React, { Dispatch, SetStateAction } from 'react'
+import React from 'react'
 import LanguageIcon from '@mui/icons-material/Language';
 import MovieIcon from '@mui/icons-material/Movie';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
@@ -14,9 +14,10 @@ import Brightness5Icon from '@mui/icons-material/Brightness5';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { CameraRoll } from '@mui/icons-material';
 import { AuthService } from '../../../modules/auth/AuthService';
-import { Global } from '@emotion/react';
 import { GlobalState } from '../../../modules/core/global-state';
 import { LoggedUserDetails } from '../../../modules/auth/logged-user-details';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import { useLocation } from 'react-router-dom'
 
 // Define our custom Navbar
 const light = createTheme({
@@ -44,6 +45,8 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
     const [isDark, setIsDark] = useState(prefersDarkMode);
     const [loggedUser, setLogged] = useState<LoggedUserDetails | null>(GlobalState.instance.loggedUser);
+    const location = useLocation();
+    console.log('location', location)
 
     const changeTheme = () => {
         setIsDarkTheme(!isDarkTheme);
@@ -60,6 +63,11 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
             label: 'Ταινίες',
             to: '/movies',
             icon: <MovieIcon />
+        },
+        {
+            label: 'Καταστήματα',
+            to: '/providers',
+            icon: <LocationCityIcon />
         },
         {
             label: 'Προβολές',
@@ -92,17 +100,18 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
                     <div>
                         {/* Icon and logo  */}
                         {navbarLeftButtonsData.map((buttonData, index) => (
-                            <IconButton key={index} size='large'
+                            <Button key={index}
+                                className={`${(buttonData.to !== "/" && location.pathname.startsWith(buttonData.to)) ? "selectedNav" : ""}`}
                                 component={Link}
                                 to={buttonData.to}
-                                edge='start'
                                 color='inherit'
-                                aria-label="logo">
+                                aria-label="logo"
+                            >
                                 {buttonData.icon}
                                 <Typography className='logoTypo' component='div'>
                                     {buttonData.label}
                                 </Typography>
-                            </IconButton>)
+                            </Button>)
                         )}
                     </div>
                     {/* Using a stack to have the other options */}
@@ -171,7 +180,7 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
                     </Stack>
                 </Toolbar>
             </AppBar>
-        </ThemeProvider>
+        </ThemeProvider >
     )
 
 }
