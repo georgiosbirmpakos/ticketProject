@@ -1,12 +1,4 @@
-import { Dialog, DialogTitle, DialogContent, Grid, FormControl, InputLabel, Select, MenuItem, TextField, DialogActions, Button } from '@mui/material';
-import { DateTimePicker } from '@mui/x-date-pickers';
-import { useSnackbar } from 'notistack';
-import { useState, useEffect } from 'react';
-import { LabelValue } from '../../../modules/core/label-value';
-import { EventDto } from '../../../modules/event/dtos/event-dto';
-import { EventOptionsDto } from '../../../modules/event/dtos/event-options-dto';
-import { AdminEventsService } from '../../admin/events/admin-events-service';
-import { CreateEventRequestDto } from '../../admin/events/dtos/create-event-dto';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 
 
 export interface LogoutConfirmationDialogComponentProps {

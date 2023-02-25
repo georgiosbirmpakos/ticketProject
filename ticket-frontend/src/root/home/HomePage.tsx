@@ -7,7 +7,6 @@ import MovieIcon from '@mui/icons-material/Movie';
 import { Stack } from '@mui/system';
 import '../shared/components/Footer.css';
 import { MovieListItemDto } from '../../modules/movie/dtos/movie-list-item-dto';
-import { AdminMoviesService } from '../admin/movies/admin-movies-service';
 import { useSnackbar } from 'notistack';
 import { HomeService } from './home-service';
 

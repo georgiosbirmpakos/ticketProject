@@ -1,4 +1,3 @@
-import { ProviderDto } from '../../../../modules/provider/provider-dto';
 
 export class DeleteProviderResponseDto {
     errors: string[] = [];

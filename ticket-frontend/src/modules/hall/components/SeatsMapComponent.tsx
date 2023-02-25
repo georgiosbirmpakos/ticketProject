@@ -1,7 +1,4 @@
-import Button from '@mui/material/Button';
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Grid, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useSnackbar } from 'notistack';
 import './SeatsMapComponent.css';
 
 export interface SeatsMapComponentProps {

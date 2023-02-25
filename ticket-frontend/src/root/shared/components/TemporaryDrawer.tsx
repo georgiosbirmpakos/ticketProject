@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -13,7 +11,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import MovieIcon from '@mui/icons-material/Movie';
 import CameraRollIcon from '@mui/icons-material/CameraRoll';
-import TheatersIcon from '@mui/icons-material/Theaters';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 import InfoIcon from '@mui/icons-material/Info';

@@ -8,7 +8,6 @@ import { EventDto } from '../../../../modules/event/dtos/event-dto';
 import { EventOptionsDto } from '../../../../modules/event/dtos/event-options-dto';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { UpdateEventRequestDto } from '../dtos/update-event-dto';
-import { MovieDto } from '../../../../modules/movie/dtos/movie-dto';
 import { MovieListItemDto } from '../../../../modules/movie/dtos/movie-list-item-dto';
 
 export interface EventDialogUpdateComponentProps {

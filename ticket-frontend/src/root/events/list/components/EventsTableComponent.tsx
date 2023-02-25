@@ -1,11 +1,9 @@
 
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { Box, Button, CardMedia, IconButton, Stack, Tooltip } from '@mui/material';
-import { Delete, Visibility, Edit } from '@mui/icons-material';
+import { Box, Button, CardMedia } from '@mui/material';
 import { LabelValue } from '../../../../modules/core/label-value';
 import { EventDto } from '../../../../modules/event/dtos/event-dto';
 import { Link } from 'react-router-dom';
-import { MovieListItemDto } from '../../../../modules/movie/dtos/movie-list-item-dto';
 import React from 'react';
 
 export interface EventsTableComponentProps {

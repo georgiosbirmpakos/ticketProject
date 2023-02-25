@@ -2,7 +2,6 @@ import React from 'react'
 import { Grid } from '@mui/material'
 import MovieCardComponent from './MovieCardComponent'
 import { MovieListItemDto } from '../dtos/movie-list-item-dto'
-import { PropaneSharp } from '@mui/icons-material'
 
 export interface MoviesGridLayoutComponentProps {
     movies: MovieListItemDto[]

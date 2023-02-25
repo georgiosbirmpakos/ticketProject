@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { MovieDto } from '../../../modules/movie/dtos/movie-dto';
-import { AdminMoviesService } from '../movies/admin-movies-service';
 
 export default function AdminUsersPage() {
     const [movies, setMovies] = useState<MovieDto[]>([]);

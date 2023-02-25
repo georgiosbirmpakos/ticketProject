@@ -3,7 +3,6 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Grid, Men
 import { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { HallDto } from '../../../../modules/hall/hall-dto';
-import { CreateHallRequestDto } from '../dtos/create-hall-dto';
 import { AdminHallsService } from '../admin-halls-service';
 import { LabelValue } from '../../../../modules/core/label-value';
 import { HallOptionsDto } from '../../../../modules/hall/hall-options-dto';

@@ -1,4 +1,3 @@
-import { HallListItemDto } from '../../../../modules/hall/hall-list-item-dto';
 import { HallOptionsDto } from '../../../../modules/hall/hall-options-dto';
 
 export class FetchHallsOptionsResponseDto {

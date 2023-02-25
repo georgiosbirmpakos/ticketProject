@@ -1,6 +1,5 @@
 import { EventDto } from '../../../../modules/event/dtos/event-dto';
 import { EventFilters } from '../../../../modules/event/dtos/event-filters';
-import { EventsFilterOptionsDto } from '../../../../modules/event/dtos/events-filter-options-dto';
 
 export class FetchEventsFilteredResponseDto {
     events: EventDto[] = [];

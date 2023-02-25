@@ -1,4 +1,4 @@
-import axios, { AxiosHeaders, AxiosInstance, AxiosRequestHeaders } from 'axios';
+import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
 import { AuthService } from '../auth/AuthService';
 import { EnvConfig } from '../core/env-config';
 import { GlobalState } from '../core/global-state';

@@ -1,5 +1,4 @@
 import { ProviderDto } from '../../../../modules/provider/provider-dto';
-import { ProviderListItemDto } from '../../../../modules/provider/provider-list-item-dto';
 
 export class FetchProviderDetailsResponseDto {
     provider: ProviderDto | null = null;

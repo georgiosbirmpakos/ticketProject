@@ -1,6 +1,5 @@
 import { LabelValue } from '../../core/label-value';
 import { TypeUtils } from '../../core/type-utils';
-import { MovieDto } from '../../movie/dtos/movie-dto';
 import { MovieListItemDto } from '../../movie/dtos/movie-list-item-dto';
 import { TicketDto } from '../../ticket/dtos/ticket-dto';
 

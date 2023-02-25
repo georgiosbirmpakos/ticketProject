@@ -1,13 +1,10 @@
 import React from 'react'
-import {Box, Button, Stack, Typography, Input, Divider, Theme} from '@mui/material'
-import OutlinedInput from '@mui/material/OutlinedInput';
+import {Box, Button, Stack, Typography, Input, Divider} from '@mui/material'
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
-import { ThemeProvider } from '@emotion/react';
 import GoogleIcon from '@mui/icons-material/Google'
-import { Link } from "react-router-dom";
 
 
 const SignUpPage = () => {const [showPassword, setShowPassword] = React.useState(false);

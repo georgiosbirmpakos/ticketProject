@@ -1,10 +1,7 @@
-import { CardHeader, Grid, TextField } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import { EventDto } from '../../../../modules/event/dtos/event-dto';
-import { MovieListItemDto } from '../../../../modules/movie/dtos/movie-list-item-dto';
 import { DateTimePicker } from '@mui/x-date-pickers';
 
 export interface EventOtherDetailsCardComponentProps {

@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Typography, Divider, Stack, Button, Box, Card, CardContent, CircularProgress, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Button, Box, Card, CardContent, CircularProgress, Grid } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 import ScrollToTopOnMount from '../../shared/components/ScrollToTopOnMount';
 import { EventDto } from '../../../modules/event/dtos/event-dto';
 import { useSnackbar } from 'notistack';
 import { EventsDetailsService } from './events-details-service';
-import { DateTimePicker } from '@mui/x-date-pickers';
 import MovieCardComponent from './components/MovieCardComponent';
 import EventOtherDetailsCardComponent from './components/EventOtherDetailsCardComponent';
 import TicketsMapComponent from './components/TicketsMapComponent';

@@ -1,6 +1,6 @@
 import { Box, Stack } from '@mui/system'
 import React from 'react'
-import { alpha, Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { FacebookRounded } from '@mui/icons-material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';

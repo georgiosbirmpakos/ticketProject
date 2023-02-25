@@ -1,4 +1,4 @@
-import Keycloak, { KeycloakError, KeycloakPromise } from 'keycloak-js';
+import { KeycloakError, KeycloakPromise } from 'keycloak-js';
 import { GlobalState } from '../core/global-state';
 import { FetchLoggedUserDetailsDto } from './dtos/fetch-logged-user-details-dto';
 

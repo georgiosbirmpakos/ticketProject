@@ -1,5 +1,4 @@
-import Button from '@mui/material/Button';
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Grid, MenuItem, Select, FormControl, InputLabel, Card, CardContent } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 import { useEffect, useState } from 'react';
 import './TicketsMapComponent.css';
 import { TicketDto } from '../../../../modules/ticket/dtos/ticket-dto';
