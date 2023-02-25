@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Box, Card, CardContent, CircularProgress, Grid } from '@mui/material';
+import { Button, Box, Card, CardContent, CircularProgress, Grid, Alert } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 import ScrollToTopOnMount from '../../shared/components/ScrollToTopOnMount';
 import { EventDto } from '../../../modules/event/dtos/event-dto';
@@ -9,6 +9,7 @@ import MovieCardComponent from './components/MovieCardComponent';
 import EventOtherDetailsCardComponent from './components/EventOtherDetailsCardComponent';
 import TicketsMapComponent from './components/TicketsMapComponent';
 import { TicketDto } from '../../../modules/ticket/dtos/ticket-dto';
+import { GlobalState } from '../../../modules/core/global-state';
 
 export default function EventDetailsPage() {
     const [searchParams] = useSearchParams();
@@ -17,6 +18,10 @@ export default function EventDetailsPage() {
     const [event, setEvent] = useState<EventDto | null>(null);
     const { enqueueSnackbar } = useSnackbar();
     const [selectedTickets, setSelectedTickets] = useState<Record<number, TicketDto>>({});
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(GlobalState.instance.loggedUser != null);
+
+    console.log('GlobalState.instance.loggedUser', GlobalState.instance.loggedUser)
+    console.log('isLoggedIn', isLoggedIn)
 
 
 
@@ -57,42 +62,47 @@ export default function EventDetailsPage() {
                     ? (
                         <React.Fragment>
 
-                            <Grid container spacing={2} className="center">
-                                <Grid item xs={12} justifyItems="center" justifyContent="center" textAlign="center">
+                            <Grid container spacing={2} className="center-align-stretch">
+                                <Grid item padding={1} xs={12} justifyItems="center" justifyContent="center" textAlign="center">
                                     <h2>
                                         Εισιτήρια
                                     </h2>
                                 </Grid>
-                                <Grid item xs={6} className="center">
+                                <Grid item padding={1} xs={12} sm={6} className="center">
                                     <MovieCardComponent style={{ margin: 2 }} movie={event.movieRef} />
                                 </Grid>
-                                <Grid item xs={6} className="center" style={{ minHeight: "100%", flexGrow: 1 }}>
+                                <Grid item padding={1} xs={12} sm={6} className="center">
                                     <EventOtherDetailsCardComponent style={{ margin: 2 }} event={event} />
                                 </Grid>
-                            </Grid>
-                            <br></br>
-                            <Grid container spacing={2} className="center">
-                                <Grid item padding={1} xs={6} className="center" >
+                                <Grid item padding={1} xs={12} sm={6} className="center" >
                                     <TicketsMapComponent tickets={event.tickets}
                                         onSelectedTicketsChange={(selectedTickets) => { setSelectedTickets(selectedTickets) }} />
                                 </Grid>
-                                <Grid item padding={1} xs={6} className="center" >
-                                    <Card>
+                                <Grid item padding={1} xs={12} sm={6} className="center" >
+                                    <Card sx={{ height: "100%" }}>
                                         <CardContent sx={{ justifyItems: "center", justifyContent: "center", textAlign: "center" }}>
                                             <p>{`Selected Tickets: ${Object.values(selectedTickets).length} `}</p>
                                             <p>{`Total Cost is: ${Object.values(selectedTickets).length * event.eventPrice} €`}</p>
-                                            <Button color='primary' variant='contained' disabled={!Object.values(selectedTickets).length}>ΑΓΟΡΑ</Button>
+                                            <Button color='primary' variant='contained' disabled={!isLoggedIn || !Object.values(selectedTickets).length}>ΑΓΟΡΑ</Button>
+                                            {!isLoggedIn && (
+                                                <Alert severity="warning">Πρέπει να συνδεθείς για να μπορείς να αγοράσεις εισιτήρια</Alert>
+                                            )}
 
                                         </CardContent>
                                     </Card>
                                 </Grid>
                             </Grid>
                             <br></br>
+                            <Grid container spacing={2} className="center">
+
+                            </Grid>
+                            <br></br>
                         </React.Fragment>
                     ) : (
                         <p>Σφάλμα στην εύρεση προβολής</p>
                     )
-                )}
+                )
+            }
         </Box >
     );
 }

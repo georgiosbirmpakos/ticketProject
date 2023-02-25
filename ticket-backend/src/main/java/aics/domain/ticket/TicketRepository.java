@@ -16,4 +16,10 @@ public class TicketRepository implements PanacheRepository<Ticket> {
         return this.delete("ticketId in :ticketsIds", parameters);
     }
 
+    public List<Ticket> findByIds(List<Long> ticketsIds) {
+        Parameters parameters = new Parameters();
+        String queryString = "ticketId in :ticketsIds";
+        parameters.and("ticketsIds", ticketsIds);
+        return find(queryString, parameters).list();
+    }
 }

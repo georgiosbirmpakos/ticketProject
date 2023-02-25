@@ -24,3 +24,11 @@ code {
     align-items: center;
     text-align: center;
 }
+
+.center-align-stretch {
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: stretch;
+    text-align: center;
+}

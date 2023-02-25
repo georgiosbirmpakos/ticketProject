@@ -13,7 +13,7 @@ export interface EventOtherDetailsCardComponentProps {
 const EventOtherDetailsCardComponent = ({ event, style }: EventOtherDetailsCardComponentProps) => {
 
     return (
-        <Card style={{ ...style }} sx={{ ":hover": { transform: 'scale(1.05)', boxShadow: 3 }, height: "100%", transition: 'ease', borderRadius: 5, margin: 2 }}>
+        <Card style={{ ...style }} sx={{ height: "100%", transition: 'ease', borderRadius: 5, margin: 2 }}>
             <h4>
                 Πληροφορίες Προβολής
             </h4>

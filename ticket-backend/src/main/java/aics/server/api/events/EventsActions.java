@@ -5,12 +5,12 @@ import aics.domain.event.dtos.EventDto;
 import aics.domain.event.dtos.EventsFilterOptionsDto;
 import aics.domain.event.entities.Event;
 import aics.domain.event.models.EventFilters;
+import aics.domain.ticket.TicketService;
+import aics.domain.ticket.entities.Ticket;
 import aics.infrastructure.errors.TicketErrorStatus;
 import aics.infrastructure.errors.TicketException;
 import aics.server.api.admin.events.dtos.FetchEventDetailsResponseDto;
-import aics.server.api.events.dtos.FetchEventsFilterOptionsDto;
-import aics.server.api.events.dtos.FetchEventsFilteredRequestDto;
-import aics.server.api.events.dtos.FetchEventsFilteredResponseDto;
+import aics.server.api.events.dtos.*;
 import io.quarkus.logging.Log;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -24,6 +24,8 @@ import java.util.List;
 public class EventsActions {
     @Inject
     EventService eventService;
+    @Inject
+    TicketService ticketService;
 
     @Transactional()
     public FetchEventsFilteredResponseDto doFetchEventsFiltered(FetchEventsFilteredRequestDto fetchEventsFilteredRequestDto) throws TicketException {
@@ -65,6 +67,18 @@ public class EventsActions {
         fetchEventDetailsResponseDto.setEvent(eventDto);
         Log.info("End EventsActions.doFetchEventDetails");
         return fetchEventDetailsResponseDto;
+    }
+
+
+    @Transactional()
+    public BookTicketResponseDto doBookTicket(BookTicketRequestDto bookTicketRequestDto) throws TicketException {
+        BookTicketResponseDto bookTicketResponseDto = new BookTicketResponseDto();
+        Log.info("Start EventsActions.doBookTicket");
+        List<Ticket> tickets = this.ticketService.fetchTicketsByIds(bookTicketRequestDto.getTicketsIds());
+//        EventDto eventDto = EventDto.fromEvent(event);
+//        bookTicketResponseDto.setEvent(eventDto);
+        Log.info("End EventsActions.doBookTicket");
+        return bookTicketResponseDto;
     }
 
 }

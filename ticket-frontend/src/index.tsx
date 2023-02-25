@@ -14,7 +14,6 @@ import { AuthService } from './modules/auth/AuthService';
 async function main() {
     GlobalState.initializeDefault();
     await AuthService.init();
-    console.log(GlobalState.instance)
 
     const root = ReactDOM.createRoot(
         document.getElementById('root') as HTMLElement
