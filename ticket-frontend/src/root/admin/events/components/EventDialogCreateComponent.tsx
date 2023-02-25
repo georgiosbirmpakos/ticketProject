@@ -57,7 +57,7 @@ export default function EventDialogCreateComponent(props: EventDialogCreateCompo
     return (
         <Dialog fullWidth={true} maxWidth={false} onClose={props.onCancel} open={props.open}>
             <DialogTitle id="alert-dialog-title">
-                Προσθήκη Αίθουσας
+                Προσθήκη Προβολής
             </DialogTitle>
             <DialogContent>
                 {event && options && (
@@ -72,7 +72,7 @@ export default function EventDialogCreateComponent(props: EventDialogCreateCompo
                                         onChange={(e) => setEvent({ ...event, movieRef: MovieListItemDto.fromObj(e.target.value ? JSON.parse(e.target.value) : '') })}
                                     >
                                         {options.moviesRefs.map((movieRef, index) => (
-                                            <MenuItem key={index} value={JSON.stringify(movieRef)}>{movieRef.label}</MenuItem>
+                                            <MenuItem key={index} value={JSON.stringify(movieRef)}>{movieRef.name}</MenuItem>
                                         ))}
                                     </Select>
                                 </FormControl>

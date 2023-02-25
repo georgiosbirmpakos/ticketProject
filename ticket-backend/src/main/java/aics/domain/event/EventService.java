@@ -85,8 +85,8 @@ public class EventService {
 
     public EventOptionsDto fetchEventOptions() {
         List<Movie> movies = this.movieRepository.findAll().list();
-        List<LabelValue<Long>> moviesRefs = CollectionUtils.isNotEmpty(movies)
-            ? movies.stream().map((movie -> new LabelValue<Long>(movie.getName(), movie.getMovieId()))).toList()
+        List<MovieListItemDto> moviesRefs = CollectionUtils.isNotEmpty(movies)
+            ? movies.stream().map(MovieListItemDto::fromMovie).toList()
             : new ArrayList<>();
 
         List<Hall> halls = this.hallRepository.findAll().list();

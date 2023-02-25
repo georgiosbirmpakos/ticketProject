@@ -49,7 +49,7 @@ export default function AdminPage() {
                 // console.error('unknown location: ' + location.pathname);
                 // navigate('/admin/movies');
             }
-        };
+        }
     }, [location, navigate]);
 
 

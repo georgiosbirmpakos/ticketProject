@@ -46,7 +46,6 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
     const [isDark, setIsDark] = useState(prefersDarkMode);
     const [loggedUser, setLogged] = useState<LoggedUserDetails | null>(GlobalState.instance.loggedUser);
     const location = useLocation();
-    console.log('location', location)
 
     const changeTheme = () => {
         setIsDarkTheme(!isDarkTheme);

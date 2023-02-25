@@ -22,10 +22,9 @@ import { Link } from 'react-router-dom';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import Brightness5Icon from '@mui/icons-material/Brightness5';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
+import { useLocation } from 'react-router-dom'
 
-// label: 'Διαχείριση',
-//             to: '/admin',
-//             icon: <AdminPanelSettingsIcon />
+import './TemporaryDrawer.css';
 
 type Anchor = 'left';
 type Props = {
@@ -43,6 +42,7 @@ export default function TemporaryDrawer({ isDark, setIsDark }: Props) {
     const [state, setState] = React.useState({
         left: false
     });
+    const location = useLocation();
 
     const toggleDrawer =
         (anchor: Anchor, open: boolean) =>
@@ -77,7 +77,9 @@ export default function TemporaryDrawer({ isDark, setIsDark }: Props) {
             <List>
                 {['Αρχική', 'Ταινίες', 'Καταστήματα', 'Προβολές', 'Διαχείριση', 'Σχετικά'].map((text, index) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton component={Link} to={routes[text]} onClick={toggleDrawer(anchor, false)}>
+                        <ListItemButton component={Link} to={routes[text]} onClick={toggleDrawer(anchor, false)}
+                            className={`${(routes[text] !== "/" && location.pathname.startsWith(routes[text])) ? "selectedNav" : ""}`}
+                        >
                             <ListItemIcon>
                                 {text === 'Αρχική' && <ConfirmationNumberIcon />}
                                 {text === 'Ταινίες' && <MovieIcon />}

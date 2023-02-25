@@ -5,7 +5,7 @@ import ScrollToTopOnMount from '../../shared/components/ScrollToTopOnMount';
 import { EventDto } from '../../../modules/event/dtos/event-dto';
 import { useSnackbar } from 'notistack';
 import { EventsDetailsService } from './events-details-service';
-import { DatePicker } from '@mui/x-date-pickers';
+import { DateTimePicker } from '@mui/x-date-pickers';
 import MovieCardComponent from './components/MovieCardComponent';
 import EventOtherDetailsCardComponent from './components/EventOtherDetailsCardComponent';
 import TicketsMapComponent from './components/TicketsMapComponent';
@@ -16,7 +16,6 @@ export default function EventDetailsPage() {
 
     const [isWaitingFetch, setIsWaitingFetch] = useState<boolean>(false);
     const [event, setEvent] = useState<EventDto | null>(null);
-    const [currentDate, setCurrentDate] = useState<Date>(new Date());
     const { enqueueSnackbar } = useSnackbar();
     const [selectedTickets, setSelectedTickets] = useState<Record<number, TicketDto>>({});
 
@@ -81,9 +80,6 @@ export default function EventDetailsPage() {
                                 <Grid item padding={1} xs={6} className="center" >
                                     <Card>
                                         <CardContent sx={{ justifyItems: "center", justifyContent: "center", textAlign: "center" }}>
-                                            {Object.values(selectedTickets).map((ticket) => (
-                                                <div></div>
-                                            ))}
                                             <p>{`Selected Tickets: ${Object.values(selectedTickets).length} `}</p>
                                             <p>{`Total Cost is: ${Object.values(selectedTickets).length * event.eventPrice} €`}</p>
                                             <Button color='primary' variant='contained' disabled={!Object.values(selectedTickets).length}>ΑΓΟΡΑ</Button>

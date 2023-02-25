@@ -43,6 +43,9 @@ export default function TicketsMapComponent(props: TicketsMapComponentProps) {
     return (
         <Card>
             <CardContent sx={{ justifyItems: "center", justifyContent: "center", textAlign: "center" }}>
+                <h4>
+                    Επιλογή Εισιτηρίων
+                </h4>
                 <table className='seatsTable' style={{ justifySelf: "center", justifyItems: "center" }}>
                     <tbody>
                         {ticketsTableData.map((ticketsRow, index) => (

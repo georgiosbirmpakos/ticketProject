@@ -11,7 +11,7 @@ export class FileUtils {
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => {
-                let result = reader.result as string;
+                const result = reader.result as string;
                 const resultSplitted = result.split(',');
                 if (resultSplitted.length > 1) {
                     resolve({

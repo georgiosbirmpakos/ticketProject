@@ -1,8 +1,9 @@
 import { LabelValue } from '../../core/label-value';
 import { TypeUtils } from '../../core/type-utils';
+import { MovieListItemDto } from '../../movie/dtos/movie-list-item-dto';
 
 export class EventOptionsDto {
-    moviesRefs: LabelValue<number>[] = [];
+    moviesRefs: MovieListItemDto[] = [];
     hallsRefs: LabelValue<number>[] = [];
 
     static fromObj(obj: any): EventOptionsDto | null {
@@ -10,7 +11,7 @@ export class EventOptionsDto {
             return null;
         }
         const eventOptionsDto: EventOptionsDto = new EventOptionsDto();
-        eventOptionsDto.moviesRefs = LabelValue.listFromObjList(obj.moviesRefs);
+        eventOptionsDto.moviesRefs = MovieListItemDto.listFromObjList(obj.moviesRefs);
         eventOptionsDto.hallsRefs = LabelValue.listFromObjList(obj.hallsRefs);
         return eventOptionsDto;
     }
