@@ -32,3 +32,10 @@ code {
     align-items: stretch;
     text-align: center;
 }
+
+.selectedNav {
+    /* background-color: rgb(242, 242, 242); */
+    /* opacity: 0.7; */
+    /* text-shadow: 2px 2px; */
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 10px;
+}

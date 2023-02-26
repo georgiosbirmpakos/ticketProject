@@ -1,6 +1,7 @@
 import { KeycloakError, KeycloakPromise } from 'keycloak-js';
 import { GlobalState } from '../core/global-state';
 import { FetchLoggedUserDetailsDto } from './dtos/fetch-logged-user-details-dto';
+import { RoleEnum } from './role-enum';
 
 export class AuthService {
     static async init(): Promise<KeycloakPromise<boolean, KeycloakError>> {
@@ -72,5 +73,20 @@ export class AuthService {
             throw new Error('fetchLoggedUserDetailsDto was null');
         }
         return fetchLoggedUserDetailsDto;
+    }
+
+    static isUserAuthorizedForRoles(pageRoles: RoleEnum[]): boolean {
+        const user = GlobalState.instance.loggedUser;
+        if (!user) {
+            return false;
+        }
+        const userRoles = user.roles;
+
+        for (const userRole of userRoles) {
+            if (pageRoles.includes(userRole)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

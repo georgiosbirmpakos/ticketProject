@@ -18,6 +18,7 @@ import { GlobalState } from '../../../modules/core/global-state';
 import { LoggedUserDetailsDto } from '../../../modules/auth/logged-user-details-dto';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import { useLocation } from 'react-router-dom'
+import { RoleEnum } from '../../../modules/auth/role-enum';
 
 // Define our custom Navbar
 const light = createTheme({
@@ -72,13 +73,15 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
             label: 'Προβολές',
             to: '/events',
             icon: <CameraRoll />
-        },
-        {
+        }
+    ];
+    if (loggedUser?.roles.includes(RoleEnum.TICKET_ADMIN)) {
+        navbarLeftButtonsData.push({
             label: 'Διαχείριση',
             to: '/admin',
             icon: <AdminPanelSettingsIcon />
-        }
-    ];
+        })
+    }
     const settings: string[] = ['settings'];
 
 

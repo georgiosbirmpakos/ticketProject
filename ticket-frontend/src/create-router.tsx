@@ -22,6 +22,7 @@ export function createRouter() {
     const AccountPageLazy = React.lazy(() => import('./root/account/AccountPage'));
     const SignUpPageLazy = React.lazy(() => import('./root/account/SignUpPage'));
     const ErrorPage = React.lazy(() => import('./root/error/ErrorPage'));
+    const ErrorUnauthorizedPage = React.lazy(() => import('./root/error-unauthorized/ErrorUnauthorizedPage'));
     const router = createBrowserRouter([
         {
             path: "/",
@@ -124,6 +125,10 @@ export function createRouter() {
                         },
                     ]
                 },
+                {
+                    path: "unauthorized",
+                    element: <ErrorUnauthorizedPage />,
+                }
             ],
         },
     ]);

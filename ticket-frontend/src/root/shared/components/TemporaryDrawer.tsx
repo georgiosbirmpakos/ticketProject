@@ -21,7 +21,9 @@ import Brightness5Icon from '@mui/icons-material/Brightness5';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import { useLocation } from 'react-router-dom'
 
-import './TemporaryDrawer.css';
+import { LoggedUserDetailsDto } from '../../../modules/auth/logged-user-details-dto';
+import { RoleEnum } from '../../../modules/auth/role-enum';
+import { GlobalState } from '../../../modules/core/global-state';
 
 type Anchor = 'left';
 type Props = {
@@ -39,6 +41,7 @@ export default function TemporaryDrawer({ isDark, setIsDark }: Props) {
     const [state, setState] = React.useState({
         left: false
     });
+    const [loggedUser, setLogged] = React.useState<LoggedUserDetailsDto | null>(GlobalState.instance.loggedUser);
     const location = useLocation();
 
     const toggleDrawer =
@@ -64,6 +67,12 @@ export default function TemporaryDrawer({ isDark, setIsDark }: Props) {
         'Σχετικά': '/about'
     }
 
+    const items = ['Αρχική', 'Ταινίες', 'Καταστήματα', 'Προβολές'];
+    if (loggedUser?.roles.includes(RoleEnum.TICKET_ADMIN)) {
+        items.push('Διαχείριση');
+    }
+    items.push('Σχετικά');
+
     const list = (anchor: Anchor) => (
         <Box
             sx={{ width: 250 }}
@@ -72,7 +81,7 @@ export default function TemporaryDrawer({ isDark, setIsDark }: Props) {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Αρχική', 'Ταινίες', 'Καταστήματα', 'Προβολές', 'Διαχείριση', 'Σχετικά'].map((text, index) => (
+                {items.map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton component={Link} to={routes[text]} onClick={toggleDrawer(anchor, false)}
                             className={`${(routes[text] !== "/" && location.pathname.startsWith(routes[text])) ? "selectedNav" : ""}`}

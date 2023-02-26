@@ -1,9 +1,12 @@
 import { Box, Tab, Tabs } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { AuthService } from '../../modules/auth/AuthService';
+import { RoleEnum } from '../../modules/auth/role-enum';
 
 export default function AdminPage() {
     const [value, setValue] = React.useState(0);
+    const [isUserAuthorizedForRoles, setIsUserAuthorizedForRoles] = React.useState(false);
 
     const tabs = [
         {
@@ -32,6 +35,10 @@ export default function AdminPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        const isUserAuthorizedForRoles = AuthService.isUserAuthorizedForRoles([RoleEnum.TICKET_ADMIN]);
+        if (!isUserAuthorizedForRoles) {
+            navigate('/unauthorized');
+        }
         handleLocationChange();
 
         function handleLocationChange() {
@@ -59,21 +66,25 @@ export default function AdminPage() {
     };
 
     return (
-        <Box style={{ width: '100%', height: '100%' }}>
-            <Box sx={{ width: '100%' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
-                    {tabs.map((tab, index) =>
-                        <Tab key={index}
-                            component={Link}
-                            to={tab.to}
-                            label={tab.name}
-                        />
-                    )}
+        <Fragment>
+            {isUserAuthorizedForRoles && (
+                <Box style={{ width: '100%', height: '100%' }}>
+                    <Box sx={{ width: '100%' }}>
+                        <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
+                            {tabs.map((tab, index) =>
+                                <Tab key={index}
+                                    component={Link}
+                                    to={tab.to}
+                                    label={tab.name}
+                                />
+                            )}
 
-                </Tabs>
-            </Box>
-            <Outlet />
-        </Box>
+                        </Tabs>
+                    </Box>
+                    <Outlet />
+                </Box>
+            )}
+        </Fragment>
     );
 }
 
