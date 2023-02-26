@@ -20,15 +20,15 @@ import java.util.List;
 @ApplicationScoped
 public class HallService {
     @Inject
-    HallRepository hallRepository;
+    private HallRepository hallRepository;
     @Inject
-    SeatRepository seatRepository;
+    private SeatRepository seatRepository;
     @Inject
-    ProviderRepository providerRepository;
+    private ProviderRepository providerRepository;
     @Inject
-    HallValidator hallValidator;
+    private HallValidator hallValidator;
     @Inject
-    ProviderService providerService;
+    private ProviderService providerService;
 
     public List<Hall> fetchAllHalls() {
         List<Hall> halls = this.hallRepository.findAll().list();

@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 @RolesAllowed(RoleEnum.Values.TICKET_ADMIN)
 public class MoviesController {
     @Inject
-    MoviesActions moviesActions;
+    private MoviesActions moviesActions;
 
     @Path("/list")
     @GET

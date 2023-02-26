@@ -12,28 +12,20 @@ import org.apache.commons.collections4.CollectionUtils;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
 public class HomeActions {
     @Inject
-    MovieService movieService;
+    private MovieService movieService;
 
     @Inject
-    AuthService authService;
+    private AuthService authService;
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchMoviesPlayingNowResponseDto doFetchMoviesPlayingNow() throws TicketException {
         Log.info("Start HomeActions.doFetchMoviesPlayingNow");
-
-        Principal principal = this.authService.getPrincipal();
-        System.out.println("THANOS_principal: " + principal);
-        System.out.println("THANOS_principal_name: " + (principal != null ? principal.getName() : ""));
-        System.out.println("THANOS_roles: " + this.authService.getRoles());
-        this.authService.getLoggedUserDetails();
-
         FetchMoviesPlayingNowResponseDto fetchMoviesPlayingNowResponseDto = new FetchMoviesPlayingNowResponseDto();
         List<Movie> moviesPlayingNow = this.movieService.fetchMoviesPlayingNow();
         List<MovieListItemDto> movieDtos = CollectionUtils.isNotEmpty(moviesPlayingNow)

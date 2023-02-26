@@ -1,9 +1,9 @@
 package aics.server.api.admin.providers;
 
-import aics.domain.provider.dtos.ProviderDto;
-import aics.domain.provider.entities.Provider;
 import aics.domain.provider.ProviderService;
+import aics.domain.provider.dtos.ProviderDto;
 import aics.domain.provider.dtos.ProviderListItemDto;
+import aics.domain.provider.entities.Provider;
 import aics.infrastructure.errors.TicketErrorStatus;
 import aics.infrastructure.errors.TicketException;
 import aics.server.api.admin.providers.dtos.*;
@@ -19,9 +19,9 @@ import java.util.List;
 @ApplicationScoped
 public class ProvidersActions {
     @Inject
-    ProviderService providerService;
+    private ProviderService providerService;
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchProvidersListResponseDto doFetchProvidersList() throws TicketException {
         FetchProvidersListResponseDto fetchProvidersListResponseDto = new FetchProvidersListResponseDto();
         Log.info("Start ProvidersActions.doFetchProvidersList");
@@ -32,7 +32,7 @@ public class ProvidersActions {
         return fetchProvidersListResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchProviderDetailsResponseDto doFetchProvidersDetails(Long providerId) throws TicketException {
         FetchProviderDetailsResponseDto fetchProviderDetailsResponseDto = new FetchProviderDetailsResponseDto();
         Log.info("Start ProvidersActions.doFetchProvidersList");
@@ -79,7 +79,7 @@ public class ProvidersActions {
         return updateProviderResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public DeleteProviderResponseDto doDeleteProvider(Long providerId) throws TicketException {
         DeleteProviderResponseDto deleteProviderResponseDto = new DeleteProviderResponseDto();
         Log.info("Start ProvidersActions.doDeleteProvider");

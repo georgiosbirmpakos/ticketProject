@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 @Path(ApiConstants.API_PATH + "/movies")
 public class MoviesController {
     @Inject
-    MoviesActions moviesActions;
+    private MoviesActions moviesActions;
 
     @Path("/movies-playing-now")
     @GET

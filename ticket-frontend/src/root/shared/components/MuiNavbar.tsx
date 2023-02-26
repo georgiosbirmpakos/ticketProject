@@ -15,7 +15,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { CameraRoll } from '@mui/icons-material';
 import { AuthService } from '../../../modules/auth/AuthService';
 import { GlobalState } from '../../../modules/core/global-state';
-import { LoggedUserDetails } from '../../../modules/auth/logged-user-details';
+import { LoggedUserDetailsDto } from '../../../modules/auth/logged-user-details-dto';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import { useLocation } from 'react-router-dom'
 
@@ -44,7 +44,7 @@ type Props = {
 const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
     const [isDark, setIsDark] = useState(prefersDarkMode);
-    const [loggedUser, setLogged] = useState<LoggedUserDetails | null>(GlobalState.instance.loggedUser);
+    const [loggedUser, setLogged] = useState<LoggedUserDetailsDto | null>(GlobalState.instance.loggedUser);
     const location = useLocation();
 
     const changeTheme = () => {

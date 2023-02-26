@@ -19,9 +19,9 @@ import java.util.List;
 @ApplicationScoped
 public class MoviesActions {
     @Inject
-    MovieService movieService;
+    private MovieService movieService;
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchMoviesPlayingNowResponseDto doFetchMoviesPlayingNow() throws TicketException {
         Log.info("Start MoviesActions.doFetchMoviesPlayingNow");
         FetchMoviesPlayingNowResponseDto fetchMoviesPlayingNowResponseDto = new FetchMoviesPlayingNowResponseDto();
@@ -35,7 +35,7 @@ public class MoviesActions {
         return fetchMoviesPlayingNowResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchMovieDetailsResponseDto doFetchMovieDetails(Long movieId) throws TicketException {
         Log.info("Start MoviesActions.doFetchMovieDetails");
         FetchMovieDetailsResponseDto fetchMovieDetailsResponseDto = new FetchMovieDetailsResponseDto();

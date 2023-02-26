@@ -40,6 +40,6 @@ public class Ticket {
     @JoinColumn(name = "SEAT_ID_FK", nullable = false, updatable = false)
     private Seat seat;
     @ManyToOne
-    @JoinColumn(name = "USER_ID_FK", nullable = true, updatable = false)
+    @JoinColumn(name = "USER_ID_FK", nullable = true, updatable = true)
     private User user;
 }

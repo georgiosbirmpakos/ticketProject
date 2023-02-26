@@ -17,17 +17,18 @@ import org.apache.commons.collections4.CollectionUtils;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
 public class EventsActions {
     @Inject
-    EventService eventService;
+    private EventService eventService;
     @Inject
-    TicketService ticketService;
+    private TicketService ticketService;
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchEventsFilteredResponseDto doFetchEventsFiltered(FetchEventsFilteredRequestDto fetchEventsFilteredRequestDto) throws TicketException {
         FetchEventsFilteredResponseDto fetchEventsFilteredResponseDto = new FetchEventsFilteredResponseDto();
         Log.info("Start EventsActions.doFetchEventsFiltered");
@@ -47,7 +48,7 @@ public class EventsActions {
         return fetchEventsFilteredResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchEventsFilterOptionsDto doFetchEventsFilterOptions() throws TicketException {
         FetchEventsFilterOptionsDto fetchEventsFilterOptionsDto = new FetchEventsFilterOptionsDto();
         Log.info("Start EventsActions.doFetchEventsFilterOptions");
@@ -58,7 +59,7 @@ public class EventsActions {
         return fetchEventsFilterOptionsDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchEventDetailsResponseDto doFetchEventDetails(Long eventId) throws TicketException {
         FetchEventDetailsResponseDto fetchEventDetailsResponseDto = new FetchEventDetailsResponseDto();
         Log.info("Start EventsActions.doFetchEventDetails");
@@ -70,13 +71,23 @@ public class EventsActions {
     }
 
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public BookTicketResponseDto doBookTicket(BookTicketRequestDto bookTicketRequestDto) throws TicketException {
         BookTicketResponseDto bookTicketResponseDto = new BookTicketResponseDto();
         Log.info("Start EventsActions.doBookTicket");
+        if (bookTicketRequestDto == null) {
+            final String error = "bookTicketRequestDto was null";
+            throw new TicketException(new Exception(error), error, TicketErrorStatus.UNPROCESSABLE_ENTITY_422);
+        }
+        if (CollectionUtils.isEmpty(bookTicketRequestDto.getTicketsIds())) {
+            final String error = "ticketsIds was empty";
+            throw new TicketException(new Exception(error), error, TicketErrorStatus.UNPROCESSABLE_ENTITY_422);
+        }
         List<Ticket> tickets = this.ticketService.fetchTicketsByIds(bookTicketRequestDto.getTicketsIds());
-//        EventDto eventDto = EventDto.fromEvent(event);
-//        bookTicketResponseDto.setEvent(eventDto);
+        List<String> errors = this.ticketService.bookTickets(tickets);
+        if (CollectionUtils.isNotEmpty(errors)) {
+            throw new TicketException(new Exception(errors.toString()), (Serializable) errors, TicketErrorStatus.UNPROCESSABLE_ENTITY_422);
+        }
         Log.info("End EventsActions.doBookTicket");
         return bookTicketResponseDto;
     }

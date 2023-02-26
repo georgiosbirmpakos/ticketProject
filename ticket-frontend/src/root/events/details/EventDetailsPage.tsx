@@ -10,6 +10,8 @@ import EventOtherDetailsCardComponent from './components/EventOtherDetailsCardCo
 import TicketsMapComponent from './components/TicketsMapComponent';
 import { TicketDto } from '../../../modules/ticket/dtos/ticket-dto';
 import { GlobalState } from '../../../modules/core/global-state';
+import { BookTicketRequestDto } from './dtos/book-ticket-dto';
+import { TypeUtils } from '../../../modules/core/type-utils';
 
 export default function EventDetailsPage() {
     const [searchParams] = useSearchParams();
@@ -26,31 +28,44 @@ export default function EventDetailsPage() {
 
 
     useEffect(() => {
+
+        loadData();
+    }, [])
+
+    async function loadData() {
         const eventIdStr = searchParams.get('eventId');
         const eventId = eventIdStr ? parseInt(eventIdStr) : NaN;
         if (isNaN(eventId)) {
             enqueueSnackbar('Η παράμετρος eventId απαιτείται για αυτή την σελίδα', { variant: 'error' });
             return;
         }
-
-        async function loadData() {
-            setIsWaitingFetch(true);
-            setEvent(null);
-            try {
-                const fetchEventDetailsResponseDto = await EventsDetailsService.fetchEventDetails(eventId);
-                console.log('fetchMoviesListResponseDto', fetchEventDetailsResponseDto)
-                setEvent(fetchEventDetailsResponseDto.event);
-                setIsWaitingFetch(false);
-            } catch (e) {
-                console.error(e);
-                enqueueSnackbar('Αποτυχημένη εύρεση επιλογών φίλτρων', { variant: 'error' });
-            }
-
+        setIsWaitingFetch(true);
+        setEvent(null);
+        setSelectedTickets([]);
+        try {
+            const fetchEventDetailsResponseDto = await EventsDetailsService.fetchEventDetails(eventId);
+            console.log('fetchMoviesListResponseDto', fetchEventDetailsResponseDto)
+            setEvent(fetchEventDetailsResponseDto.event);
+            setIsWaitingFetch(false);
+        } catch (e) {
+            console.error(e);
+            enqueueSnackbar('Αποτυχημένη εύρεση επιλογών φίλτρων', { variant: 'error' });
         }
 
+    }
 
-        loadData();
-    }, [])
+    async function onBuyTicketClicked() {
+        try {
+            const bookTicketRequestDto = new BookTicketRequestDto();
+            bookTicketRequestDto.ticketsIds = Object.values(selectedTickets).map(ticket => ticket.ticketId).filter(TypeUtils.isNonNullable);
+            const bookTicketResponseDto = await EventsDetailsService.bookTicket(bookTicketRequestDto);
+            enqueueSnackbar('Επιτυχία αγοράς εισιτηρίων ', { variant: 'success' });
+            await loadData();
+        } catch (e: any) {
+            console.error(e);
+            enqueueSnackbar('Αποτυχία αγοράς εισιτηρίων ', { variant: 'error' })
+        }
+    }
 
     return (
         <Box style={{ width: '100%', height: '100%' }}>
@@ -83,7 +98,11 @@ export default function EventDetailsPage() {
                                         <CardContent sx={{ justifyItems: "center", justifyContent: "center", textAlign: "center" }}>
                                             <p>{`Selected Tickets: ${Object.values(selectedTickets).length} `}</p>
                                             <p>{`Total Cost is: ${Object.values(selectedTickets).length * event.eventPrice} €`}</p>
-                                            <Button color='primary' variant='contained' disabled={!isLoggedIn || !Object.values(selectedTickets).length}>ΑΓΟΡΑ</Button>
+                                            <Button color='primary' variant='contained' disabled={!isLoggedIn || !Object.values(selectedTickets).length}
+                                                onClick={() => onBuyTicketClicked()}
+                                            >
+                                                ΑΓΟΡΑ
+                                            </Button>
                                             {!isLoggedIn && (
                                                 <Alert severity="warning">Πρέπει να συνδεθείς για να μπορείς να αγοράσεις εισιτήρια</Alert>
                                             )}

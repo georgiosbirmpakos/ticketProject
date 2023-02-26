@@ -9,7 +9,7 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class EventValidator {
     @Inject
-    EventRepository eventRepository;
+    private EventRepository eventRepository;
 
     public String validateForCreateEvent(EventDto eventDto) {
         final String error = this.validateMandatory(eventDto);

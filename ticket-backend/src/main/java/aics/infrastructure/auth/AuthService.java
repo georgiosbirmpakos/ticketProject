@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class AuthService {
     @Inject
-    SecurityIdentity securityIdentity;
+    private SecurityIdentity securityIdentity;
     @Inject
-    JsonWebToken jwt;
+    private JsonWebToken jwt;
     @Inject
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public Principal getPrincipal() {
         return this.securityIdentity.getPrincipal();
@@ -63,6 +63,7 @@ public class AuthService {
             : givenName + " " + familyName;
 
         LoggedUserDetails loggedUserDetails = new LoggedUserDetails()
+            .setUser(user)
             .setUserId(user.getUserId())
             .setName(name)
             .setSub(jwt.getClaim(Claims.sub))

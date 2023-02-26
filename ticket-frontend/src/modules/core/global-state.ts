@@ -3,7 +3,7 @@ import { createApiConsumer } from '../net/api-consumer';
 import { EnvConfig } from './env-config';
 import Keycloak from 'keycloak-js';
 import { createKeycloack } from '../auth/create-keycloak';
-import { LoggedUserDetails } from '../auth/logged-user-details';
+import { LoggedUserDetailsDto } from '../auth/logged-user-details-dto';
 
 export class GlobalState {
     private static _instance: GlobalState | null = null;
@@ -11,13 +11,13 @@ export class GlobalState {
     readonly envConfig: EnvConfig;
     readonly apiConsumer: AxiosInstance;
     readonly kc: Keycloak;
-    loggedUser: LoggedUserDetails | null;
+    loggedUser: LoggedUserDetailsDto | null;
 
     constructor(obj: {
         envConfig: EnvConfig,
         apiConsumer: AxiosInstance,
         kc: Keycloak,
-        loggedUser: LoggedUserDetails | null
+        loggedUser: LoggedUserDetailsDto | null
     }) {
         this.envConfig = obj.envConfig;
         this.apiConsumer = obj.apiConsumer;

@@ -10,7 +10,7 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class MovieValidator {
     @Inject
-    ProviderRepository providerRepository;
+    private ProviderRepository providerRepository;
 
     public String validateForCreateMovie(MovieDto movieDto) {
         final String error = this.validateMandatory(movieDto);

@@ -11,9 +11,9 @@ import java.util.List;
 @ApplicationScoped
 public class ProviderService {
     @Inject
-    ProviderRepository providerRepository;
+    private ProviderRepository providerRepository;
     @Inject
-    ProviderValidator providerValidator;
+    private ProviderValidator providerValidator;
 
     public List<Provider> fetchAllProviders() {
         List<Provider> providers = this.providerRepository.findAll().list();

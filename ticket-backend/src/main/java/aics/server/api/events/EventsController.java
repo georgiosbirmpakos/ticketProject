@@ -24,7 +24,7 @@ import javax.ws.rs.core.MediaType;
 @PermitAll
 public class EventsController {
     @Inject
-    EventsActions eventsActions;
+    private EventsActions eventsActions;
 
     @Path("/list-filtered")
     @GET

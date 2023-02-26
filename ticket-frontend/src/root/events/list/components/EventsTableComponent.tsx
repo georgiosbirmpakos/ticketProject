@@ -17,8 +17,8 @@ export default function EventsTableComponent(props: EventsTableComponentProps) {
         {
             field: 'movieRef',
             headerName: 'Ταινία',
-            minWidth: 100,
-            editable: true,
+            minWidth: 150,
+            editable: false,
             flex: 1,
             sortable: false,
             // valueGetter: (params: GridValueGetterParams<MovieListItemDto>) => params.value ? params.value.name : '',
@@ -38,7 +38,7 @@ export default function EventsTableComponent(props: EventsTableComponentProps) {
             field: 'hallRef',
             headerName: 'Αίθουσα',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
             sortable: false,
             valueGetter: (params: GridValueGetterParams<LabelValue<number>>) => params.value ? params.value.label : '',
@@ -47,23 +47,15 @@ export default function EventsTableComponent(props: EventsTableComponentProps) {
             field: 'eventDatetime',
             headerName: 'Ημερομηνία',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
             sortable: true,
-        },
-        {
-            field: 'description',
-            headerName: 'Περιγραφή',
-            minWidth: 100,
-            editable: true,
-            flex: 1,
-            sortable: false
         },
         {
             field: 'eventPrice',
             headerName: 'Τιμή Εισιτηρίου',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
             sortable: false
         },
@@ -71,7 +63,7 @@ export default function EventsTableComponent(props: EventsTableComponentProps) {
             field: 'actions',
             headerName: 'Εισιτήρια',
             width: 150,
-            editable: true,
+            editable: false,
             sortable: false,
             renderCell: (params) => (
                 <Button component={Link} to={'/events/details?eventId=' + params.row.eventId} variant='outlined' sx={{ ":hover": { borderColor: '#920b17', color: '#920b17' }, color: '#E63946', backgroundColor: 'white', borderColor: '#E63946', borderRadius: 20, marginLeft: 1 }} size="small">ΕΙΣΙΤΗΡΙΑ</Button>

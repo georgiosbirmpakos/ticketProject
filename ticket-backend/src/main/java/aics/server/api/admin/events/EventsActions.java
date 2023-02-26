@@ -20,11 +20,11 @@ import java.util.List;
 @ApplicationScoped
 public class EventsActions {
     @Inject
-    EventService eventService;
+    private EventService eventService;
     @Inject
-    ProviderService providerService;
+    private ProviderService providerService;
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchEventsListResponseDto doFetchEventsList() throws TicketException {
         FetchEventsListResponseDto fetchEventsListResponseDto = new FetchEventsListResponseDto();
         Log.info("Start EventsActions.doFetchEventsList");
@@ -35,7 +35,7 @@ public class EventsActions {
         return fetchEventsListResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchEventDetailsResponseDto doFetchEventDetails(Long eventId) throws TicketException {
         FetchEventDetailsResponseDto fetchEventDetailsResponseDto = new FetchEventDetailsResponseDto();
         Log.info("Start EventsActions.doFetchEventDetails");
@@ -46,7 +46,7 @@ public class EventsActions {
         return fetchEventDetailsResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchEventOptionsResponseDto doFetchEventOptions() throws TicketException {
         FetchEventOptionsResponseDto fetchEventOptionsResponseDto = new FetchEventOptionsResponseDto();
         Log.info("Start EventsActions.doFetchEventOptions");
@@ -93,7 +93,7 @@ public class EventsActions {
         return updateEventResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public DeleteEventResponseDto doDeleteEvent(Long eventId) throws TicketException {
         DeleteEventResponseDto deleteEventResponseDto = new DeleteEventResponseDto();
         Log.info("Start EventsActions.doDeleteEvent");

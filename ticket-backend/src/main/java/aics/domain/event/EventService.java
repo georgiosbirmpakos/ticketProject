@@ -33,21 +33,21 @@ import java.util.List;
 @ApplicationScoped
 public class EventService {
     @Inject
-    EventRepository eventRepository;
+    private EventRepository eventRepository;
     @Inject
-    MovieRepository movieRepository;
+    private MovieRepository movieRepository;
     @Inject
-    HallRepository hallRepository;
+    private HallRepository hallRepository;
     @Inject
-    ProviderRepository providerRepository;
+    private ProviderRepository providerRepository;
     @Inject
-    TicketRepository ticketRepository;
+    private TicketRepository ticketRepository;
     @Inject
-    SeatRepository seatRepository;
+    private SeatRepository seatRepository;
     @Inject
-    EventValidator eventValidator;
+    private EventValidator eventValidator;
     @Inject
-    MovieService movieService;
+    private MovieService movieService;
 
     public List<Event> fetchAllEvents() {
         List<Event> events = this.eventRepository.findAll().list();

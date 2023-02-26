@@ -22,11 +22,11 @@ import java.util.List;
 @ApplicationScoped
 public class HallsActions {
     @Inject
-    HallService hallService;
+    private HallService hallService;
     @Inject
-    ProviderService providerService;
+    private ProviderService providerService;
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchHallsListResponseDto doFetchHallsList() throws TicketException {
         FetchHallsListResponseDto fetchHallsListResponseDto = new FetchHallsListResponseDto();
         Log.info("Start HallsActions.doFetchHallsList");
@@ -37,7 +37,7 @@ public class HallsActions {
         return fetchHallsListResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchHallDetailsResponseDto doFetchHallDetails(Long hallId) throws TicketException {
         FetchHallDetailsResponseDto fetchHallDetailsResponseDto = new FetchHallDetailsResponseDto();
         Log.info("Start HallsActions.doFetchHallDetails");
@@ -49,7 +49,7 @@ public class HallsActions {
         return fetchHallDetailsResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchHallsOptionsResponseDto doFetchHallsOptions() throws TicketException {
         FetchHallsOptionsResponseDto fetchHallsOptionsResponseDto = new FetchHallsOptionsResponseDto();
         Log.info("Start HallsActions.doFetchHallsOptions");
@@ -96,7 +96,7 @@ public class HallsActions {
         return updateHallResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public DeleteHallResponseDto doDeleteHall(Long hallId) throws TicketException {
         DeleteHallResponseDto deleteHallResponseDto = new DeleteHallResponseDto();
         Log.info("Start HallsActions.doDeleteHall");

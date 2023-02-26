@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class MovieService {
     @Inject
-    MovieRepository movieRepository;
+    private MovieRepository movieRepository;
     @Inject
-    EventRepository eventRepository;
+    private EventRepository eventRepository;
     @Inject
-    MovieValidator movieValidator;
+    private MovieValidator movieValidator;
 
     public List<Movie> fetchAllMovies() {
         List<Movie> movies = this.movieRepository.findAll().list();

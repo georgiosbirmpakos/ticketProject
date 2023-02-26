@@ -9,7 +9,7 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class HallValidator {
     @Inject
-    HallRepository hallRepository;
+    private HallRepository hallRepository;
 
     public String validateForCreateHall(HallDto hallDto) {
         final String error = this.validateMandatory(hallDto);

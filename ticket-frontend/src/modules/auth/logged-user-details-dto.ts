@@ -1,6 +1,6 @@
 import { RoleEnum } from './role-enum';
 
-export class LoggedUserDetails {
+export class LoggedUserDetailsDto {
     userId: number;
     name: string;
     sub: string;

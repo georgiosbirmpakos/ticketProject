@@ -1,9 +1,9 @@
 package aics.server.api.admin.movies;
 
-import aics.domain.movie.dtos.MovieListItemDto;
-import aics.domain.movie.entities.Movie;
 import aics.domain.movie.MovieService;
 import aics.domain.movie.dtos.MovieDto;
+import aics.domain.movie.dtos.MovieListItemDto;
+import aics.domain.movie.entities.Movie;
 import aics.infrastructure.errors.TicketErrorStatus;
 import aics.infrastructure.errors.TicketException;
 import aics.server.api.admin.movies.dtos.*;
@@ -13,18 +13,15 @@ import org.apache.commons.collections4.CollectionUtils;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 @ApplicationScoped
 public class MoviesActions {
     @Inject
-    MovieService movieService;
+    private MovieService movieService;
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchMoviesListResponseDto doFetchAllMovies() throws TicketException {
         Log.info("Start MoviesActions.doFetchAllMovies");
         FetchMoviesListResponseDto fetchMoviesListResponseDto = new FetchMoviesListResponseDto();
@@ -38,7 +35,7 @@ public class MoviesActions {
         return fetchMoviesListResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public FetchMovieDetailsResponseDto doFetchMovieDetails(Long movieId) throws TicketException {
         Log.info("Start MoviesActions.doFetchMovieDetails");
         FetchMovieDetailsResponseDto fetchMovieDetailsResponseDto = new FetchMovieDetailsResponseDto();
@@ -87,7 +84,7 @@ public class MoviesActions {
         return updateMovieResponseDto;
     }
 
-    @Transactional()
+    @Transactional(rollbackOn = Exception.class)
     public DeleteMovieResponseDto doDeleteMovie(Long movieId) throws TicketException {
         DeleteMovieResponseDto deleteMovieResponseDto = new DeleteMovieResponseDto();
         Log.info("Start MoviesActions.doDeleteMovie");

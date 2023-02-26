@@ -1,10 +1,10 @@
-import { LoggedUserDetails } from '../logged-user-details';
+import { LoggedUserDetailsDto } from '../logged-user-details-dto';
 
 export class FetchLoggedUserDetailsDto {
-    loggedUserDetails: LoggedUserDetails
+    loggedUserDetails: LoggedUserDetailsDto
 
     constructor(obj: {
-        loggedUserDetails: LoggedUserDetails
+        loggedUserDetails: LoggedUserDetailsDto
     }) {
         this.loggedUserDetails = obj.loggedUserDetails;
     }
