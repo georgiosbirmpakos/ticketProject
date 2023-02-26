@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Divider, CircularProgress, Box } from '@mui/material';
+import { Typography, Divider, CircularProgress, Box, Grid } from '@mui/material';
 import ScrollToTopOnMount from '../shared/components/ScrollToTopOnMount';
-import MoviesGridLayoutComponent from '../../modules/movie/components/MoviesGridLayoutComponent';
-import MovieIcon from '@mui/icons-material/Movie';
-import { MovieListItemDto } from '../../modules/movie/dtos/movie-list-item-dto';
 import { useSnackbar } from 'notistack';
-import { MoviesListService } from './movies-list-service';
+import { ProvidersService } from './providers-service';
+import { ProviderListItemDto } from '../../modules/provider/provider-list-item-dto';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import ProviderCardComponent from './components/ProviderCardComponent';
 
 export default function ProvidersPage() {
     const [isWaitingFetch, setIsWaitingFetch] = useState<boolean>(false);
-    const [movies, setMovies] = useState<MovieListItemDto[]>([]);
+    const [providers, setProviders] = useState<ProviderListItemDto[]>([]);
     const { enqueueSnackbar } = useSnackbar();
 
 
     useEffect(() => {
         async function loadData() {
             setIsWaitingFetch(true);
-            setMovies([]);
+            setProviders([]);
             try {
-                const fetchMoviesListResponseDto = await MoviesListService.fetchMoviesPlayingNow();
+                const fetchMoviesListResponseDto = await ProvidersService.fetchProvidersList();
                 console.log('fetchMoviesListResponseDto', fetchMoviesListResponseDto)
-                setMovies(fetchMoviesListResponseDto.movies);
+                setProviders(fetchMoviesListResponseDto.providers);
                 setIsWaitingFetch(false);
             } catch (e) {
                 console.error(e);
@@ -46,11 +46,18 @@ export default function ProvidersPage() {
                             alignItems: 'center',
                             flexWrap: 'wrap', marginTop: 10
                         }}>
-                            <MovieIcon sx={{ marginLeft: 4 }} fontSize='large' />
-                            <Typography sx={{ fontSize: 'xx-large', marginLeft: 3, fontWeight: 'bolder' }}>ΠΑΙΖΟΝΤΑΙ ΤΩΡΑ</Typography>
+                            <LocationCityIcon sx={{ marginLeft: 4 }} fontSize='large' />
+                            <Typography sx={{ fontSize: 'xx-large', marginLeft: 3, fontWeight: 'bolder' }}>ΚΑΤΑΣΤΗΜΑΤΑ</Typography>
                         </div>
                         <Divider variant="middle" style={{ marginBottom: 10 }} />
-                        <MoviesGridLayoutComponent movies={movies} />
+                        <Grid container spacing={1} className="center-align-stretch" sx={{ padding: 1 }}>
+                            {providers.map(provider => (
+                                <Grid item xs={12} sm={6} key={provider.providerId}>
+                                    <ProviderCardComponent provider={provider} />
+                                </Grid>
+                            ))}
+
+                        </Grid>
                     </React.Fragment>
                 )}
         </Box>

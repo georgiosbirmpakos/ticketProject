@@ -5,7 +5,7 @@ export class MoviesListService {
 
     static async fetchMoviesPlayingNow(): Promise<FetchMoviesPlayingNowResponseDto> {
         const apiConsumer = GlobalState.instance.apiConsumer;
-        const fetchEventsListUrl = '/home/movies-playing-now'
+        const fetchEventsListUrl = '/movies/movies-playing-now'
 
         const response = await apiConsumer.get(fetchEventsListUrl);
         const fetchMoviesPlayingNowResponseDto: FetchMoviesPlayingNowResponseDto | null = FetchMoviesPlayingNowResponseDto.fromObj(response.data)
