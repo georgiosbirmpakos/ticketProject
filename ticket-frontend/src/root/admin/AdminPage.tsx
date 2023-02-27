@@ -38,7 +38,9 @@ export default function AdminPage() {
         const isUserAuthorizedForRoles = AuthService.isUserAuthorizedForRoles([RoleEnum.TICKET_ADMIN]);
         if (!isUserAuthorizedForRoles) {
             navigate('/unauthorized');
+            return;
         }
+        setIsUserAuthorizedForRoles(isUserAuthorizedForRoles);
         handleLocationChange();
 
         function handleLocationChange() {
