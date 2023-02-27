@@ -3,6 +3,8 @@ package aics.domain.ticket;
 import aics.domain.ticket.entities.Ticket;
 import aics.infrastructure.auth.AuthService;
 import aics.infrastructure.auth.LoggedUserDetails;
+import io.quarkus.mailer.Mail;
+import io.quarkus.mailer.Mailer;
 import org.apache.commons.collections4.CollectionUtils;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -18,6 +20,8 @@ public class TicketService {
     private TicketValidator ticketValidator;
     @Inject
     private AuthService authService;
+    @Inject
+    Mailer mailer;
 
     public List<Ticket> fetchTicketsByIds(List<Long> ticketsIds) {
         if (CollectionUtils.isEmpty(ticketsIds)) {
@@ -49,6 +53,24 @@ public class TicketService {
 
         this.ticketRepository.persist(tickets);
 
+        this.sendSuccessMail(loggedUserDetails, tickets);
+
         return errors;
+    }
+
+    private void sendSuccessMail(LoggedUserDetails loggedUserDetails, List<Ticket> tickets) {
+        String body = "<h1>Επιτυχής αγορά Εισιτηρίων!</h1><br>";
+        body += "<p>Αγοράσατε " + tickets.size() + " εισιτήρια</p><br>";
+
+        double totalCost = tickets.size() * tickets.get(0).getEvent().getEventPrice();
+        body += "<p>Συνολικό κόστος: " + totalCost + " €</p><br>";
+        body += "<p>Θέσεις Εισιτηρίων:</p><br>";
+        body += "<ul>";
+        for (Ticket ticket : tickets) {
+            body += "<li>" + ticket.getSeat().getSeatRow() + "-" + ticket.getSeat().getSeatColumn() + "</li>";
+        }
+        body += "</ul><br>";
+
+        mailer.send(Mail.withHtml(loggedUserDetails.getEmail(), "Επιτυχής αγορά Εισιτηρίων!", body));
     }
 }

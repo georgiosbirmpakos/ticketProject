@@ -6,10 +6,10 @@ import { GlobalState } from '../core/global-state';
 export function createApiConsumer(envConfig: EnvConfig): AxiosInstance {
     const apiConsumer = axios.create({
         baseURL: envConfig.backendUrl + '/api',
-        timeout: 5000,
+        timeout: 15000,
         // headers: { 'X-Custom-Header': 'foobar' },
-        maxContentLength: 5000,
-        maxBodyLength: 5000,
+        maxContentLength: 15000,
+        maxBodyLength: 15000,
         maxRedirects: 21 // default
     });
 
