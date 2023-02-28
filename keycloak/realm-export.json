@@ -452,8 +452,8 @@
   "otpPolicyPeriod": 30,
   "otpPolicyCodeReusable": false,
   "otpSupportedApplications": [
-    "totpAppGoogleName",
-    "totpAppFreeOTPName"
+    "totpAppFreeOTPName",
+    "totpAppGoogleName"
   ],
   "webAuthnPolicyRpEntityName": "keycloak",
   "webAuthnPolicySignatureAlgorithms": [
@@ -804,19 +804,21 @@
       "clientId": "ticket",
       "name": "ticket",
       "description": "ticket",
-      "rootUrl": "http://localhost:3000",
+      "rootUrl": "https://aics-ticket.org",
       "adminUrl": "",
-      "baseUrl": "http://localhost:3000",
+      "baseUrl": "https://aics-ticket.org",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": true,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
         "http://localhost:8080/*",
-        "http://localhost:3000/*"
+        "http://localhost:3000/*",
+        "https://aics-ticket.org/*"
       ],
       "webOrigins": [
         "http://localhost:8080",
+        "https://aics-ticket.org",
         "http://localhost:3000"
       ],
       "notBefore": 0,
@@ -832,7 +834,7 @@
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
         "backchannel.logout.session.required": "true",
-        "post.logout.redirect.uris": "http://localhost:8080/*##http://localhost:3000/*",
+        "post.logout.redirect.uris": "http://localhost:8080/*##http://localhost:3000/*##https://aics-ticket.org/*",
         "display.on.consent.screen": "false",
         "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
@@ -1575,7 +1577,7 @@
         "hideOnLoginPage": "false",
         "offlineAccess": "false",
         "acceptsPromptNoneForwardFromClient": "false",
-        "clientId": "528067641715-mmep754rsah6vjb0eaq3h4p7t7i1hi7o.apps.googleusercontent.com",
+        "clientId": "573774347984-89pkfnivkf9v0hvhhebij7l4j0j5o17j.apps.googleusercontent.com",
         "disableUserInfo": "false",
         "syncMode": "IMPORT",
         "userIp": "true",
