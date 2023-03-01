@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom'
 import { Grid } from '@mui/material';
 import { ProviderDto } from '../../../modules/provider/provider-dto';
+import React from 'react';
 
 export interface ProviderCardComponentProps {
     provider: ProviderDto
@@ -52,10 +53,22 @@ const ProviderCardComponent = (props: ProviderCardComponentProps) => {
                 </Grid>
 
                 <Grid container>
-                    <Grid item xs={6} justifyItems="left" justifyContent="left" textAlign="left">
+                    <Grid item xs={12} justifyItems="left" justifyContent="left" textAlign="left">
                         <h3>Αίθουσες:</h3>
                     </Grid>
-                    <Grid item xs={3} justifyItems="left" justifyContent="left" textAlign="left">
+                    {props.provider.halls.map(hall => (
+                        <Grid container item key={hall.hallId}>
+                            <Grid item xs={6} justifyItems="left" justifyContent="left" textAlign="left">
+                            </Grid>
+                            <Grid item xs={3} justifyItems="left" justifyContent="left" textAlign="left">
+                                <h4>{hall.name}</h4>
+                            </Grid>
+                            <Grid item xs={3} justifyItems="right" justifyContent="right" textAlign="right">
+                                <p>{hall.description}</p>
+                            </Grid>
+                        </Grid>
+                    ))}
+                    {/* <Grid item xs={3} justifyItems="left" justifyContent="left" textAlign="left">
                         {props.provider.halls.map(hall => (
                             <h4 key={hall.hallId}>{hall.name}</h4>
                         ))}
@@ -64,7 +77,7 @@ const ProviderCardComponent = (props: ProviderCardComponentProps) => {
                         {props.provider.halls.map(hall => (
                             <p key={hall.hallId}>{hall.description}</p>
                         ))}
-                    </Grid>
+                    </Grid> */}
                 </Grid>
                 <Grid container className="center">
                     <Grid item className="center">
