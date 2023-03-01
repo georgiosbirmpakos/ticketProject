@@ -62,7 +62,8 @@ public class MovieService {
             .setActors(movieDto.getActors())
             .setAppropriateness(movieDto.getAppropriateness())
             .setDuration(movieDto.getDuration())
-            .setTrailerSrcUrl(movieDto.getTrailerSrcUrl());
+            .setTrailerSrcUrl(movieDto.getTrailerSrcUrl())
+            .setYear(movieDto.getYear());
 
         this.movieRepository.persist(newMovie);
 
@@ -90,7 +91,8 @@ public class MovieService {
             .setActors(movieDto.getActors())
             .setAppropriateness(movieDto.getAppropriateness())
             .setDuration(movieDto.getDuration())
-            .setTrailerSrcUrl(movieDto.getTrailerSrcUrl());
+            .setTrailerSrcUrl(movieDto.getTrailerSrcUrl())
+            .setYear(movieDto.getYear());
 
         this.movieRepository.persist(movie);
 

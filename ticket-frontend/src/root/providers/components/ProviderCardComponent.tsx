@@ -28,7 +28,7 @@ const ProviderCardComponent = (props: ProviderCardComponentProps) => {
 
                 <Grid container>
                     <Grid item xs={6} justifyItems="left" justifyContent="left" textAlign="left">
-                        Διεύθυνση:
+                        <h3>Διεύθυνση:</h3>
                     </Grid>
                     <Grid item xs={6} justifyItems="right" justifyContent="right" textAlign="right">
                         {props.provider.address}
@@ -36,7 +36,7 @@ const ProviderCardComponent = (props: ProviderCardComponentProps) => {
                 </Grid>
                 <Grid container>
                     <Grid item xs={6} justifyItems="left" justifyContent="left" textAlign="left">
-                        Τηλέφωνο:
+                        <h3>Τηλέφωνο:</h3>
                     </Grid>
                     <Grid item xs={6} justifyItems="right" justifyContent="right" textAlign="right">
                         {props.provider.phone}
@@ -44,7 +44,7 @@ const ProviderCardComponent = (props: ProviderCardComponentProps) => {
                 </Grid>
                 <Grid container>
                     <Grid item xs={6} justifyItems="left" justifyContent="left" textAlign="left">
-                        Περιγραφή:
+                        <h3>Περιγραφή:</h3>
                     </Grid>
                     <Grid item xs={6} justifyItems="right" justifyContent="right" textAlign="right">
                         {props.provider.description}
@@ -53,7 +53,7 @@ const ProviderCardComponent = (props: ProviderCardComponentProps) => {
 
                 <Grid container>
                     <Grid item xs={6} justifyItems="left" justifyContent="left" textAlign="left">
-                        Αίθουσες:
+                        <h3>Αίθουσες:</h3>
                     </Grid>
                     <Grid item xs={3} justifyItems="left" justifyContent="left" textAlign="left">
                         {props.provider.halls.map(hall => (
@@ -66,10 +66,14 @@ const ProviderCardComponent = (props: ProviderCardComponentProps) => {
                         ))}
                     </Grid>
                 </Grid>
-                {props.provider.googleMapsSrc && (
-                    <iframe src={props.provider.googleMapsSrc} width="300" height="300" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="someTitle">
-                    </iframe>
-                )}
+                <Grid container className="center">
+                    <Grid item className="center">
+                        {props.provider.googleMapsSrc && (
+                            <iframe src={props.provider.googleMapsSrc} width="300" height="300" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="someTitle">
+                            </iframe>
+                        )}
+                    </Grid>
+                </Grid>
 
 
 

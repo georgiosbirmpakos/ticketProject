@@ -41,6 +41,8 @@ public class Movie {
     private String trailerSrcUrl;
     @Column(name = "DURATION", nullable = false, length = 255)
     private int duration;
+    @Column(name = "YEAR", nullable = false)
+    private int year;
     @Column(name = "CREATED_ON", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdOn;

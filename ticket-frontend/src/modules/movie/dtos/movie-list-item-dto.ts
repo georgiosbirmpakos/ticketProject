@@ -7,6 +7,7 @@ export class MovieListItemDto {
     image: string = '';
     imageName: string = '';
     imageMimePrefix: string = '';
+    year: number = 0;
 
     static fromObj(obj: any): MovieListItemDto | null {
         if (!obj) {
@@ -19,6 +20,7 @@ export class MovieListItemDto {
         movieModel.image = obj.image;
         movieModel.imageName = obj.imageName;
         movieModel.imageMimePrefix = obj.imageMimePrefix;
+        movieModel.year = obj.year;
         return movieModel;
     }
 

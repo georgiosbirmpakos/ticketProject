@@ -56,6 +56,9 @@ export default function ProviderDialogCreateComponent(props: ProviderDialogCreat
                             <TextField label="Διεύθυνση" value={provider.address} onChange={(e) => setProvider({ ...provider, address: e.target.value })} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <TextField label="Πηγή GoogleMaps" value={provider.googleMapsSrc} onChange={(e) => setProvider({ ...provider, googleMapsSrc: e.target.value })} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TextField label="Τηλέφωνο" value={provider.phone} onChange={(e) => setProvider({ ...provider, phone: e.target.value })} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={4} lg={3}>

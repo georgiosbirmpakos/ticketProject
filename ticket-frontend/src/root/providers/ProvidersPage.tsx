@@ -52,7 +52,7 @@ export default function ProvidersPage() {
                         <Divider variant="middle" style={{ marginBottom: 10 }} />
                         <Grid container spacing={1} className="center-align-stretch" sx={{ padding: 1 }}>
                             {providers.map(provider => (
-                                <Grid item xs={12} md={6} key={provider.providerId}>
+                                <Grid item xs={12} lg={6} key={provider.providerId}>
                                     <ProviderCardComponent provider={provider} />
                                 </Grid>
                             ))}

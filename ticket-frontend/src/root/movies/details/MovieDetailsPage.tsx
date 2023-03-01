@@ -84,33 +84,41 @@ export default function MovieDetailsPage() {
                                         src={`${movie.imageMimePrefix},${movie.image}`} />
 
                                     <Stack direction={'column'}>
-                                        <Typography sx={{movieIdinLeft: 2,
+                                        <Typography sx={{
+                                            marginLeft: 2,
                                             float: 'left', display: 'block'
                                         }}>
-                                            Σκηνοθεσία: {movie.directors}
+                                            <b>Σκηνοθεσία:</b> {movie.directors}
                                         </Typography>
-                                        <Typography sx={{ fontSize: 'small', marginLeft: 2, float: 'left' }}>Σενάριο:	{movie.script}</Typography>
-                                        <Typography sx={{ fontSize: 'small', maxWidth: { xs: 300, md: 500 }, marginLeft: 2, float: 'left' }}>Ηθοποιοί:	{movie.actors}</Typography>
+                                        <Typography sx={{ fontSize: 'small', marginLeft: 2, float: 'left' }}>
+                                            <b>Σενάριο:</b>	{movie.script}
+                                        </Typography>
+                                        <Typography sx={{ fontSize: 'small', maxWidth: { xs: 300, md: 500 }, marginLeft: 2, float: 'left' }}>
+                                            <b>Ηθοποιοί:</b>	{movie.actors}
+                                        </Typography>
                                         <Typography sx={{
                                             fontSize: 'small', marginLeft: 2,
                                             float: 'left', display: 'block'
                                         }}>
-                                            Διάρκεια:	{movie.duration} λεπτά</Typography>
+                                            <b>Διάρκεια:</b>	{movie.duration} λεπτά</Typography>
                                         <Typography sx={{
                                             fontSize: 'small', marginLeft: 2,
                                             float: 'left', display: 'block'
                                         }}>
-                                            Πρεμιέρα:	Τετάρτη, 24 Απριλίου 2019 (TODO)</Typography>
+                                            <b>Έτος:</b>	{movie.year}
+                                        </Typography>
                                         <Typography sx={{
                                             fontSize: 'small', marginLeft: 2,
                                             float: 'left', display: 'block'
                                         }}>
-                                            Καταλληλότητα:	{movie.appropriateness}</Typography>
+                                            <b>Καταλληλότητα:</b>	{movie.appropriateness}</Typography>
                                     </Stack>
                                     <Typography sx={{
                                         fontSize: 'x-large', marginLeft: 2, fontWeight: 'bolder', clear: 'both',
                                         float: 'left', display: 'block'
-                                    }}>ΠΕΡΙΛΗΨΗ</Typography>
+                                    }}>
+                                        ΠΕΡΙΛΗΨΗ
+                                    </Typography>
                                     <Divider variant="middle" style={{ marginBottom: 10, marginTop: 10, clear: 'both' }} />
                                     <Typography sx={{ fontSize: 'medium', marginLeft: 2, float: 'left' }}>{movie.description}</Typography>
 

@@ -102,6 +102,9 @@ export default function MovieDialogCreateComponent(props: MovieDialogCreateCompo
                                 <TextField disabled={props.readonly} label="Καταλληλότητα" value={movie.appropriateness} onChange={(e) => setMovie({ ...movie, appropriateness: e.target.value })} />
                             </Grid>
                             <Grid item xs={12} sm={6} md={4} lg={3}>
+                                <TextField disabled={props.readonly} type='number' label="Έτος" value={movie.year} onChange={(e) => setMovie({ ...movie, year: e.target.value ? parseInt(e.target.value) : 0 })} />
+                            </Grid>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <TextField disabled={props.readonly} type='number' label="Διάρκεια" value={movie.duration} onChange={(e) => setMovie({ ...movie, duration: e.target.value ? parseInt(e.target.value) : 0 })} />
                             </Grid>
                             <Grid item xs={12} sm={6} md={4} lg={3}>
