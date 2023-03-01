@@ -1,6 +1,6 @@
 
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { Box, Button, CardMedia } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { LabelValue } from '../../../../modules/core/label-value';
 import { EventDto } from '../../../../modules/event/dtos/event-dto';
 import { Link } from 'react-router-dom';
@@ -24,12 +24,8 @@ export default function EventsTableComponent(props: EventsTableComponentProps) {
             // valueGetter: (params: GridValueGetterParams<MovieListItemDto>) => params.value ? params.value.name : '',
             renderCell: (params) => (
                 <React.Fragment>
-                    <CardMedia
-                        component="img"
-                        height={60}
-                        width={60}
-                        src={params.value.imageMimePrefix + ',' + params.value.image}
-                    />
+                    <img height={60} width={60} src={params.value.imageMimePrefix + ',' + params.value.image} alt="movie" ></img>
+
                     <p>{params.value.name}</p>
                 </React.Fragment>
             ),
@@ -54,7 +50,7 @@ export default function EventsTableComponent(props: EventsTableComponentProps) {
         {
             field: 'eventPrice',
             headerName: 'Τιμή Εισιτηρίου',
-            minWidth: 100,
+            minWidth: 50,
             editable: false,
             flex: 1,
             sortable: false

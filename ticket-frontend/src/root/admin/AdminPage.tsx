@@ -10,19 +10,19 @@ export default function AdminPage() {
 
     const tabs = [
         {
-            name: 'Ταινίες',
+            name: 'ΤΑΙΝΙΕΣ',
             to: '/admin/movies'
         },
         {
-            name: 'Καταστήματα',
+            name: 'ΚΑΤΑΣΤΗΜΑΤΑ',
             to: '/admin/providers'
         },
         {
-            name: 'Αίθουσες',
+            name: 'ΑΙΘΟΥΣΕΣ',
             to: '/admin/halls'
         },
         {
-            name: 'Προβολές',
+            name: 'ΠΡΟΒΟΛΕΣ',
             to: '/admin/events'
         }
     ];

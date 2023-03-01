@@ -29,7 +29,7 @@ export default function ProvidersTableComponent(props: ProvidersTableComponentPr
       minWidth: 100,
       editable: false,
       flex: 1,
-      sortable: false
+      sortable: true
     },
     {
       field: 'phone',
@@ -37,7 +37,7 @@ export default function ProvidersTableComponent(props: ProvidersTableComponentPr
       minWidth: 100,
       editable: false,
       flex: 1,
-      sortable: false
+      sortable: true
     },
     {
       field: 'description',

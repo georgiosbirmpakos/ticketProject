@@ -4,6 +4,7 @@ import { Box, IconButton, Stack, Tooltip } from '@mui/material';
 import { Delete, Visibility, Edit } from '@mui/icons-material';
 import { LabelValue } from '../../../../modules/core/label-value';
 import { EventDto } from '../../../../modules/event/dtos/event-dto';
+import React from 'react';
 
 export interface EventsTableComponentProps {
     events: EventDto[];
@@ -16,29 +17,36 @@ export interface EventsTableComponentProps {
 
 export default function EventsTableComponent(props: EventsTableComponentProps) {
     const columns: GridColDef[] = [
+
         {
             field: 'movieRef',
             headerName: 'Ταινία',
-            minWidth: 100,
-            editable: true,
+            minWidth: 150,
+            editable: false,
             flex: 1,
-            sortable: false,
-            valueGetter: (params: GridValueGetterParams<LabelValue<number>>) => params.value ? params.value.label : '',
+            sortable: true,
+            renderCell: (params) => (
+                <React.Fragment>
+                    <img height={60} width={60} src={params.value.imageMimePrefix + ',' + params.value.image} alt="movie" ></img>
+
+                    <p>{params.value.name}</p>
+                </React.Fragment>
+            ),
         },
         {
             field: 'hallRef',
             headerName: 'Αίθουσα',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
-            sortable: false,
+            sortable: true,
             valueGetter: (params: GridValueGetterParams<LabelValue<number>>) => params.value ? params.value.label : '',
         },
         {
             field: 'name',
             headerName: 'Όνομα',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
             sortable: true
         },
@@ -46,23 +54,23 @@ export default function EventsTableComponent(props: EventsTableComponentProps) {
             field: 'eventDatetime',
             headerName: 'Ημερομηνία',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
-            sortable: false,
+            sortable: true,
+        },
+        {
+            field: 'eventPrice',
+            headerName: 'Τιμή Εισιτηρίου',
+            minWidth: 50,
+            editable: false,
+            flex: 1,
+            sortable: true
         },
         {
             field: 'description',
             headerName: 'Περιγραφή',
             minWidth: 100,
-            editable: true,
-            flex: 1,
-            sortable: false
-        },
-        {
-            field: 'eventPrice',
-            headerName: 'Τιμή Εισιτηρίου',
-            minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
             sortable: false
         },
@@ -70,7 +78,7 @@ export default function EventsTableComponent(props: EventsTableComponentProps) {
             field: 'actions',
             headerName: 'Ενέργειες',
             width: 150,
-            editable: true,
+            editable: false,
             sortable: false,
             renderCell: (params) => (
                 <Stack direction="row">

@@ -20,7 +20,7 @@ export default function HallsTableComponent(props: HallsTableComponentProps) {
             field: 'name',
             headerName: 'Όνομα',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
             sortable: true
         },
@@ -28,40 +28,40 @@ export default function HallsTableComponent(props: HallsTableComponentProps) {
             field: 'seatsRows',
             headerName: 'Σειρές Θέσεων',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
-            sortable: false
+            sortable: true
         },
         {
             field: 'seatsColumns',
             headerName: 'Στήλες Θέσεων',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
-            sortable: false
-        },
-        {
-            field: 'description',
-            headerName: 'Περιγραφή',
-            minWidth: 100,
-            editable: true,
-            flex: 1,
-            sortable: false
+            sortable: true
         },
         {
             field: 'providerRef',
             headerName: 'Κατάστημα',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
-            sortable: false,
+            sortable: true,
             valueGetter: (params: GridValueGetterParams<LabelValue<number>>) => params.value ? params.value.label : '',
+        },
+        {
+            field: 'description',
+            headerName: 'Περιγραφή',
+            minWidth: 100,
+            editable: false,
+            flex: 1,
+            sortable: false
         },
         {
             field: 'actions',
             headerName: 'Ενέργειες',
             width: 150,
-            editable: true,
+            editable: false,
             sortable: false,
             renderCell: (params) => (
                 <Stack direction="row">
