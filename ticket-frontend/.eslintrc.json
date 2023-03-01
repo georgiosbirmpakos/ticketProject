@@ -22,11 +22,12 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "react/react-in-jsx-scope": "off",
+        "no-unused-vars": "off",
         "@typescript-eslint/no-empty-function": "warn",
         "@typescript-eslint/no-inferrable-types": "off",
-        "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "react/react-in-jsx-scope": "off",
         "unused-imports/no-unused-imports": "warn",
         "unused-imports/no-unused-vars": [
             "off",

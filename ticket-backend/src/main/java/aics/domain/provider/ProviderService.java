@@ -39,7 +39,8 @@ public class ProviderService {
             .setName(providerDto.getName())
             .setAddress(providerDto.getAddress())
             .setPhone(providerDto.getPhone())
-            .setDescription(providerDto.getDescription());
+            .setDescription(providerDto.getDescription())
+            .setGoogleMapsSrc(providerDto.getGoogleMapsSrc());
 
         this.providerRepository.persist(newProvider);
 
@@ -63,7 +64,8 @@ public class ProviderService {
             .setName(providerDto.getName())
             .setAddress(providerDto.getAddress())
             .setPhone(providerDto.getPhone())
-            .setDescription(providerDto.getDescription());
+            .setDescription(providerDto.getDescription())
+            .setGoogleMapsSrc(providerDto.getGoogleMapsSrc());
 
         this.providerRepository.persist(provider);
 

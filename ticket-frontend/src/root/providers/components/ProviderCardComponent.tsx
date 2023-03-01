@@ -4,11 +4,11 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom'
-import { ProviderListItemDto } from '../../../modules/provider/provider-list-item-dto';
 import { Grid } from '@mui/material';
+import { ProviderDto } from '../../../modules/provider/provider-dto';
 
 export interface ProviderCardComponentProps {
-    provider: ProviderListItemDto
+    provider: ProviderDto
 }
 
 //Probably have to use arrays in order to load them dynamically
@@ -51,9 +51,26 @@ const ProviderCardComponent = (props: ProviderCardComponentProps) => {
                     </Grid>
                 </Grid>
 
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12211.010976878968!2d23.772819702994582!3d38.04230765177676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a198c130d24143%3A0x46397c352cf10818!2zzprOuc69zrfOvM6xz4TOv86zz4HOrM-Gzr_PgiBWaWxsYWdl!5e0!3m2!1sel!2sgr!4v1677607493542!5m2!1sel!2sgr" width="600" height="450" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="someTitle">
+                <Grid container>
+                    <Grid item xs={6} justifyItems="left" justifyContent="left" textAlign="left">
+                        Αίθουσες:
+                    </Grid>
+                    <Grid item xs={3} justifyItems="left" justifyContent="left" textAlign="left">
+                        {props.provider.halls.map(hall => (
+                            <h4 key={hall.hallId}>{hall.name}</h4>
+                        ))}
+                    </Grid>
+                    <Grid item xs={3} justifyItems="right" justifyContent="right" textAlign="right">
+                        {props.provider.halls.map(hall => (
+                            <p key={hall.hallId}>{hall.description}</p>
+                        ))}
+                    </Grid>
+                </Grid>
+                {props.provider.googleMapsSrc && (
+                    <iframe src={props.provider.googleMapsSrc} width="300" height="300" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="someTitle">
+                    </iframe>
+                )}
 
-                </iframe>
 
 
             </CardContent>

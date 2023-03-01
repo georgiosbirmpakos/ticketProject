@@ -1,7 +1,7 @@
 package aics.server.api.providers;
 
 import aics.domain.provider.ProviderService;
-import aics.domain.provider.dtos.ProviderListItemDto;
+import aics.domain.provider.dtos.ProviderDto;
 import aics.domain.provider.entities.Provider;
 import aics.infrastructure.errors.TicketException;
 import aics.server.api.providers.dtos.FetchProvidersListResponseDto;
@@ -24,8 +24,8 @@ public class ProvidersActions {
         Log.info("Start ProvidersActions.doFetchProvidersList");
         FetchProvidersListResponseDto fetchProvidersListResponseDto = new FetchProvidersListResponseDto();
         List<Provider> providers = this.providerService.fetchAllProviders();
-        List<ProviderListItemDto> providersDtos = CollectionUtils.isNotEmpty(providers)
-            ? providers.stream().map(ProviderListItemDto::fromProvider).toList()
+        List<ProviderDto> providersDtos = CollectionUtils.isNotEmpty(providers)
+            ? providers.stream().map(ProviderDto::fromProvider).toList()
             : new ArrayList<>();
 
         fetchProvidersListResponseDto.setProviders(providersDtos);

@@ -3,13 +3,13 @@ import { Typography, Divider, CircularProgress, Box, Grid } from '@mui/material'
 import ScrollToTopOnMount from '../shared/components/ScrollToTopOnMount';
 import { useSnackbar } from 'notistack';
 import { ProvidersService } from './providers-service';
-import { ProviderListItemDto } from '../../modules/provider/provider-list-item-dto';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import ProviderCardComponent from './components/ProviderCardComponent';
+import { ProviderDto } from '../../modules/provider/provider-dto';
 
 export default function ProvidersPage() {
     const [isWaitingFetch, setIsWaitingFetch] = useState<boolean>(false);
-    const [providers, setProviders] = useState<ProviderListItemDto[]>([]);
+    const [providers, setProviders] = useState<ProviderDto[]>([]);
     const { enqueueSnackbar } = useSnackbar();
 
 

@@ -14,6 +14,7 @@ public class ProviderListItemDto implements Serializable {
     private String address;
     private String phone;
     private String description;
+    private String googleMapsSrc;
 
     public static ProviderListItemDto fromProvider(Provider provider) {
         if (provider == null) {
@@ -24,6 +25,7 @@ public class ProviderListItemDto implements Serializable {
             .setName(provider.getName())
             .setAddress(provider.getAddress())
             .setPhone(provider.getPhone())
-            .setDescription(provider.getDescription());
+            .setDescription(provider.getDescription())
+            .setGoogleMapsSrc(provider.getGoogleMapsSrc());
     }
 }

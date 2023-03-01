@@ -6,6 +6,7 @@ export class ProviderListItemDto {
     address: string = '';
     phone: string = '';
     description: string = '';
+    googleMapsSrc: string = '';
 
     static fromObj(obj: any): ProviderListItemDto | null {
         if (!obj) {
@@ -17,6 +18,7 @@ export class ProviderListItemDto {
         providerDto.address = obj.address;
         providerDto.phone = obj.phone;
         providerDto.description = obj.description;
+        providerDto.googleMapsSrc = obj.googleMapsSrc;
         return providerDto;
     }
 

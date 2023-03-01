@@ -51,6 +51,9 @@ public class ProviderValidator {
         if (StringUtils.isEmpty(providerDto.getDescription())) {
             return "providerDto.getDescription() was empty";
         }
+        if (StringUtils.isEmpty(providerDto.getGoogleMapsSrc())) {
+            return "providerDto.getGoogleMapsSrc() was empty";
+        }
         return null;
     }
 

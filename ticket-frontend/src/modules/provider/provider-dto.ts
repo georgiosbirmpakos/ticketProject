@@ -1,4 +1,5 @@
 import { TypeUtils } from '../core/type-utils';
+import { HallListItemDto } from '../hall/hall-list-item-dto';
 
 export class ProviderDto {
     providerId: number | null = null;
@@ -6,6 +7,8 @@ export class ProviderDto {
     address: string = '';
     phone: string = '';
     description: string = '';
+    googleMapsSrc: string = '';
+    halls: HallListItemDto[] = [];
 
     static fromObj(obj: any): ProviderDto | null {
         if (!obj) {
@@ -17,6 +20,8 @@ export class ProviderDto {
         providerDto.address = obj.address;
         providerDto.phone = obj.phone;
         providerDto.description = obj.description;
+        providerDto.googleMapsSrc = obj.googleMapsSrc;
+        providerDto.halls = HallListItemDto.listFromObjList(obj.halls);
         return providerDto;
     }
 

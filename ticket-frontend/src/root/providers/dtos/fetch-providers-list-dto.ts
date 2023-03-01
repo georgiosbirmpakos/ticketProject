@@ -1,14 +1,14 @@
-import { ProviderListItemDto } from '../../../modules/provider/provider-list-item-dto';
+import { ProviderDto } from '../../../modules/provider/provider-dto';
 
 export class FetchProvidersListResponseDto {
-    providers: ProviderListItemDto[] = [];
+    providers: ProviderDto[] = [];
 
     static fromObj(obj: any): FetchProvidersListResponseDto | null {
         if (!obj) {
             return null;
         }
         const fetchProvidersListResponseDto: FetchProvidersListResponseDto = new FetchProvidersListResponseDto();
-        fetchProvidersListResponseDto.providers = ProviderListItemDto.listFromObjList(obj.providers);
+        fetchProvidersListResponseDto.providers = ProviderDto.listFromObjList(obj.providers);
         return fetchProvidersListResponseDto;
     }
 }
