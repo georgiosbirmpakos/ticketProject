@@ -62,7 +62,7 @@ export default function EventDialogUpdateComponent(props: EventDialogUpdateCompo
                 {event && options && (
                     <form>
                         <Grid container spacing={2} sx={{ padding: 1 }}>
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <FormControl fullWidth sx={{ minWidth: 140 }}>
                                     <InputLabel id="movieRef-select-label-id">Ταινία</InputLabel>
                                     <Select disabled={props.readonly} labelId="movieRef-select-label-id"
@@ -77,7 +77,7 @@ export default function EventDialogUpdateComponent(props: EventDialogUpdateCompo
                                 </FormControl>
                             </Grid>
 
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <FormControl fullWidth sx={{ minWidth: 140 }}>
                                     <InputLabel id="hallRef-select-label-id">Κατάστημα</InputLabel>
                                     <Select disabled={props.readonly} labelId="hallRef-select-label-id"
@@ -92,13 +92,13 @@ export default function EventDialogUpdateComponent(props: EventDialogUpdateCompo
                                 </FormControl>
                             </Grid>
 
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <TextField disabled={props.readonly} label="Όνομα" value={event.name} onChange={(e) => setEvent({ ...event, name: e.target.value })} />
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <TextField disabled={props.readonly} type="number" label="Τιμή Εισιτηρίου" value={event.eventPrice} onChange={(e) => setEvent({ ...event, eventPrice: e.target.value ? parseInt(e.target.value) : 0 })} />
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <DateTimePicker disabled={props.readonly}
                                     label="Ημερομηνία"
                                     value={event.eventDatetime ? event.eventDatetime : new Date()}
@@ -106,8 +106,8 @@ export default function EventDialogUpdateComponent(props: EventDialogUpdateCompo
                                     renderInput={(params) => <TextField {...params} />}
                                 />
                             </Grid>
-                            <Grid item>
-                                <TextField disabled={props.readonly} label="Περιγραφή" value={event.description} onChange={(e) => setEvent({ ...event, description: e.target.value })} />
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
+                                <TextField disabled={props.readonly} multiline label="Περιγραφή" value={event.description} onChange={(e) => setEvent({ ...event, description: e.target.value })} />
                             </Grid>
                         </Grid>
                     </form>

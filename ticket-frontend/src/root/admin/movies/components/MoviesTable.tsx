@@ -21,7 +21,7 @@ export default function MoviesTable(props: MoviesTableProps) {
             field: 'name',
             headerName: 'Τίτλος',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
             sortable: true
         },
@@ -29,14 +29,14 @@ export default function MoviesTable(props: MoviesTableProps) {
             field: 'description',
             headerName: 'Περίληψη',
             minWidth: 100,
-            editable: true,
+            editable: false,
             flex: 1,
             sortable: false
         }, {
             field: 'image',
             headerName: 'Εικόνα',
             width: 60,
-            editable: true,
+            editable: false,
             sortable: false,
             renderCell: (params) => (
                 <CardMedia
@@ -50,7 +50,7 @@ export default function MoviesTable(props: MoviesTableProps) {
             field: 'actions',
             headerName: 'Ενέργειες',
             width: 150,
-            editable: true,
+            editable: false,
             sortable: false,
             renderCell: (params) => (
                 <Stack direction="row">

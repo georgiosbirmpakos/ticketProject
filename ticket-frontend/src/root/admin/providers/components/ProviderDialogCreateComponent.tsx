@@ -49,17 +49,17 @@ export default function ProviderDialogCreateComponent(props: ProviderDialogCreat
         </DialogContentText> */}
                 <form>
                     <Grid container spacing={2} sx={{ padding: 1 }}>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TextField label="Όνομα" value={provider.name} onChange={(e) => setProvider({ ...provider, name: e.target.value })} />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TextField label="Διεύθυνση" value={provider.address} onChange={(e) => setProvider({ ...provider, address: e.target.value })} />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TextField label="Τηλέφωνο" value={provider.phone} onChange={(e) => setProvider({ ...provider, phone: e.target.value })} />
                         </Grid>
-                        <Grid item>
-                            <TextField label="Περιγραφή" value={provider.description} onChange={(e) => setProvider({ ...provider, description: e.target.value })} />
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <TextField multiline label="Περιγραφή" value={provider.description} onChange={(e) => setProvider({ ...provider, description: e.target.value })} />
                         </Grid>
                     </Grid>
                 </form>

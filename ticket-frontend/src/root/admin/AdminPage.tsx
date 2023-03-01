@@ -24,10 +24,6 @@ export default function AdminPage() {
         {
             name: 'Προβολές',
             to: '/admin/events'
-        },
-        {
-            name: 'Χρήστες',
-            to: '/admin/users'
         }
     ];
 
@@ -52,8 +48,6 @@ export default function AdminPage() {
                 setValue(2);
             } else if (location.pathname.startsWith('/admin/events')) {
                 setValue(3);
-            } else if (location.pathname.startsWith('/admin/users')) {
-                setValue(4);
             } else {
                 // console.error('unknown location: ' + location.pathname);
                 // navigate('/admin/movies');

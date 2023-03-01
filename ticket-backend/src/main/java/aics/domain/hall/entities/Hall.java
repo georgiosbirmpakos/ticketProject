@@ -21,7 +21,7 @@ public class Hall {
     private Long hallId;
     @Column(name = "NAME", nullable = false, length = 255)
     private String name;
-    @Column(name = "DESCRIPTION", nullable = false, length = 2000)
+    @Column(name = "DESCRIPTION", nullable = false, length = 2048)
     private String description;
     @Column(name = "SEATS_ROWS", nullable = false)
     private int seatsRows;

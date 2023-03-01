@@ -25,9 +25,11 @@ public class Provider {
     private String name;
     @Column(name = "ADDRESS", nullable = false, length = 255)
     private String address;
+    @Column(name = "GOOGLE_MAPS_SRC", nullable = false, length = 1024)
+    private String googleMapsSrc;
     @Column(name = "PHONE", nullable = false, length = 255)
     private String phone;
-    @Column(name = "DESCRIPTION", nullable = false, length = 255)
+    @Column(name = "DESCRIPTION", nullable = false, length = 2048)
     private String description;
     @Column(name = "CREATED_ON", nullable = false)
     @CreationTimestamp

@@ -64,31 +64,31 @@ export default function MovieDialogCreateComponent(props: MovieDialogCreateCompo
             <DialogContent>
                 <form>
                     <Grid container spacing={2} sx={{ padding: 1 }}>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TextField label="Όνομα" value={movie.name} onChange={(e) => setMovie({ ...movie, name: e.target.value })} />
                         </Grid>
-                        <Grid item>
-                            <TextField label="Περιγραφή" value={movie.description} onChange={(e) => setMovie({ ...movie, description: e.target.value })} />
-                        </Grid>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TextField label="Σκηνοθεσία" value={movie.directors} onChange={(e) => setMovie({ ...movie, directors: e.target.value })} />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TextField label="Σενάριο" value={movie.script} onChange={(e) => setMovie({ ...movie, script: e.target.value })} />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TextField label="Ηθοποιοί" value={movie.actors} onChange={(e) => setMovie({ ...movie, actors: e.target.value })} />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TextField label="Καταλληλότητα" value={movie.appropriateness} onChange={(e) => setMovie({ ...movie, appropriateness: e.target.value })} />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TextField type='number' label="Διάρκεια" value={movie.duration} onChange={(e) => setMovie({ ...movie, duration: e.target.value ? parseInt(e.target.value) : 0 })} />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <TextField label="Trailer" value={movie.trailerSrcUrl} onChange={(e) => setMovie({ ...movie, trailerSrcUrl: e.target.value })} />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
+                            <TextField multiline label="Περιγραφή" value={movie.description} onChange={(e) => setMovie({ ...movie, description: e.target.value })} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={4} lg={3}>
                             <FormControl>
                                 <FormLabel id="demo-radio-buttons-group-label">Εικόνα</FormLabel>
                                 <input type="file"

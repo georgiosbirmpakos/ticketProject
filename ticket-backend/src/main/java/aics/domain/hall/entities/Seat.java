@@ -24,7 +24,7 @@ public class Seat {
     private int seatColumn;
     //    @Column(name = "FLOOR", nullable = false)
 //    private int floor;
-    @Column(name = "DESCRIPTION", nullable = true, length = 255)
+    @Column(name = "DESCRIPTION", nullable = true, length = 2048)
     private String description;
     @Column(name = "CREATED_ON", nullable = false)
     @CreationTimestamp

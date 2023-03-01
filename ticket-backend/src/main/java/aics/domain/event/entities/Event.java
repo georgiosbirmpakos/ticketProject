@@ -27,7 +27,7 @@ public class Event {
     private String name;
     @Column(name = "EVENT_DATETIME", nullable = false)
     private LocalDateTime eventDatetime;
-    @Column(name = "DESCRIPTION", nullable = true, length = 255)
+    @Column(name = "DESCRIPTION", nullable = true, length = 2048)
     private String description;
     @Column(name = "EVENT_PRICE", nullable = false, precision = 10, scale = 2)
     private Double eventPrice;

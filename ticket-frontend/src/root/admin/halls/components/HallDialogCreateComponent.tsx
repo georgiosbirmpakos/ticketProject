@@ -57,7 +57,7 @@ export default function HallDialogCreateComponent(props: HallDialogCreateCompone
                 {hall && options && (
                     <form>
                         <Grid container spacing={2} sx={{ padding: 1 }}>
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <FormControl fullWidth sx={{ minWidth: 140 }}>
                                     <InputLabel id="providerref-select-label-id">Κατάστημα</InputLabel>
                                     <Select labelId="providerref-select-label-id"
@@ -73,21 +73,21 @@ export default function HallDialogCreateComponent(props: HallDialogCreateCompone
                                 </FormControl>
                             </Grid>
 
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <TextField label="Όνομα" value={hall.name} onChange={(e) => setHall({ ...hall, name: e.target.value })} />
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <TextField type="number" label="Γραμμές Θέσεων" value={hall.seatsRows} onChange={(e) => setHall({ ...hall, seatsRows: e.target.value ? parseInt(e.target.value) : 0 })} />
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <TextField type="number" label="Στήλες Θέσεων" value={hall.seatsColumns} onChange={(e) => setHall({ ...hall, seatsColumns: e.target.value ? parseInt(e.target.value) : 0 })} />
                             </Grid>
-                            <Grid item>
-                                <TextField label="Περιγραφή" value={hall.description} onChange={(e) => setHall({ ...hall, description: e.target.value })} />
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
+                                <TextField multiline label="Περιγραφή" value={hall.description} onChange={(e) => setHall({ ...hall, description: e.target.value })} />
                             </Grid>
                         </Grid>
                         <Grid container spacing={2} justifyContent='center' sx={{ padding: 1 }}>
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <SeatsMapComponent seatsRows={hall.seatsRows} seatsColumns={hall.seatsColumns}></SeatsMapComponent>
                             </Grid>
                         </Grid>

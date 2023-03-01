@@ -20,7 +20,7 @@ public class Movie {
     private Long movieId;
     @Column(name = "NAME", nullable = false, length = 255)
     private String name;
-    @Column(name = "DESCRIPTION", nullable = true, length = 255)
+    @Column(name = "DESCRIPTION", nullable = true, length = 2048)
     private String description;
     @Column(name = "IMAGE", nullable = false)
     @Lob

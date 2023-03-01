@@ -63,7 +63,7 @@ export default function EventDialogCreateComponent(props: EventDialogCreateCompo
                 {event && options && (
                     <form>
                         <Grid container spacing={2} sx={{ padding: 1 }}>
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <FormControl fullWidth sx={{ minWidth: 140 }}>
                                     <InputLabel id="movieRef-select-label-id">Ταινία</InputLabel>
                                     <Select labelId="movieRef-select-label-id"
@@ -78,7 +78,7 @@ export default function EventDialogCreateComponent(props: EventDialogCreateCompo
                                 </FormControl>
                             </Grid>
 
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <FormControl fullWidth sx={{ minWidth: 140 }}>
                                     <InputLabel id="hallRef-select-label-id">Κατάστημα</InputLabel>
                                     <Select labelId="hallRef-select-label-id"
@@ -93,13 +93,13 @@ export default function EventDialogCreateComponent(props: EventDialogCreateCompo
                                 </FormControl>
                             </Grid>
 
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <TextField label="Όνομα" value={event.name} onChange={(e) => setEvent({ ...event, name: e.target.value })} />
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <TextField type="number" label="Τιμή Εισιτηρίου" value={event.eventPrice} onChange={(e) => setEvent({ ...event, eventPrice: e.target.value ? parseInt(e.target.value) : 0 })} />
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
                                 <DateTimePicker
                                     label="Ημερομηνία"
                                     value={event.eventDatetime ? event.eventDatetime : new Date()}
@@ -107,8 +107,8 @@ export default function EventDialogCreateComponent(props: EventDialogCreateCompo
                                     renderInput={(params) => <TextField {...params} />}
                                 />
                             </Grid>
-                            <Grid item>
-                                <TextField label="Περιγραφή" value={event.description} onChange={(e) => setEvent({ ...event, description: e.target.value })} />
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
+                                <TextField multiline label="Περιγραφή" value={event.description} onChange={(e) => setEvent({ ...event, description: e.target.value })} />
                             </Grid>
                         </Grid>
                     </form>

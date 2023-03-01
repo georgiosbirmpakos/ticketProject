@@ -51,6 +51,10 @@ const ProviderCardComponent = (props: ProviderCardComponentProps) => {
                     </Grid>
                 </Grid>
 
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12211.010976878968!2d23.772819702994582!3d38.04230765177676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a198c130d24143%3A0x46397c352cf10818!2zzprOuc69zrfOvM6xz4TOv86zz4HOrM-Gzr_PgiBWaWxsYWdl!5e0!3m2!1sel!2sgr!4v1677607493542!5m2!1sel!2sgr" width="600" height="450" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="someTitle">
+
+                </iframe>
+
 
             </CardContent>
             <CardActions>

@@ -23,7 +23,7 @@ public class Ticket {
     private Long ticketId;
     @Column(name = "DATE_OF_BOOKING", nullable = true)
     private LocalDateTime dateOfBooking;
-    @Column(name = "DESCRIPTION", nullable = true, length = 255)
+    @Column(name = "DESCRIPTION", nullable = true, length = 2048)
     private String description;
     @Column(name = "CREATED_ON", nullable = false)
     @CreationTimestamp

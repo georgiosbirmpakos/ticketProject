@@ -19,7 +19,7 @@ export default function ProvidersTableComponent(props: ProvidersTableComponentPr
       field: 'name',
       headerName: 'Όνομα',
       minWidth: 100,
-      editable: true,
+      editable: false,
       flex: 1,
       sortable: true
     },
@@ -27,7 +27,7 @@ export default function ProvidersTableComponent(props: ProvidersTableComponentPr
       field: 'address',
       headerName: 'Διεύθυνση',
       minWidth: 100,
-      editable: true,
+      editable: false,
       flex: 1,
       sortable: false
     },
@@ -35,7 +35,7 @@ export default function ProvidersTableComponent(props: ProvidersTableComponentPr
       field: 'phone',
       headerName: 'Τηλέφωνο',
       minWidth: 100,
-      editable: true,
+      editable: false,
       flex: 1,
       sortable: false
     },
@@ -43,7 +43,7 @@ export default function ProvidersTableComponent(props: ProvidersTableComponentPr
       field: 'description',
       headerName: 'Περιγραφή',
       minWidth: 100,
-      editable: true,
+      editable: false,
       flex: 1,
       sortable: false
     },
@@ -51,7 +51,7 @@ export default function ProvidersTableComponent(props: ProvidersTableComponentPr
       field: 'actions',
       headerName: 'Ενέργειες',
       width: 150,
-      editable: true,
+      editable: false,
       sortable: false,
       renderCell: (params) => (
         <Stack direction="row">
