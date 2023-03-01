@@ -1,29 +1,35 @@
-.carousel{
+.carousel {
     width: 100 wv;
     margin: auto;
 }
-.carouselImg{
-  object-fit:cover;
-  width: 100vw;
-  height:80vh;
+
+.carouselImg {
+    object-fit: cover;
+    width: 100vw;
+    height: 80vh;
 }
 
-.imageBtn{
-    position: relative !important;
-    bottom: 100px;
-    width: fit-content !important;
-    height: auto !important;
-    left: -35%;
+.imageBtn {
+    /* position: relative !important; */
+    bottom: 4rem;
+    margin-left: 1rem;
+    float: left;
+    /* width: fit-content !important; */
+    /* height: auto !important; */
+    /* left: -35%; */
     border-radius: 20px !important;
     font-size: medium !important;
     /* background-color: #E63946 !important; */
 }
-.imageBtn:hover{
+
+.imageBtn:hover {
     /* background-color: #920b17 !important; */
 }
+
 .control-dots {
     bottom: 40px !important;
-  }
-.control-arrow{
+}
+
+.control-arrow {
     height: 80vh;
 }

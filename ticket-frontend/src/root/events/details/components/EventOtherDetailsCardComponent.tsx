@@ -27,7 +27,7 @@ const EventOtherDetailsCardComponent = ({ event, style }: EventOtherDetailsCardC
                             label="Ημερομηνία"
                             value={event.eventDatetime ? event.eventDatetime : new Date()}
                             disabled={true}
-                            onChange={() => { }}
+                            onChange={() => undefined}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </Grid>
