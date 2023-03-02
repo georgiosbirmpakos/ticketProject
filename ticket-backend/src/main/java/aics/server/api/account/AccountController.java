@@ -1,14 +1,15 @@
 package aics.server.api.account;
 
+import aics.domain.user.RoleEnum;
 import aics.infrastructure.errors.TicketException;
 import aics.server.api.account.dtos.FetchUserEventsResponseDto;
 import aics.server.api.api_shared.ApiConstants;
 import io.quarkus.logging.Log;
-import io.quarkus.security.Authenticated;
 import org.jboss.resteasy.reactive.RestPath;
 import org.jboss.resteasy.reactive.RestResponse;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -24,7 +25,7 @@ public class AccountController {
     @Path("/user-events")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Authenticated
+    @RolesAllowed({RoleEnum.Values.TICKET_USER, RoleEnum.Values.TICKET_ADMIN})
     public RestResponse<FetchUserEventsResponseDto> handleFetchUserEvents(@RestPath Long id) {
         Log.info("Start AccountController.handleFetchUserEvents");
         try {

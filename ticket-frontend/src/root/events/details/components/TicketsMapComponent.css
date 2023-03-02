@@ -1,30 +1,30 @@
-.seatsTable {
+.event-tickets-table {
     /* width: 1em; */
     table-layout: fixed;
     /* border-radius: 2px;
     border-color: black; */
 }
 
-.seatsTable tr {
+.event-tickets-table tr {
     /* background-color: lightgray; */
     /* border-radius: 2px;
     border-color: black; */
 }
 
-.seatsTable td {
+.event-tickets-table td {
     width: 2em;
     height: 2em;
     background-color: lightgray;
 }
 
-.seatsTable td:hover {
+.event-tickets-table td:hover {
     transform: scale(1.05)
 }
 
-.seatsTable td.selected {
+.event-tickets-table td.selected {
     background-color: lightgreen;
 }
 
-.seatsTable td.taken {
+.event-tickets-table td.taken {
     background-color: red;
 }

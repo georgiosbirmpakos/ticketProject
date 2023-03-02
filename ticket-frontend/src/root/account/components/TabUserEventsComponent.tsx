@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, CircularProgress, Grid } from '@mui/material'
-import { AuthService } from '../../../modules/auth/AuthService';
+import { Box, CircularProgress, Grid } from '@mui/material'
 import { EventDto } from '../../../modules/event/dtos/event-dto';
 import { AccountService } from '../account-service';
 import { useSnackbar } from 'notistack';
@@ -39,7 +38,6 @@ const TabUserEventsComponent = () => {
                 )
                 : (
                     <React.Fragment>
-                        length: {events.length}
                         <Grid container spacing={2} className="center-align-stretch">
                             {events.map(event => (
                                 <Grid key={event.eventId} item padding={1} xs={12} sm={6} className="center">
