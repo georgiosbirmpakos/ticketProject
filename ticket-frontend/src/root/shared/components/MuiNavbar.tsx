@@ -115,7 +115,10 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
                     <Stack direction={'row'}>
                         {loggedUser ? (
                             <React.Fragment>
-                                <Button className="stackBtn" color='inherit' component={Link} to="/account">{loggedUser.fullName}</Button>
+                                <Button className={`stackBtn ${location.pathname.startsWith("/account") ? "selectedNav" : ""}`}
+                                    color='inherit' component={Link} to="/account">
+                                    {loggedUser.fullName}
+                                </Button>
                                 <Tooltip title='Change Language'>
                                     <IconButton size="large" edge='end'>
                                         <LanguageIcon />
@@ -157,7 +160,10 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
                     <Stack direction={'row'}>
                         {loggedUser ? (
                             <React.Fragment>
-                                <Button className="stackBtn" color='inherit' component={Link} to="/account">{loggedUser.fullName}</Button>
+                                <Button className={`stackBtn ${location.pathname.startsWith("/account") ? "selectedNav" : ""}`}
+                                    color='inherit' component={Link} to="/account">
+                                    {loggedUser.fullName}
+                                </Button>
                                 <Tooltip title='Change Language'>
                                     <IconButton size="large" edge='end'>
                                         <LanguageIcon />
