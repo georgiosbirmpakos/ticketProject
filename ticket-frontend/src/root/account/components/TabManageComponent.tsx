@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Box, Button, Grid } from '@mui/material'
-import { useNavigate } from "react-router-dom";
 import { AuthService } from '../../../modules/auth/AuthService';
 import LogoutConfirmationDialogComponent from './LogoutConfirmationDialogComponent';
-import { GlobalState } from '../../../modules/core/global-state';
 
 const TabManageComponent = () => {
     const [isLogoutConfirmationDialogOpen, setIsLogoutConfirmationDialogOpen] = useState(false);
 
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!GlobalState.instance.loggedUser) {
-            navigate('/')
-        }
-    }, [])
 
     async function onLogoutConfirm() {
         await AuthService.logout();

@@ -59,7 +59,8 @@ export default function ProvidersPage() {
 
                         </Grid>
                     </React.Fragment>
-                )}
+                )
+            }
         </Box>
     );
 }

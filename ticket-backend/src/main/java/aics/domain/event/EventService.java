@@ -17,6 +17,9 @@ import aics.domain.provider.ProviderRepository;
 import aics.domain.provider.entities.Provider;
 import aics.domain.ticket.TicketRepository;
 import aics.domain.ticket.entities.Ticket;
+import aics.domain.user.entities.User;
+import aics.infrastructure.auth.AuthService;
+import aics.infrastructure.auth.LoggedUserDetails;
 import aics.infrastructure.core.LabelValue;
 import aics.infrastructure.errors.TicketErrorStatus;
 import aics.infrastructure.errors.TicketException;
@@ -29,6 +32,8 @@ import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class EventService {
@@ -48,6 +53,8 @@ public class EventService {
     private EventValidator eventValidator;
     @Inject
     private MovieService movieService;
+    @Inject
+    private AuthService authService;
 
     public List<Event> fetchAllEvents() {
         List<Event> events = this.eventRepository.findAll().list();
@@ -67,6 +74,22 @@ public class EventService {
         List<Event> events = this.eventRepository.findFiltered(eventFilters);
 
         return events;
+    }
+
+    public List<Event> fetchCurrentUserEvents() throws TicketException {
+        LoggedUserDetails loggedUserDetails = this.authService.getLoggedUserDetails();
+        List<Event> events = this.eventRepository.findCurrent();
+
+        List<Event> userEvents = events.stream().filter(event -> {
+            List<User> users = (event.getTickets()).stream()
+                .filter(Objects::nonNull)
+                .map(Ticket::getUser)
+                .toList();
+            List<Long> userIds = users.stream().filter(Objects::nonNull).map(User::getUserId).toList();
+            return userIds.contains(loggedUserDetails.getUserId());
+        }).collect(Collectors.toList());
+
+        return userEvents;
     }
 
     public Event fetchEventById(Long eventId) {

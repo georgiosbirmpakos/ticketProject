@@ -6,6 +6,7 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.quarkus.panache.common.Parameters;
 
 import javax.enterprise.context.ApplicationScoped;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @ApplicationScoped
@@ -30,6 +31,16 @@ public class EventRepository implements PanacheRepository<Event> {
             parameters.and("toDate", eventFilters.getToDate());
             queryString += " AND (eventDatetime <= :toDate)";
         }
+        return find(queryString, parameters)
+            .list();
+    }
+
+    public List<Event> findCurrent() {
+        Parameters parameters = new Parameters();
+        parameters.and("fromDate", LocalDateTime.now());
+
+        String queryString = "eventDatetime >= :fromDate";
+
         return find(queryString, parameters)
             .list();
     }

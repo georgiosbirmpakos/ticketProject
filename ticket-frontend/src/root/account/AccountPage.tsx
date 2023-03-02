@@ -1,20 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Tab, Tabs } from '@mui/material'
 import TabManageComponent from './components/TabManageComponent';
+import TabUserEventsComponent from './components/TabUserEventsComponent';
+import { GlobalState } from '../../modules/core/global-state';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-    const [showPassword, setShowPassword] = React.useState(false);
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
     const [value, setValue] = React.useState(0);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!GlobalState.instance.loggedUser) {
+            navigate('/')
+        }
+
+
+    }, [])
 
     const tabs = [
         {
             name: 'ΔΙΑΧΕΙΡΙΣΗ ΛΟΓΑΡΙΑΣΜΟΥ',
         },
+        {
+            name: 'ΟΙ ΠΡΟΒΟΛΕΣ ΜΟΥ',
+        },
     ];
+
+
 
     return (
         <Box style={{ width: '100%', height: '100%' }}>
@@ -34,6 +46,11 @@ const LoginPage = () => {
             {value === 0 && (
                 <Box sx={{ width: '100%' }}>
                     <TabManageComponent></TabManageComponent>
+                </Box>
+            )}
+            {value === 1 && (
+                <Box sx={{ width: '100%' }}>
+                    <TabUserEventsComponent></TabUserEventsComponent>
                 </Box>
             )}
         </Box>

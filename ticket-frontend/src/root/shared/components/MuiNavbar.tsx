@@ -60,37 +60,32 @@ const MuiNavbar = ({ isDarkTheme, setIsDarkTheme }: Props) => {
             icon: <ConfirmationNumberIcon className="navLogo" fontSize='large' />
         },
         {
-            label: 'Ταινίες',
+            label: 'ΤΑΙΝΙΕΣ',
             to: '/movies',
             icon: <MovieIcon />
         },
         {
-            label: 'Καταστήματα',
+            label: 'ΚΑΤΑΣΤΗΜΑΤΑ',
             to: '/providers',
             icon: <LocationCityIcon />
         },
         {
-            label: 'Προβολές',
+            label: 'ΠΡΟΒΟΛΕΣ',
             to: '/events',
             icon: <CameraRoll />
         }
     ];
+
     if (loggedUser?.roles.includes(RoleEnum.TICKET_ADMIN)) {
         navbarLeftButtonsData.push({
-            label: 'Διαχείριση',
+            label: 'ΔΙΑΧΕΙΡΙΣΗ',
             to: '/admin',
             icon: <AdminPanelSettingsIcon />
         })
     }
-    const settings: string[] = ['settings'];
-
 
     async function onLoginClicked() {
         await AuthService.login();
-    }
-
-    async function onUserClicked() {
-        // await AuthService.login();
     }
 
     return (
