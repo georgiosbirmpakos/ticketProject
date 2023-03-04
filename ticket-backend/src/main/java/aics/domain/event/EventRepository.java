@@ -44,4 +44,9 @@ public class EventRepository implements PanacheRepository<Event> {
         return find(queryString, parameters)
             .list();
     }
+
+    public Long deleteByHallId(Long hallId) {
+        Parameters parameters = Parameters.with("hallId", hallId);
+        return delete("hall.hallId = :hallId", parameters);
+    }
 }

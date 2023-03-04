@@ -1,5 +1,6 @@
 package aics.domain.hall;
 
+import aics.domain.event.EventRepository;
 import aics.domain.hall.dtos.HallDto;
 import aics.domain.hall.dtos.HallOptionsDto;
 import aics.domain.hall.entities.Hall;
@@ -7,6 +8,7 @@ import aics.domain.hall.entities.Seat;
 import aics.domain.provider.ProviderRepository;
 import aics.domain.provider.ProviderService;
 import aics.domain.provider.entities.Provider;
+import aics.domain.ticket.TicketRepository;
 import aics.infrastructure.core.LabelValue;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -23,6 +25,10 @@ public class HallService {
     private HallRepository hallRepository;
     @Inject
     private SeatRepository seatRepository;
+    @Inject
+    private TicketRepository ticketRepository;
+    @Inject
+    private EventRepository eventRepository;
     @Inject
     private ProviderRepository providerRepository;
     @Inject
@@ -124,7 +130,7 @@ public class HallService {
         if (hall == null) {
             return "couldn't find hall";
         }
-        Long deleted = this.seatRepository.deleteByHallId(hall.getHallId());
+        this.seatRepository.deleteByHallId(hall.getHallId());
 
         this.hallRepository.delete(hall);
 

@@ -22,4 +22,9 @@ public class TicketRepository implements PanacheRepository<Ticket> {
         parameters.and("ticketsIds", ticketsIds);
         return find(queryString, parameters).list();
     }
+
+    public Long deleteBySeatIds(List<Long> seatIds) {
+        Parameters parameters = Parameters.with("seatIds", seatIds);
+        return delete("seat.seatId in :seatIds", parameters);
+    }
 }

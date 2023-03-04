@@ -9,6 +9,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "HALLS")
 @Getter
@@ -38,4 +40,6 @@ public class Hall {
     @ManyToOne
     @JoinColumn(name = "PROVIDER_ID_FK", nullable = false, updatable = false)
     private Provider provider;
+    @OneToMany(mappedBy = "hall")
+    private List<Seat> seats = new ArrayList<>();
 }
