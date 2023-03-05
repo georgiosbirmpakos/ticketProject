@@ -80,8 +80,8 @@ export default function MoviesTable(props: MoviesTableProps) {
             <DataGrid
                 rows={props.movies}
                 columns={columns}
-                pagination={undefined}
-                hideFooter={true}
+                pagination={true}
+                hideFooter={false}
                 checkboxSelection
                 disableSelectionOnClick
                 experimentalFeatures={{ newEditingApi: true }}

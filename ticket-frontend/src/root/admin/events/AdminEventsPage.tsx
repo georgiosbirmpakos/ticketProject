@@ -83,7 +83,7 @@ export default function AdminEventsPage() {
                     </Grid>
                     <Grid item>
                         <Button onClick={createEventClicked} variant="contained" startIcon={<Add />}>
-                            Δημιουργία Προβολής
+                            ΔΗΜΙΟΥΡΓΙΑ ΠΡΟΒΟΛΗΣ
                         </Button>
                     </Grid>
                 </Grid>

@@ -91,8 +91,8 @@ export default function HallsTableComponent(props: HallsTableComponentProps) {
             <DataGrid
                 rows={props.halls}
                 columns={columns}
-                pagination={undefined}
-                hideFooter={true}
+                pagination={true}
+                hideFooter={false}
                 checkboxSelection
                 disableSelectionOnClick
                 experimentalFeatures={{ newEditingApi: true }}

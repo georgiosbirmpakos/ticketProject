@@ -29,7 +29,7 @@ export default function MovieDialogDeleteComponent(props: MovieDialogDeleteCompo
     return (
         <Dialog fullWidth={true} maxWidth={false} onClose={props.onCancel} open={props.open}>
             <DialogTitle id="alert-dialog-title">
-                Διγραφή Ταινίας
+                Διαγραφή Ταινίας
             </DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">

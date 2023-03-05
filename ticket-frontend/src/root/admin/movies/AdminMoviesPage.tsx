@@ -85,7 +85,7 @@ export default function AdminMoviesPage() {
                     </Grid>
                     <Grid item>
                         <Button onClick={createMovieClicked} variant="contained" startIcon={<Add />}>
-                            Δημιουργία Ταινίας
+                            ΔΗΜΙΟΥΡΓΙΑ ΤΑΙΝΙΑΣ
                         </Button>
                     </Grid>
                 </Grid>

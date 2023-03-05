@@ -85,7 +85,7 @@ export default function AdminProvidersPage() {
                     </Grid>
                     <Grid item>
                         <Button onClick={createProviderClicked} variant="contained" startIcon={<Add />}>
-                            Δημιουργία Καταστήματος
+                            ΔΗΜΙΟΥΡΓΙΑ ΚΑΤΑΣΤΗΜΑΤΟΣ
                         </Button>
                     </Grid>
                 </Grid>

@@ -108,8 +108,8 @@ export default function EventsTableComponent(props: EventsTableComponentProps) {
             <DataGrid
                 rows={props.events}
                 columns={columns}
-                pagination={undefined}
-                hideFooter={true}
+                pagination={true}
+                hideFooter={false}
                 checkboxSelection
                 disableSelectionOnClick
                 experimentalFeatures={{ newEditingApi: true }}

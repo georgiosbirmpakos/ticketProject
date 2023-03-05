@@ -83,7 +83,7 @@ export default function AdminHallsPage() {
                     </Grid>
                     <Grid item>
                         <Button onClick={createHallClicked} variant="contained" startIcon={<Add />}>
-                            Δημιουργία Αίθουσας
+                            ΔΗΜΙΟΥΡΓΙΑ ΑΙΘΟΥΣΑΣ
                         </Button>
                     </Grid>
                 </Grid>

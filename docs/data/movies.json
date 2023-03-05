@@ -31,5 +31,28 @@
         "duration": 195,
         "trailer": "https://www.youtube.com/watch?v=gG22XNhtnoY",
         "description": "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis."
+    },
+    {
+        "name": "Creed III",
+        "director": "Michael B. Jordan",
+        "writers": "Keenan Coogler, Zach Baylin, Ryan Coogler",
+        "actors": "Michael B. Jordan, Tessa Thompson, Jonathan Majors",
+        "appropriateness": "PG-13",
+        "year": "2023",
+        "duration": 116,
+        "trailer": "https://www.youtube.com/watch?v=AHmCH7iB_IM",
+        "description": "Adonis has been thriving in both his career and family life, but when a childhood friend and former boxing prodigy resurfaces, the face-off is more than just a fight."
+    },
+    // DEMONSTRATION
+    {
+        "name": "Harry Potter and the Prisoner of Azkaban",
+        "director": "Alfonso Cuarón",
+        "writers": "J.K. Rowling, Steve Kloves",
+        "actors": "Daniel Radcliffe, Emma Watson, Rupert Grint",
+        "appropriateness": "PG",
+        "year": "2004",
+        "duration": 142,
+        "trailer": "https://www.youtube.com/watch?v=lAxgztbYDbs",
+        "description": "Harry Potter, Ron and Hermione return to Hogwarts School of Witchcraft and Wizardry for their third year of study, where they delve into the mystery surrounding an escaped prisoner who poses a dangerous threat to the young wizard."
     }
 ]
